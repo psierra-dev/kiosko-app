@@ -1,0 +1,23 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Nova+Slim&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Lobster', cursive;
+  font-family: 'Nova Slim', cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ebebeb;
+  min-height: 100vh;
+}
+
+article, div, footer, header, main, nav, section,span, figure{
+  align-items: stretch;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
