@@ -124,16 +124,6 @@ export const todoReducer = (state: TState, action: TodoAction): TState => {
                 ...state,
                 widthPhone: action.payload
             }
-        case "token":
-            return {
-                ...state,
-                jwtToken: action.payload 
-            }
-        case "type":
-            return {
-                ...state,
-                currentType: action.payload
-            }
         case "getProductsComercio":
             return {
                 ...state,
@@ -248,5 +238,7 @@ export const todoReducer = (state: TState, action: TodoAction): TState => {
                 ...state,
                 orders: filterOrders
             }
+        default:
+            return state
     }
 }
