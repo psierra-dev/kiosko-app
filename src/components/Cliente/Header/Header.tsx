@@ -3,12 +3,13 @@ import { SHeader } from './style';
 import { GoSearch } from "react-icons/go";
 import AvatarC from './components/Avatar';
 import CartOrderNoti from './components/CartOrderNoti';
+import Link from 'next/link';
 
 const HeaderClient = () => {
     return (
             <SHeader>
                 <div className='con'>
-                <div><a href="/inicio">Logo</a></div>
+                <div><Link href="/inicio">Logo</Link></div>
                 <div className="coninput">
                     <input type='text' placeholder='Buscar Productos...'/>
                     <button>
