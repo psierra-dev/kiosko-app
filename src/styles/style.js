@@ -1,18 +1,7 @@
 import styled from "styled-components";
 import { Color } from "./color";
 
-type Props = {
-    size: string,
-    weight: string,
-    line: string,
-    color: string,
-    cursor: string,
-    backgroundcolor: string,
-    width: string,
-    height: string,
-    colortext: string 
-}
-export const Text = styled.span.attrs(({props}: {props: Props}) => ({
+export const Text = styled.span.attrs(props => ({
     size:props.size,
     weight:props.weight,
     lineheight: props.line || '22px',
@@ -27,12 +16,12 @@ export const Text = styled.span.attrs(({props}: {props: Props}) => ({
 
 `
 
-export const ChipFilter = styled.button.attrs(({props}: {props: Props}) => ({
+export const ChipFilter = styled.button.attrs(props => ({
     color: props.color || "black",
     backgroundcolor: props.backgroundcolor || 'white',
 }))`
     color: ${props => props.color};
-    cursor: ${({props}: {props: {cursor: string}}) => props.cursor};
+    cursor: ${props  => props.cursor};
     background-color: ${props => props.backgroundcolor};
     padding: 3px;
     border-radius: 5px;
@@ -42,14 +31,14 @@ export const ChipFilter = styled.button.attrs(({props}: {props: Props}) => ({
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
 `
 
-export const Button = styled.button.attrs(({props}: {props: Props}) => ({
+export const Button = styled.button.attrs(props => ({
     width: props.width,
     height: props.height,
     colortext: props.colortext 
 }))`
     width: ${props => props.width};
     height: ${props => props.height};
-    background-color: ${({props}: {props: {primary:string}}) => props.primary ? Color.One : Color.Two};
+    background-color: ${props => props.primary ? Color.One : Color.Two};
     color: ${props => props.colortext || Color.Pricipal};
     border: none;
     box-shadow: 5px 5px 5px 0px lightgray;

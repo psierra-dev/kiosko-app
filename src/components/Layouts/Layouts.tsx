@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react'
+import ClienteLayout from './ClienteLayout';
 import LoRe from './LoRe';
 
 type Prop = {
@@ -18,7 +19,13 @@ const Layouts = ({children}: Prop) => {
             </>
         )
     }
-
+    if(router.pathname === '/inicio' || router.pathname === '/inicio/cart'){
+        return (
+            <ClienteLayout>
+                {children}
+            </ClienteLayout>
+        )
+    }
     return (
         <main>
             {children}

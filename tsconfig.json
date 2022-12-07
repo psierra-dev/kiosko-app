@@ -8,7 +8,10 @@
       "@public/*": ["public/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
-      "@lib/*":["lib/*"]
+      "@lib/*":["lib/*"],
+      "@config/*": ["config/*"],
+      "@service/*": ["service/*"],
+      "@adapter/*": ["adapter/*"]
     },
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -25,6 +28,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/styles/style.js"],
   "exclude": ["node_modules"]
 }

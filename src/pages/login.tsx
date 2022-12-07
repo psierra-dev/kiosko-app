@@ -7,7 +7,7 @@ const Login: NextPage = () => {
     return (
         <>
         <Head>
-        <title>Loginp</title>
+        <title>Login</title>
         <meta name="login" content="Login" />
         </Head>
             <FormLogin />

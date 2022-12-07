@@ -86,10 +86,8 @@ type TFormValuesUpdateStore = {
     }
 
 //State
-type State = {
+type TState = {
     //userLogin
-    jwtToken: string | null,
-    currentType: string | null,
     currentUser: TUser | null,
     //Product
     products: TProduct[] | [],
@@ -107,7 +105,7 @@ type State = {
     products_commerce: TProductInfo[],
     store_select: number,
     hasStore: boolean,
-    LatLng: {lng: number | null, lat: number | null}
+    LatLng: {lng: number | null, lat: number | null},
     //Order
     orders: TOrder[]
     allorders: TOrder[]

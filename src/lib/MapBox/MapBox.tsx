@@ -98,18 +98,21 @@ const MapBox = ({formLng, formLat, from, LngLatStore, LngLatClient}: Prop) => {
                     
                 }
 
-                const el = document.createElement('div');
-                const width = '30px';
-                const height = '25px';
-                el.className ='marker'
-                el.style.width = width
-                el.style.height = height;
-                el.style.borderRadius = '5px'
-                el.style.backgroundImage = 'url(https://images.pexels.com/photos/375889/pexels-photo-375889.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)';
-                el.style.backgroundSize = '100%'
-                const market2 = new mapboxgl.Marker(el)
-                    .setLngLat(LngLatStore as [number, number])
-                    .addTo(map.current as any);
+                if(LngLatStore){
+                    
+                    const el = document.createElement('div');
+                    const width = '30px';
+                    const height = '25px';
+                    el.className ='marker'
+                    el.style.width = width
+                    el.style.height = height;
+                    el.style.borderRadius = '5px'
+                    el.style.backgroundImage = 'url(https://images.pexels.com/photos/375889/pexels-photo-375889.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)';
+                    el.style.backgroundSize = '100%'
+                    const market2 = new mapboxgl.Marker(el)
+                        .setLngLat(LngLatStore as [number, number] )
+                        .addTo(map.current as any);
+                }
 
                 
         })}

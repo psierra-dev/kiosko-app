@@ -6,7 +6,10 @@ import {schemaLogin} from '@utils/yup'
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
+import { postLogin } from 'service/user';
+import { useRouter } from 'next/router';
 export const FormLogin = () => {
+    const router = useRouter()
     const { register, formState: { errors }, handleSubmit } = useForm<TFormValues>({
         resolver: yupResolver(schemaLogin)
     });
@@ -19,12 +22,19 @@ export const FormLogin = () => {
     const btnRef = useRef<HTMLButtonElement >(null)
 
     const onSubmit: SubmitHandler<TFormValues> = async (data) => {
-
         const credentials = {
             email: data.Email,
             password: data.Contraseña
         }
+        
+        const response = await postLogin(credentials)
 
+        if(response.status !== 200){
+            console.log(response)
+        }
+
+        document.cookie = `token=${response.data}`
+        router.reload()
     }
 
     return (
