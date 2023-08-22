@@ -41,7 +41,7 @@ const CardOrder = ({order}: Prop) => {
                                 <p className='text-sec'>Pago en {order.type_payment}</p>
                             </div>
 
-                            <p className='text-sec'>N° de orden: {order.id.slice(11,15)}</p>
+                            <p className='text-sec'>N° de orden: </p>
                         </div>
                     </div>
 
