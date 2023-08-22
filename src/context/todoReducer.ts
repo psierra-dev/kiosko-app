@@ -134,7 +134,7 @@ export const todoReducer = (state: TState, action: TodoAction): TState => {
             const product = products?.filter(e => e.id === action.payload.id);
             if(product !== undefined && product?.length > 0){
                 product[0].product.precio = action.payload.precio;
-                product[0].product.stock = action.payload.stock;
+                product[0].product.stock = true
             }
             
             return {
