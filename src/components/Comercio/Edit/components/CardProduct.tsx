@@ -69,7 +69,7 @@ const CardProduct = ({ producto, activeProduct, handlerActive }: Prop) => {
     setStatus("loading");
     const product_updated = {
       precio: update.precio,
-      stock: update.stock,
+      stock: true,
     };
 
     const resp = await updateProductService(id, product_updated);
@@ -115,15 +115,15 @@ const CardProduct = ({ producto, activeProduct, handlerActive }: Prop) => {
         <div className="column">
           {activeProduct[0] === producto.id ? (
             <Switch
-              checked={update.stock}
-              onChange={() => setUpdate({ ...update, stock: !update.stock })}
+              checked={true}
+              onChange={() => setUpdate({ ...update, stock: 1})}
               size="small"
               color={update.stock ? "success" : "error"}
             />
           ) : (
             <Switch
-              checked={update.stock}
-              onChange={() => setUpdate({ ...update, stock: !update.stock })}
+              checked={true}
+              onChange={() => setUpdate({ ...update, stock: 2})}
               size="small"
               disabled
               color={update.stock ? "success" : "error"}
@@ -168,7 +168,8 @@ const CardProduct = ({ producto, activeProduct, handlerActive }: Prop) => {
                 onClick={() => {
                   handlerActive([producto.id as number, 0]);
                   setUpdate({
-                    stock: producto.product.stock,
+                    ...update,
+                    stock: 2,
                     precio: producto.product.precio,
                   });
                 }}
@@ -181,7 +182,8 @@ const CardProduct = ({ producto, activeProduct, handlerActive }: Prop) => {
                 onClick={() => {
                   setOpenUpdatePhone(true);
                   setUpdate({
-                    stock: producto.product.stock,
+                    ...update,
+                    stock: 2,
                     precio: producto.product.precio,
                   });
                 }}
