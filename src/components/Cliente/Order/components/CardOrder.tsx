@@ -37,7 +37,7 @@ const CardOrder = ({order}: Prop) => {
                         <div className='infoorder'>
                             <h6>{order.store.name}</h6>
                             <div className='fecha-pay'>
-                                <p className='text-sec'>{order.date.slice(0,10)}</p>
+                                <p className='text-sec'></p>
                                 <p className='text-sec'>Pago en {order.type_payment}</p>
                             </div>
 
