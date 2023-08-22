@@ -6,8 +6,8 @@ import { useSesionStorage } from './useSesionStorage'
 const useLocation = () => {
     const {todoState, getComercios} = useContext(TodoContext)
     const {LatLng} = todoState;
-    const {get} = useSesionStorage('lnglat')
-    const lnglat = get();
+    //const {get} = useSesionStorage('lnglat')
+    //const lnglat = get();
 
     const onSuccess = async (location: any) => {
         const res = await getStoreAround(location.coords.latitude, location.coords.longitude)
