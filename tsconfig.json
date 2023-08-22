@@ -17,7 +17,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -28,6 +28,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/styles/style.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/styles/style.js", "src/components/Comercio/Edit/components/components/style.jsx", "src/lib/MapBoxReact/Map.tsx"],
   "exclude": ["node_modules"]
 }

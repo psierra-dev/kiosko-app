@@ -39,6 +39,10 @@ export const SInput = styled.div`
         border: 2px solid red;
         outline: none;
     }
+    p {
+        margin: 0;
+        padding: 0;
+    }
 
     .message {
         color: red;

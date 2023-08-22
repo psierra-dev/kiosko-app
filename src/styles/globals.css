@@ -1,23 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Nova+Slim&family=Quicksand:wght@500&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Nova+Slim&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html #__next,
+body #__next {
+  height: 100%;
+}
 
 body {
+  font-size: 16px;
   margin: 0;
   font-family: 'Lobster', cursive;
   font-family: 'Nova Slim', cursive;
+  font-family: 'Quicksand', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ebebeb;
-  min-height: 100vh;
   overflow: none;
+  box-sizing: border-box;
 }
 
-article, div, footer, header, main, nav, section,span, figure{
+a,
+li,
+ul {
+  color: inherit;
+  text-decoration: none;
+  list-style: none;
+}
+
+article,
+div,
+footer,
+header,
+main,
+nav,
+section,
+span,
+figure,
+ul {
   align-items: stretch;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
   margin: 0;
   padding: 0;
   position: relative;
@@ -25,4 +57,46 @@ article, div, footer, header, main, nav, section,span, figure{
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  display: block;
+}
+
+.mapboxgl-map,
+.mapboxgl-map>div {
+  display: block !important;
+  position: unset;
+}
+
+.mapboxgl-ctrl-top-left {
+  display: none !important;
+}
+
+.mapboxgl-canvas-container {
+  height: 100%;
+}
+
+.mapboxgl-canvas {
+  height: 100% !important;
+}
+
+.swiper-wrapper {
+  flex-direction: row;
+}
+
+main {
+  flex: 1
+}
+
+.splide__list {
+  flex-direction: row;
+}
+
+.splide__slide {
+  width: auto !important;
 }

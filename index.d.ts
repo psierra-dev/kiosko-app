@@ -7,12 +7,12 @@ type TInfoUser = {
 }
 
 type TUser = {
-    id: string;
+    id?: string;
     name: string;
     lastname: string;
     email: string;
     password?: string;
-    type?: string;
+    role?: string;
     infouser?: InfoUser 
 }
 
@@ -34,7 +34,7 @@ type TProduct = {
     categoria?: string | null;
     almacen?: string;
     precio?: string ;
-    stock?: string | null;
+    stock?: boolean;
     unit?: "kg" | "lt";
 }
 
@@ -42,7 +42,7 @@ type  TProductInfo = {
     id?: number;
     product: TProduct
     almacen?:TCommerce,
-    
+    quantity?: number
 }
 
 type TInfoCLient = {
@@ -53,16 +53,23 @@ type TInfoCLient = {
     number_phone: string;
 }
 
+type TDetailOrder = {
+    id: number;
+    precio: number;
+    quantity: number;
+    product: TProduct;
+}
+
 type TOrder = {
-    id: string;
+    id: number;
     amount: number;
     state: string;
     date: string;
     user: TUser;
     detailorders: TDetailOrder[];
     infoclient: TInfoCLient;
-    store: TCommerce;
-    type_payment: string
+    store?: TCommerce;
+    type_payment?: string;
 }
 
 //Form
@@ -114,3 +121,5 @@ type TState = {
     //Drawer
     stateDrawer: {noti: boolean, order: boolean}
 }
+
+type TStatus = 'typing' | 'loading' | "success" | "error"

@@ -1,9 +1,10 @@
 import { FormLogin } from '@components/General/FormLogin/FormLogin';
-import { NextPage } from 'next';
+import { getLayout } from '@components/Layouts/LoRe';
 import Head from 'next/head';
 import React from 'react'
+import { NextPageWithLayout } from './_app';
 
-const Login: NextPage = () => {
+const Login: NextPageWithLayout = () => {
     return (
         <>
         <Head>
@@ -15,4 +16,5 @@ const Login: NextPage = () => {
     )
 }
 
+Login.getLayout = getLayout
 export default Login;

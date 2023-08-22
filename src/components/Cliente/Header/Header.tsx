@@ -1,46 +1,79 @@
-import React from 'react'
-import { SHeader } from './style';
-import { GoSearch } from "react-icons/go";
-import AvatarC from './components/Avatar';
-import CartOrderNoti from './components/CartOrderNoti';
-import Link from 'next/link';
+import React, { useState } from "react";
+import { SHeader, StyleNav } from "./style";
+import AvatarC from "./components/Avatar";
+import CartOrderNoti from "./components/CartOrderNoti";
+import Link from "next/link";
+import { FaHamburger } from "react-icons/fa";
+import logo from "@public/Logo.png"
+import Image from "next/image";
+import { Drawer } from "@mui/material";
+import { AiOutlineClose } from "react-icons/ai";
+
+const Nav = ({onClose}) => {
+  return (
+    <StyleNav onClick={onClose}>
+           <div className="close">
+            <AiOutlineClose />
+            </div>
+            <Image src={logo} alt="logo"/>
+            <nav>
+              <ul>
+                <li>
+                  <Link href="/perfil">
+                  Perfil
+                  </Link>
+                </li>
+                <li>
+                 <Link href="/inicio">
+                  Cerrar Sesion
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+
+
+    </StyleNav>
+  )
+}
 
 const HeaderClient = () => {
-    return (
-            <SHeader>
-                <div className='con'>
-                <div><Link href="/inicio">Logo</Link></div>
-                <div className="coninput">
-                    <input type='text' placeholder='Buscar Productos...'/>
-                    <button>
-                        <div className='search'>
-                            <GoSearch />
-                        </div>
-                    </button>
-                </div>
+  const [drawer, setDrawer] = useState(false)
+  const handleDrawer = () => {
+    setDrawer(true)
+  }
+  return (
+    <SHeader>
+      <div className="con">
+       <div className="hamburger" onClick={handleDrawer}>
+          <FaHamburger />
+        </div>
 
-                <nav className="order-cart-noti">
-                    {true ? <CartOrderNoti type='cart'/>
-                    :<></>
-                    }
-                    {true ? <CartOrderNoti type='order'/>
-                    :<></>
-                    }
+        <Drawer 
+        anchor='left'
+        open={drawer}
+        onClose={handleDrawer}
+        className="drawer"
+        >
+          <Nav onClose={() => setDrawer(false)}/>
+        </Drawer>
+        <div>
+          <Link href="/inicio">
+            <Image src={logo} alt="logo"/>
+          </Link>
+        </div>
 
-                    <AvatarC name='Ruben' lastname="Sierra"/>
-                </nav>
+        <nav className="order-cart-noti">
+          <CartOrderNoti type="cart" /> 
+          <CartOrderNoti type="order" />
 
+          <div className="avatar">
+            <AvatarC name="Ruben" lastname="Sierra"/>
+          </div>
+        </nav>
 
-
-                {!true ? <div className='btnrorl'>
-                    <button className='btnlogin'>Login</button>
-                    <button className='btnregister'>Register</button>
-                </div>
-                :null
-                }
-            </div>
-            </SHeader>
-    )
-}
+      </div>
+    </SHeader>
+  );
+};
 
 export default HeaderClient;

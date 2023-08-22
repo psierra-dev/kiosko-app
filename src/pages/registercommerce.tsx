@@ -1,8 +1,10 @@
 import FormStore from '@components/General/FormStore/FormStore';
 import Head from 'next/head';
 import React from 'react'
+import { NextPageWithLayout } from './_app';
+import { getLayout } from '@components/Layouts/LoRe';
 
-const RegisterCommerce = () => {
+const RegisterCommerce: NextPageWithLayout = () => {
     return (
         <>
         <Head>
@@ -14,4 +16,5 @@ const RegisterCommerce = () => {
     )
 }
 
+RegisterCommerce.getLayout = getLayout
 export default RegisterCommerce;

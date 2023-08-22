@@ -1,74 +1,55 @@
-
-import { IoCartOutline } from 'react-icons/io5';
-import { useContext, useEffect, useState } from "react";
-
-import axios from "axios";
-import { TodoContext } from "@context/context";
+import { IoCartOutline } from "react-icons/io5";
+import { useContext } from "react";
 import Image from "next/image";
 import { Text } from "@styles/style";
 import { SCardProduct } from "./style";
-import { useSesionStorage } from '@hooks/useSesionStorage';
+import { MdOutlineRemoveShoppingCart } from "react-icons/md";
+import { CartProductContext } from "@context/cart";
 interface Prop {
-    product: TProductInfo
+  product: TProductInfo;
 }
 
+export const CardProduct = ({ product }: Prop) => {
+  const { state, addProduct, deleteProduct } = useContext(CartProductContext);
+  const isCart = state.cartProducts?.some((e) => e.id === product.id);
 
-export const CardProduct = ({product}: Prop) => {
-    const {set} = useSesionStorage('productscart');
-    const [setCart, setSetCart] = useState();
-    const [loader , setLoader] = useState(false);
-    const {todoState, addProductCart} = useContext(TodoContext);
-    const {productsCart} = todoState;
+  return (
+    <SCardProduct>
+      <div className="con">
+        <div className="conimg">
+          <img src={product.product.imgurl as string} alt="" />
+        </div>
+        <div className="con1">
+          <div>
+            <Text size="12px" weight="400" lineheight="15px" color="#ADADAD">
+              {product.product.categoria}
+            </Text>
+          </div>
+          <div>
+            <Text size="16px" weight="600" lineheight="20px" color="#253D4E">
+              {product.product.name}
+            </Text>
+          </div>
+        </div>
 
-    const addProductsToCart = async (p: TProductInfo) => {
-            setLoader(true);
-            const bool =  productsCart.some(e => e.id === p.id);
-            console.log(bool)
-            if(!bool ){
-                set(product)
-                addProductCart(product)
-                setLoader(false)
-            }else{
-                setLoader(false)
-                alert('producto ya agregado')
-            }
-    }
+        <div className="con2">
+          <div>
+            <Text size="16px" weight="600" lineheight="20px" color="#FFB531">
+              {`$${product.product.precio}`}
+            </Text>
+          </div>
 
-    console.log(product.product.imgurl)
-    return (
-        <SCardProduct>
-            <div className='con'>
-                <div className='conimg'>
-                    
-                </div>
-                <div className='con1'>
-                    <div>
-                        <Text size='12px' weight='400' lineheight='15px' color='#ADADAD'>
-                            {product.product.categoria}
-
-                        </Text>
-                    </div>
-                    <div>
-                        <Text size='16px' weight='600' lineheight='20px' color='#253D4E'>
-                            {product.product.name}
-                        </Text>
-                    </div>
-                </div>
-
-                <div className='con2'>
-                    <div>
-                        <Text size='16px' weight='600' lineheight='20px' color='#FFB531'>
-                            {`$${product.product.precio}`}
-                        </Text>
-                    </div>
-                    <button onClick={ () => addProductsToCart(product)}>
-                        {!loader ?<><IoCartOutline /> Add</>  : "agregando.."}
-                    </button>
-                </div>
-            </div>
-
-        </SCardProduct>
-        
-    
-)
-}
+          {isCart ? (
+            <button onClick={() => deleteProduct(product.id)}>
+              <MdOutlineRemoveShoppingCart /> Delete
+            </button>
+          ) : (
+            <button onClick={() => addProduct(product)}>
+              <IoCartOutline /> Add
+            </button>
+          )}
+        </div>
+      </div>
+    </SCardProduct>
+  );
+};

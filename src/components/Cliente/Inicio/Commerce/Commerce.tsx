@@ -1,62 +1,137 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { Alert } from "@mui/material";
 
-import { CarouselCommerce, SCommerce } from './style';
+import CardKiosko from "./components/CardKiosko";
+import { SCommerce } from "./style";
+import useSessionLocation from "@hooks/useSessionLocation";
+import MapBox from "@lib/MapBoxReact/Map";
 
-import { TodoContext } from '@context/context';
-import MapBox from '@lib/MapBox/MapBox';
-import CardKiosko from './components/CardKiosko';
+import { Options, Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
 
-    const Commerce = () => {
-        const {todoState, selectStore, lnglatUser} = useContext(TodoContext);
-        const {commerce} = todoState;
-        const [active, setActive] = useState<number>(1);
+const STORES = [
+  {
+    id: 1,
+    name: "Los Sierras",
+    imgurl: "https://images.pexels.com/photos/64613/pexels-photo-64613.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 2,
+    name: "Raul",
+    imgurl: "https://images.pexels.com/photos/64613/pexels-photo-64613.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 3,
+    name: "La Glady",
+    imgurl: "https://images.pexels.com/photos/64613/pexels-photo-64613.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 4,
+    name: "La Glady",
+    imgurl: "https://images.pexels.com/photos/64613/pexels-photo-64613.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 5,
+    name: "La Glady",
+    imgurl: "https://images.pexels.com/photos/64613/pexels-photo-64613.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 6,
+    name: "La Glady",
+    imgurl: "https://images.pexels.com/photos/64613/pexels-photo-64613.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 7,
+    name: "La Glady",
+    imgurl: "https://images.pexels.com/photos/64613/pexels-photo-64613.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+];
 
-        const [lng, setLng] = useState<number | null>(null)
-        const [lat, setLat] = useState<number | null>(null)
+const options: Options = {
+  perPage: 4,
+  perMove: 1,
+  pagination: false,
+  arrows: false,
+  gap: 1,
+};
+const Commerce = ({ commerce }) => {
+  const router = useRouter();
 
+  const [lng, setLng] = useState<number | null>(null);
+  const [lat, setLat] = useState<number | null>(null);
+  const { setItem, getItem } = useSessionLocation();
+  const { lng: lngQuery, lat: latQuery, storeid } = router.query;
 
-        useEffect(() => {
-            if(commerce !== undefined) {
-                selectStore(commerce[0]?.id)
-            }
-        }, [commerce])
+  const locationSession = getItem();
+  const select = (id: number) => {
+    console.log(id);
+    //if (id === Number(storeid)) return;
+    const path = router.asPath;
+    const replacePath = path.replace(`storeid=${storeid}`, `storeid=${id}`);
+    router.push(replacePath);
+  };
 
-        const select = (id: number) => {
-            setActive(id)
-            selectStore(id)
-        }
-
-        useEffect(() => {
-            if(lng !== null && lat !== null){
-                const lnglat = { lng, lat}
-                lnglatUser(lnglat)
-                sessionStorage.setItem("lnglat", JSON.stringify(lnglat))
-            }else {
-                console.log('seleccione')
-            }
-        }, [lng, lat])
-
-        return (
-        <SCommerce> 
-            <div className='con-mapbox'>
-                {lng === null && <p className='aviso-mp' >Marca la ubicacion donde te encuentras</p>}
-                <MapBox
-                    formLat={setLat}
-                    formLng={setLng}
-                    from='formcreate'
-                />
-            </div>
-
-            <div className='con-commerce'>
-                <CarouselCommerce>
-                { commerce?.length > 0 
-                    ? commerce?.map((c) => <CardKiosko Comercio={c} key={c.id} Func={select} active={active}/>)
-                    : <div>No hay comercios cerca tuyo</div>
-                }
-                </CarouselCommerce>
-            </div>
-        </SCommerce>
-        )
+  const handleLocation = ({
+    latitude,
+    longitude,
+  }: {
+    latitude: number;
+    longitude: number;
+  }) => {
+    setLat(latitude);
+    setLng(longitude);
+  };
+  useEffect(() => {
+    if (STORES.length > 0 && lngQuery && latQuery && !storeid) {
+      console.log(STORES[0].id);
+      const path = `${router.asPath}&storeid=${STORES[0].id}`;
+      router.push(path);
     }
+  }, [STORES]);
+  useEffect(() => {
+    if (lng !== null && lat !== null) {
+      setItem({ lat: lat, lng: lng });
+      router.push(`inicio?lng=${lng}&lat=${lat}`);
+    }
+  }, [lng, lat]);
+
+  return (
+    <SCommerce>
+      {lng === null && (
+        <Alert className="aviso-mp" severity="info">
+          Marca la ubicacion donde te encuentras
+        </Alert>
+      )}
+      <div className="container-map">
+        <MapBox
+          initialLocation={{
+            latitude: 65.99999,
+            longitude: -29.0091289982,
+            type: "store",
+          }}
+          handleLocation={handleLocation}
+          type="drag"
+        />
+      </div>
+
+      <div className="con-commerce">
+        <div className="wrapper">
+          <div className="splide">
+            <Splide options={options}>
+              {STORES.map((slide) => (
+                <SplideSlide key={slide.id}>
+                  <div>
+                    <CardKiosko commerce={slide} handleSelect={select} />
+                  </div>
+                </SplideSlide>
+              ))}
+            </Splide>
+          </div>
+        </div>
+      </div>
+    </SCommerce>
+  );
+};
 
 export default Commerce;

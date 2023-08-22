@@ -54,6 +54,7 @@ export const SFormStore = styled.div`
         height: 39px;
         background-color: ${Color.One};
         border: none;
+        cursor: pointer;
     }
 
     .inp {

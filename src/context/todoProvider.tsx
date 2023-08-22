@@ -32,7 +32,7 @@ interface props{
     children: JSX.Element | JSX.Element[]
 }
 
-export const TodoProvider = ({children} : props) => {
+export const TodoProvider = ({children}: props) => {
 
     const [todoState,dispatch] = useReducer(todoReducer, INITIAL_STATE);
 

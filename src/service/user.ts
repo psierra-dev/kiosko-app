@@ -2,32 +2,39 @@ import {API_BASE_URL} from "@config/config";
 import axios, { AxiosError } from "axios";
 
 type TresponsePost = {
-    token: string
+    token: string,
+    role: string
 }
 
-type TerrorAxios = {
-    msg: string
+type ApiError = {
+    message: string,
+    statusCode: number
 }
-export const postLogin =  async (datos: any) => {
-    try {
-        const {data, status} = await axios.post<TresponsePost>(`${API_BASE_URL}/user/login`, datos)
 
-        return {data: data.token, status: status}
-    } catch (error) {
-        const {response} = error as AxiosError<TerrorAxios>;
+console.log(API_BASE_URL)
 
-        return {data: response?.data.msg, status: response?.status}
+export class Auth{
+    constructor(){}
+
+    async login(datos: {email: string, password: string}){
+        try {
+            const {data, status} = await axios.post<TresponsePost>(`${API_BASE_URL}users/login`, datos)
+    
+            return {token: data.token, status: status, role: data.role}
+        } catch (error) {
+            const apiError: ApiError = error.response.data;
+            throw new Error(apiError.message);
+        }
     }
-}
-
-export const postRegister =  async (datos: any) => {
-    try {
-        const {data, status} = await axios.post<TresponsePost>(`${API_BASE_URL}/user/register`, datos)
-
-        return {data, status}
-    } catch (error) {
-        const {response} = error as AxiosError<TerrorAxios>;
-
-        return {data: response?.data.msg, status: response?.status}
+    async register(datos: TUser) {
+        try {
+            const {data, status} = await axios.post<TresponsePost>(`${API_BASE_URL}users/register`, datos)
+    
+            return {data, status}
+        } catch (error) {
+            console.log(error)
+            const apiError: ApiError = error.response.data;
+            throw new Error(apiError.message);
+        }
     }
 }

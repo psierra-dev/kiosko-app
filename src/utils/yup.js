@@ -10,7 +10,7 @@ const schema = {
     Nombre_Del_Kiosko:yup.string().required("Escribe el nombre de tu kiosko"),
     Apellido: yup.string("Solo letra").matches(stringRegex, "Apellido no valido").required("Escribe tu apellido"),
     Email: yup.string().email("Escribe un email valido").required("Escribe un email por favor"),
-    Contraseña: yup.string(),
+    Contraseña: yup.string().matches(passwordregExpr, "Ponga una contraseña correcta").required(""),
     Direccion: yup.string().required("Escribe una direccion"),
     Telefono: yup.string().matches(phoneRegex, "Ingrese un numero valido").min(10, 'min10').max(10, 'max10'),
     Descripcion:yup.string(),

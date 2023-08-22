@@ -1,40 +1,44 @@
-import { TodoContext } from '@context/context';
-import React, { useState, useEffect, useContext } from 'react'
+import { CartProductContext } from "@context/cart";
+import React, { useState, useEffect, useContext } from "react";
 
 export const useCart = () => {
-    const {todoState, updateProductCart, selectStoreCart} = useContext(TodoContext);
-    const {productsCart, storeCart, productCartStore} = todoState;
-    const [total, setTotal] = useState(0);
-    const [active, setActive] = useState<TCommerce >(storeCart[0]);
+  const { state, deleteProduct } = useContext(CartProductContext);
 
-    useEffect(() => {
-        const totalHandler = () => {
-            let sum = 0;
-            for(let i =0; i < productCartStore.length; i++){
-                sum = sum +  parseFloat(productCartStore[i].product.precio as string)
-            }
-    
-            setTotal(sum)
-        }
+  const [storeActive, setStoreActive] = useState<TCommerce | null>(null);
+  const commercesCart = state.cartProducts
+    ?.map((p) => {
+      return { name: p.almacen.name, id: p.almacen.id };
+    })
+    ?.filter(
+      (object, index, self) =>
+        index === self.findIndex((o) => o.id === object.id)
+    );
 
-        totalHandler()
-    }, [productsCart, updateProductCart])
+  const productsCartFilter = state.cartProducts?.filter(
+    (p) => p.almacen.id === storeActive?.id
+  );
 
-    useEffect(() => {
-        if(storeCart.length > 0){
-            setActive(storeCart[0])
-        }
-    }, [storeCart])
-
-    useEffect(() => {
-        selectStoreCart(active?.id as number)
-    }, [active])
-
-
-    const handleStore = (e: TCommerce) =>  setActive(e)
-    return {
-        total,
-        active,
-        handleStore
+  useEffect(() => {
+    if (!storeActive && state.cartProducts) {
+      console.log("entra");
+      setStoreActive(state.cartProducts[0]?.almacen);
     }
-}
+  }, [state, storeActive]);
+
+  useEffect(() => {
+    if (productsCartFilter?.length === 0) {
+      setStoreActive(state.cartProducts[0]?.almacen);
+    }
+  }, [productsCartFilter]);
+  const total = productsCartFilter
+    ?.map((p) => Number(p.product.precio) * p.quantity)
+    ?.reduce((a, b) => a + b, 0);
+  return {
+    total,
+    commercesCart,
+    productsCartFilter,
+    storeActive,
+    setStoreActive,
+    deleteProduct,
+  };
+};

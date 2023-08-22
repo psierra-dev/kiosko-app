@@ -1,76 +1,136 @@
-import {  useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from "react";
 
-import { SProducts } from './style';
+import { SProducts } from "./style";
 
+import axios from "axios";
+import { TodoContext } from "@context/context";
+import { API_BASE_URL } from "@config/config";
+import { ChipFilter, Text, Wrapper } from "@styles/style";
+import { CardProduct } from "./components/CardProduct";
+import useFilter from "@hooks/useFilter";
+import { category } from "../../../../data/category";
+import Image from "next/image";
+import { Options, Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
 
+const arrTipo = ["All", "Verduras", "Frutas", "Bebidas", "Golosinas", "Otros"];
 
+const PRODUCTS: TProductInfo[] = [
+  {
+    id: 1,
+    product: {
+      id: 1,
+      name: "Tomate",
+      categoria: "Vegetables",
+      precio: "200",
+      imgurl:
+        "https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+  },
+  {
+    id: 2,
+    product: {
+      id: 1,
+      name: "Tomate",
+      categoria: "Vegetables",
+      precio: "200",
+      imgurl:
+        "https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+  },
+  {
+    id: 3,
+    product: {
+      id: 1,
+      name: "Tomate",
+      categoria: "Vegetables",
+      precio: "200",
+      imgurl:
+        "https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+  },
+  {
+    id: 4,
+    product: {
+      id: 1,
+      name: "Tomate",
+      categoria: "Vegetables",
+      precio: "200",
+      imgurl:
+        "https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+  },
+  {
+    id: 5,
+    product: {
+      id: 1,
+      name: "Tomate",
+      categoria: "Vegetables",
+      precio: "200",
+      imgurl:
+        "https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  ",
+    },
+  },
+];
 
-import axios from 'axios';
-import { TodoContext } from '@context/context';
-import { API_BASE_URL } from '@config/config';
-import { Text, Wrapper } from '@styles/style';
-import { CardProduct } from './components/CardProduct';
+const options: Options = {
+  perPage: 2,
+  perMove: 1,
+  gap: 20,
+  pagination: false,
+  arrows: false
+};
+const Products = ({ products }) => {
+  const { filterProducts, filter, setFilter } = useFilter("All");
 
-    const arrTipo = ["All", 'Verduras', 'Frutas', 'Bebidas', 'Golosinas', 'Otros'];
+  const productsFilter = filterProducts({ products });
 
-    const Products = () => {
-        const [active, setActive] = useState('All')
-        const {todoState, updateTipo, getProductos} = useContext(TodoContext);
-        const {store_select} = todoState;
-        const {productInfo} = todoState;
+  return (
+    <SProducts>
+      <Text size="20px" weight="520" lineheight="20px" color="#253D4E">
+        Categorias
+      </Text>
+      <Splide options={options}>
+              {category.map((slide, index) => (
+                <SplideSlide key={index}>
+                  <div>
+                  <ChipFilter
+                    border={filter === slide.name && "orange"}
+                    key={slide.name}
+                    onClick={() => setFilter(slide.name)}
+                   >
+                   {slide.img && (
+                   <Image className="img-filter" src={slide?.img} alt={slide.name} />
+                    )}
+                   <span>{slide.name}</span>
+                  </ChipFilter>
+                  </div>
+                </SplideSlide>
+              ))}
+        </Splide>
+      <div>
+        <Text size="20px" weight="520" lineheight="20px" color="#253D4E">
+          Productos
+        </Text>
+      </div>
 
-        const handlerTipo = (name: string) => {
-            updateTipo(name)
-            setActive(name)
-        }
-        useEffect(() => {
-            if(store_select){
-                const getProductStore = async () => {
-                    try {
-                        const product = await axios.get(`${API_BASE_URL}/product-store/getproductstore/${store_select}` );
-                        console.log(product);
-                        getProductos(product.data)
-                    } catch (error) {
-                        console.log(error)
-                    }
-                    
-                }
-    
-                getProductStore();
-            }
-            
-        }, [store_select])
-        
-    return (
-            <SProducts >
-                
-                    <div className='div-row'>
-                        <div>
-                            <Text size='20px' weight='520' lineheight='20px' color='#253D4E'>  
-                                Productos
-                            </Text>
-                        </div>
-                        <div className="filt">
-                            {arrTipo.map(e => 
-                            <Text 
-                            key={e}
-                            onClick= {() => handlerTipo(e)}
-                            color={active === e ? 'orange' : '#253D4E'}
-                            size='14px' 
-                            weight='400' 
-                            lineheight='20px' 
-                            cursor='pointer'>
-                                {e}
-                            </Text>)}
-
-                        </div>
-                    </div>
-                <Wrapper >
-                    {productInfo.length > 0 ?productInfo?.map(p => <CardProduct key={p.id} product={p}/>) : <h2>No hay productos</h2>}
-                </Wrapper>
-            </SProducts>
-        
-    )
-}
+      <div className="cont-product">
+        {PRODUCTS.length > 0 ? (
+          <Wrapper>
+            {PRODUCTS?.map((p: TProductInfo) => (
+              <CardProduct key={p.id} product={p} />
+            ))}
+          </Wrapper>
+        ) : (
+          <div className="not-product">
+            <Text size="20px" weight="520" lineheight="20px" color="#253D4E">
+              No hay productos
+            </Text>
+          </div>
+        )}
+      </div>
+    </SProducts>
+  );
+};
 
 export default Products;

@@ -1,84 +1,78 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import { CircularProgress } from '@mui/material';
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import { CircularProgress } from "@mui/material";
 
 interface Prop {
-    open: boolean,
-    handleClose: (open: boolean) => void,
-    deleteProduct: () => void,
-    state?: {
-        loading: boolean,
-        aproved: boolean,
-        error: boolean
-    }
+  open: boolean;
+  handleClose: () => void;
+  handleClick: () => void;
+  status?: TStatus;
+  type: string;
 }
-const DialogC = ({open, handleClose, deleteProduct, state}: Prop) => {
+const DialogC = ({ open, handleClose, handleClick, type, status }: Prop) => {
+  return (
+    <div>
+      <Dialog
+        open={open}
+        //onClose={handleClose}
+        //aria-labelledby="alert-dialog-title"
+        //aria-describedby="alert-dialog-description"
+      >
+        {status !== "success" && status !== "loading" && status !== "error" && (
+          <>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                {`Esta seguro que quiere ${type} este producto?`}
+              </DialogContentText>
+            </DialogContent>
 
-    const handleUpdatePage = () => {
-        window.location.reload()
-    } 
-    return (
-            <div>
-                <Dialog
-                    open={open}
-            //onClose={handleClose}
-            //aria-labelledby="alert-dialog-title"
-            //aria-describedby="alert-dialog-description"
-            >
-                {!state?.aproved && !state?.loading && !state?.error && <><DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Esta seguro que quiere eliminar este producto?
-                    </DialogContentText>
-                </DialogContent>
+            <DialogActions>
+              <Button onClick={() => handleClose()}>No aceptar</Button>
 
-                <DialogActions>
-                    <Button 
-                        onClick={() => handleClose(false)}>
-                            Disagree
-                    </Button>
+              <Button onClick={handleClick} autoFocus>
+                Aceptar
+              </Button>
+            </DialogActions>
+          </>
+        )}
 
-                    <Button 
-                        onClick={deleteProduct} autoFocus>
-                        Agree
-                    </Button>
-                </DialogActions></>}
+        {status === "loading" && <CircularProgress />}
 
-                {state?.loading && <CircularProgress />}
+        {status === "success" && (
+          <>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                {type === "eliminar" && "El pruducto a sido eliminado"}
+                {type === "actualizar" && "El pruducto a sido actualizado"}
+              </DialogContentText>
+            </DialogContent>
 
-                {state?.aproved && <><DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        El pruducto a sido eliminado
-                    </DialogContentText>
-                </DialogContent>
+            <DialogActions>
+              <Button onClick={() => handleClose()}>Ok</Button>
+            </DialogActions>
+          </>
+        )}
 
-                <DialogActions>
-                    <Button
-                        onClick={handleUpdatePage}
-                        >
-                            Ok
-                    </Button>
-                </DialogActions></>}
+        {status === "error" && (
+          <>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                {`Error al ${type} el producto`}
+              </DialogContentText>
+            </DialogContent>
 
-                {state?.error && <><DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Error al eliminar el producto
-                    </DialogContentText>
-                </DialogContent>
-
-                <DialogActions>
-                    <Button
-                        onClick={handleUpdatePage}
-                        >
-                            Ok
-                    </Button>
-                </DialogActions></>}
-        </Dialog>
-            </div>
-    )
-}
+            <DialogActions>
+              <Button onClick={() => handleClose()}>Ok</Button>
+            </DialogActions>
+          </>
+        )}
+      </Dialog>
+    </div>
+  );
+};
 
 export default DialogC;

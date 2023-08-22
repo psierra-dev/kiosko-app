@@ -21,7 +21,7 @@ export const SLoginRegister = styled.div`
         width: 100%;
         align-items: center;
         justify-content: center;
-        gap:3em;
+        gap:1em;
     }
     .input-div {
         width: 100%;
@@ -46,10 +46,28 @@ export const SLoginRegister = styled.div`
     }
 
     .msg-error {
-        margin: 0.3em;
-        color: red;
-        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid red;
+        border-radius: 10px;
+        background-color: #ce5858;
+        color: white;
+        gap: 10px;
+        padding: 0.8em;
     }
+
+    .msg-error button {
+        border: none;
+        background-color: #ce5858;
+        color: red;
+        position: absolute;
+        right: 10px;
+    }
+
+
 
     .prueba-map {
         width: 100%;

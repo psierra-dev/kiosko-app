@@ -1,4 +1,14 @@
-.conmapbox {
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
     width: 100%;
-    min-height: 300px;
+    display: block;
+}
+
+.conmapbox {
+    height: 100%;
+}
+.conmapbox > .mapboxgl-canvas-container {
+    height: 100%;
 }

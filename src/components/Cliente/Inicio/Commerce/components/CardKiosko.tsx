@@ -1,40 +1,51 @@
-import {SCardKiosko } from "./style";
+import { SCardKiosko } from "./style";
 import { useState } from "react";
-import cc from './cardcomercio.module.css';
+import cc from "./cardcomercio.module.css";
 import Image from "next/image";
-
+import { useRouter } from "next/router";
+import { AiOutlineCreditCard, AiOutlineStar } from "react-icons/ai";
+import { IoLocationOutline } from "react-icons/io5";
+import { MdOutlineDeliveryDining } from "react-icons/md";
 
 interface Prop {
-    Comercio: TCommerce;
-    Func: (id:number) => void;
-    active: number
+  commerce: TCommerce;
+  handleSelect?: (id: number) => void;
 }
-    const CardKiosko = ({Comercio, Func, active}: Prop) => {
-        console.log('render')
-        console.log(active)
-    return (
-        <SCardKiosko onClick={() => Func(Comercio.id)} activeColor={active === Comercio.id ? "#ffb331e5" : undefined}>
-            <div className="con">
-                <div className="conimg">
-                    <Image 
-                        src={Comercio.imgurl as string}
-                        alt='imgurl'
-                    />
-                </div>
+const CardKiosko = ({ commerce, handleSelect }: Prop) => {
+  const router = useRouter();
+  const { storeid } = router.query;
+  const activeStore = Number(storeid) === commerce.id;
+  return (
+    <SCardKiosko
+      onClick={() => handleSelect(commerce.id)}
+      activeColor={activeStore ? "#ffb331e5" : undefined}
+      className={activeStore ? "active-store" : ""}
+    >
+      <div className="container">
 
-                <div>
-                    <span>
-                        Tucuman
-                    </span>
-                        
-                    <h5>
-                        {Comercio.name}
-                    </h5>
-                </div>
-                
-            </div>
-        </SCardKiosko>
-    )
-    }
+      <div className="conimg">
+        <img src={commerce.imgurl} alt="imgurl" />
+      </div>
+
+      <div className="info">
+        <h5>{commerce.name}</h5>
+        <div className="delivery-pago">
+          <AiOutlineCreditCard />
+          <span>Pago online</span>
+        </div>
+        <div className="delivery-pago">
+          <MdOutlineDeliveryDining />
+          <span>Con Delivery</span>
+        </div>
+      </div>
+
+      <AiOutlineStar className="icon-start" />
+      </div>
+      <div className="open">
+        Abierto
+      </div>
+    </SCardKiosko>
+  );
+};
 
 export default CardKiosko;

@@ -2,48 +2,80 @@ import { Color } from "@styles/color";
 import styled from "styled-components";
 
 type Prop = {
-    activeColor: string
-}
+  activeColor: string;
+};
 
-export const SCardKiosko = styled.div.attrs(({props}: {props: Prop}) => ({
-    activeColor: props?.activeColor || "rgba(173, 173, 173, 0.25)"
+export const SCardKiosko = styled.div.attrs(({ props }: { props: Prop }) => ({
+  activeColor: props?.activeColor || "rgba(173, 173, 173, 0.25)",
 }))`
-    width: 140px;
-    height: 150px;
-    margin-right: 10px;
-    border:1px solid ${props => props.activeColor};
-    border-radius: 5px;
-    cursor: pointer;
+  margin-right: 10px;
+  min-width: 220px;
+  
+  .container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
     background-color: ${Color.Pricipal};
+    border: 1px solid ${(props) => props.activeColor};
+    cursor: pointer;
+    color: ${Color.Text};
 
-    .con{
-    margin: 5px;
-    height: 100%;
-    }
-    .conimg{
-        width: 100%;
-        height: 50%;
-    }
+  }
 
-    .conimg img{
-        border-radius: 10px;
-    }
+  &.active-store {
+    border: 1px solid orange;
+  }
 
-    .scrollh > div {
-        flex-direction: row;
-    }
+  .conimg {
+    width: 50px;
+    height: 50px;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
 
-    .active{
-        background-color: aqua;
-    }
+  .info h5 {
+    margin-bottom: 3px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .info span, svg {
+    margin-bottom: 4px;
+    font-size: 13px;
+    font-weight: normal;
+    color: #919191;
+    margin-left: 3px;
+  }
 
-    &:hover {
-        box-shadow: 1px  2px 5px grey;
-    }
+  .info div {
+    flex-direction: row;
+  }
 
-    @media (max-width: 700px) {
-        width: 120px;
-        height: 150px;
-    }
-`
+  .icon-start {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
 
+  .conimg img {
+    
+  }
+
+  .scrollh > div {
+    flex-direction: row;
+  }
+
+  .active {
+    background-color: aqua;
+  }
+
+  &:hover {
+    box-shadow: 1px 2px 5px grey;
+  }
+  .open {
+    background-color: #219233;
+    text-align: center;
+    color: #062F0D;
+    border-radius: 0 0px 10px 10px;
+    font-size: small;
+  }
+`;
