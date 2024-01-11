@@ -1,4 +1,3 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 const DetailOrderStyle = styled.section`

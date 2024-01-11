@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { Color } from "../../../styles/color";
 
 export const SFormStore = styled.div`
     width: 100%;
     height: auto;
     justify-content: center;
     align-items: center;
-    background-color: ${Color.Pricipal};
+    background-color: ${({ theme: { colors } }) => colors.main};
     padding: 15px;
     box-shadow: 5px 5px 5px 0px lightgray;
 
@@ -52,7 +51,7 @@ export const SFormStore = styled.div`
 
     .btn-sb {
         height: 39px;
-        background-color: ${Color.One};
+        background-color: ${({ theme: { colors } }) => colors.primary};
         border: none;
         cursor: pointer;
     }
@@ -65,4 +64,4 @@ export const SFormStore = styled.div`
     .inp:focus {
         border: 1px solid red;
     }
-`
+`;

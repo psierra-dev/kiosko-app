@@ -1,7 +1,6 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
-export const  ConfigureStyle = styled.section` 
+export const ConfigureStyle = styled.section` 
     width: 50%;
     height: 100vh;
     margin-top: 20px;
@@ -13,7 +12,7 @@ export const  ConfigureStyle = styled.section`
         align-items: center;
         width: 100%;
         height: 50px;
-        background-color: ${Color.Pricipal};
+        background-color: ${({ theme: { colors } }) => colors.main};
         border-bottom: 1px solid grey;
         cursor: pointer;
     }
@@ -24,4 +23,4 @@ export const  ConfigureStyle = styled.section`
     @media only screen and (max-width: 750px){
         width: 100%;
     }
-`
+`;

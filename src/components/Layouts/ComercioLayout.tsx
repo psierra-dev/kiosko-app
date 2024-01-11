@@ -1,11 +1,6 @@
 import Header from "@components/Comercio/Header/Header";
 import Nav from "@components/Comercio/Nav/Nav";
-import Notification from "@components/Comercio/Notification/Notification";
-import { TodoContext } from "@context/context";
-import { Drawer } from "@mui/material";
-import { api, setContext } from "@utils/axios";
-import { GetServerSideProps } from "next";
-import React, { ReactElement, useContext, useEffect, useState } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { SCommerce } from "./style.cl";
 import { ProductProvider } from "@context/product";
 import { OrderProvider } from "@context/order";

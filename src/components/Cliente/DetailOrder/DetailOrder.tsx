@@ -1,12 +1,8 @@
 import React from "react";
 import DetailOrderStyle from "./style";
-import CardOrder from "./CardOrder";
 import {
   MdAccessTime,
-  MdCancel,
-  MdCheckCircle,
   MdOutlinePaid,
-  MdPending,
 } from "react-icons/md";
 import { PayService } from "@service/pay";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";

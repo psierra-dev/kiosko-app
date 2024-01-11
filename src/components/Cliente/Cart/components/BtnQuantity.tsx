@@ -1,6 +1,4 @@
-import React, { useContext, useState } from "react";
 import { StyledBtnQuantity } from "./style.btn";
-import { CartProductContext } from "@context/cart";
 
 interface Prop {
   quantity: number;

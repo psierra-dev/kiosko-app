@@ -2,7 +2,6 @@ import { SCardCartProduct } from "./style";
 
 import { useContext, useState } from "react";
 import BtnQuantity from "./BtnQuantity";
-import { Div, Text } from "@styles/style";
 import { CartProductContext } from "@context/cart";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 

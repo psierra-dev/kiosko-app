@@ -1,12 +1,14 @@
 import MapBox from "@lib/MapBoxReact/Map";
-import { Button, Div, StyledForm, StyledInput, Text } from "@styles/style";
 import React, { useEffect, useState } from "react";
-import { BiX, BiXCircle } from "react-icons/bi";
+import { BiXCircle } from "react-icons/bi";
 import styled from "styled-components";
 import { CustomerService } from "@service/customer";
 import { useRouter } from "next/router";
 import useCustomer from "@hooks/useCustomer";
 import { CircularProgress } from "@mui/material";
+import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
+import { ButtonPrimary } from "@components/General/Button/Button";
+import { StyledItemForm } from "@components/General/ItemsForm/ItemsForm";
 const customerService = new CustomerService();
 
 const FindLocationStyle = styled.section`
@@ -117,11 +119,11 @@ const FindLocation = ({ onCloseModal }: { onCloseModal: () => void }) => {
             />
           </div>
 
-          <Div gap="9px" padding="2rem">
-            <StyledForm onSubmit={handleSubmit}>
+          <WrapperFlex $gap="9px" $padding="2rem">
+            <WrapperFlex as="form" onSubmit={handleSubmit}>
               <h3>Cual es tu direccion?</h3>
 
-              <StyledInput
+              <StyledItemForm
                 type="text"
                 placeholder="Direccion"
                 onChange={(e) => {
@@ -130,13 +132,9 @@ const FindLocation = ({ onCloseModal }: { onCloseModal: () => void }) => {
                 }}
                 value={direction}
               />
-              <StyledInput type="text" placeholder="Numero" />
-              <Button
+              <StyledItemForm type="text" placeholder="Numero" />
+              <ButtonPrimary
                 disabled={!isChange || status === "loading"}
-                p="10px"
-                fontsize="smaller"
-                backgroundcolor={!isChange ? "#e7be97" : ""}
-                cursor={!isChange ? "no-drop" : ""}
                 type="submit"
               >
                 {status === "loading" ? (
@@ -144,9 +142,9 @@ const FindLocation = ({ onCloseModal }: { onCloseModal: () => void }) => {
                 ) : (
                   "Guardar Direccion"
                 )}
-              </Button>
-            </StyledForm>
-          </Div>
+              </ButtonPrimary>
+            </WrapperFlex>
+          </WrapperFlex>
         </>
       )}
     </FindLocationStyle>

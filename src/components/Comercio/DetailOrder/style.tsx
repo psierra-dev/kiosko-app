@@ -1,10 +1,9 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 export const StyleCardDetailOrder = styled.div`
   gap: 1rem;
   font-size: 1rem;
-  color: ${Color.Text};
+  color: ${({ theme: { colors } }) => colors.text};
   
   .container {
     padding: .5rem;
@@ -73,7 +72,7 @@ export const StyleCardDetailOrder = styled.div`
     font-size: 13px;
     font-weight: 400;
     min-width: 300px;
-    color: ${Color.One};
+    color: ${({ theme: { colors } }) => colors.main};
   }
 
   .subtotal {

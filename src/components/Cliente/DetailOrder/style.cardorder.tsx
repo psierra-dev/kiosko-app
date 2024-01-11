@@ -1,8 +1,7 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 const CardOrderStyle = styled.div`
-    color: ${Color.Text};
+    color: ${({ theme: { colors } }) => colors.text};
 
     border-bottom: 1px solid #dedede;
     padding-block: 1rem;

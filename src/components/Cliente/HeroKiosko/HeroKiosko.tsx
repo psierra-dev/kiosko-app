@@ -1,9 +1,6 @@
 import React from "react";
 import { StyleSelectKiosko } from "./style";
-import { IoInformationCircle } from "react-icons/io5";
 import { AiTwotoneStar } from "react-icons/ai";
-import background from "@public/backgroundStore2.png";
-import Image from "next/image";
 
 const HeroKiosko = () => {
   return (
