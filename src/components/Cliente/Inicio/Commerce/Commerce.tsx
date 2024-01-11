@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Modal } from "@mui/material";
 import { SCommerce } from "./style";
 import "@splidejs/react-splide/css";
-import { Div } from "@styles/style";
-import { GoLocation } from "react-icons/go";
 import FindLocation from "./FindLocation";
 import useCustomer from "@hooks/useCustomer";
 import CustomSlide from "./components/CustomSlide";
@@ -43,9 +41,9 @@ const Commerce = ({ stores }: { stores: TStore[] }) => {
         {stores.length > 0 ? (
           <CustomSlide stores={stores} />
         ) : (
-          <Div width="100%" justifycontent="center" alignitems="center">
+          <WrapperFlex $justifycontent="center" $alignitems="center">
             <h4>No podemos ofrecerte resultado</h4>
-          </Div>
+          </WrapperFlex>
         )}
       </section>
     </SCommerce>
