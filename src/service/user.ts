@@ -1,5 +1,5 @@
-import {API_BASE_URL} from "@config/config";
-import axios, { AxiosError } from "axios";
+import { api } from "@utils/axios"
+
 
 type TresponsePost = {
     token: string,
@@ -11,14 +11,13 @@ type ApiError = {
     statusCode: number
 }
 
-console.log(API_BASE_URL)
 
 export class Auth{
     constructor(){}
 
     async login(datos: {email: string, password: string}){
         try {
-            const {data, status} = await axios.post<TresponsePost>(`${API_BASE_URL}users/login`, datos)
+            const {data, status} = await api.post<TresponsePost>(`/users/login`, datos)
     
             return {token: data.token, status: status, role: data.role}
         } catch (error) {
@@ -28,7 +27,7 @@ export class Auth{
     }
     async register(datos: TUser) {
         try {
-            const {data, status} = await axios.post<TresponsePost>(`${API_BASE_URL}users/register`, datos)
+            const {data, status} = await api.post<TresponsePost>(`/users/register`, datos)
     
             return {data, status}
         } catch (error) {
