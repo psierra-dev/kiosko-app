@@ -85,7 +85,7 @@ function ORDERReducer(state: ISTATE, action: ProductAction) {
     case "DELETE_ORDER":
       const id = action.payload;
       return {
-        orders: state.orders.filter((p) => p.id !== id),
+        orders: state.orders.filter((p) => +p.id !== id),
       };
     case "FILTER_ORDERS":
       return {
