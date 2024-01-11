@@ -2,10 +2,11 @@
 import React from "react";
 import { StyleCardDetailOrder } from "./style";
 import { TableStyle } from "@components/General/Table/style";
-import { Div, StyledLabel, StyledSelect } from "@styles/style";
 import MapBox from "@lib/MapBoxReact/Map";
 import { FiUser } from "react-icons/fi";
 import { BiHomeAlt, BiPhone } from "react-icons/bi";
+import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
+import { StyledItemForm } from "@components/General/ItemsForm/ItemsForm";
 
 interface Prop {
   order: TOrder;
@@ -31,14 +32,14 @@ const DetailOrder = ({ order }: Prop) => {
                 {order?.orderproduct.map((p) => (
                   <tr key={p.id}>
                     <td className="name-product">
-                      <Div flexdirection="row" gap="0.4rem">
+                      <WrapperFlex $flexdirection="row" $gap="0.4rem">
                         <img
                           style={{ width: "50px", height: "50px" }}
                           src={p.imgurl}
                           alt="a"
                         />
                         {p.name}
-                      </Div>
+                      </WrapperFlex>
                     </td>
                     <td className="price-product">${p.price}</td>
                     <td className="quantity-product">
@@ -95,18 +96,18 @@ const DetailOrder = ({ order }: Prop) => {
           <div className="order-status">
             <h4>Estado de la Orden</h4>
 
-            <Div gap="0.2rem" margin="0 0 1rem 0">
-              <StyledLabel>Estado del pago</StyledLabel>
-              <StyledSelect>
+            <WrapperFlex $gap="0.2rem" $margin="0 0 1rem 0">
+              <label>Estado del pago</label>
+              <StyledItemForm as="select">
                 <option value=""></option>
-              </StyledSelect>
-            </Div>
-            <Div gap="0.2rem">
-              <StyledLabel>Estado del pago</StyledLabel>
-              <StyledSelect>
+              </StyledItemForm>
+            </WrapperFlex>
+            <WrapperFlex $gap="0.2rem">
+              <label>Estado del pago</label>
+              <StyledItemForm as="select">
                 <option value=""></option>
-              </StyledSelect>
-            </Div>
+              </StyledItemForm>
+            </WrapperFlex>
           </div>
         </div>
       </div>
