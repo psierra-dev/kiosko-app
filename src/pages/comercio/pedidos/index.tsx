@@ -5,13 +5,6 @@ import StyledOrder from "@components/Comercio/Order/style";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import TableOrder from "@components/Comercio/Order/TableOrder/TableOrder";
 import useOrder from "@hooks/useOrder";
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Skeleton,
-} from "@mui/material";
 import { StyledItemForm } from "@components/General/ItemsForm/ItemsForm";
 
 const PedidoPage: NextPageWithLayout = () => {
