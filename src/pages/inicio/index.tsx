@@ -22,7 +22,12 @@ export const getServerSideProps = async (context) => {
     headers: {
       Authorization: `${token}`,
     },
+    cache: "no-store",
   });
+
+  if (!res.ok) {
+    throw new Error("Couldn't fetch");
+  }
 
   const repo = await res.json();
 
