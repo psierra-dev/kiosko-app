@@ -6,14 +6,15 @@ import React, { useState } from "react";
 import Input from "../Input/Input";
 import { SFormStore } from "./style";
 import MapBox from "@lib/MapBoxReact/Map";
-import axios from "axios";
+import { StoreService } from "@service/store";
+import { CircularProgress } from "@mui/material";
+import Link from "next/link";
+
+const storeService = new StoreService();
 
 const FormStore = () => {
-  const [response, setResponse] = useState({
-    correct: false,
-    error: false,
-    loading: false,
-  });
+  const [status, setStatus] = useState<TStatus>("typing");
+  const [error, setError] = useState("");
   const [lng, setLng] = useState<number | null>(null);
   const [lat, setLat] = useState<number | null>(null);
   const {
@@ -23,78 +24,48 @@ const FormStore = () => {
   } = useForm<TFormValues>({
     resolver: yupResolver(schemaRegisterStore),
   });
-  const [stateRegister, setStateRegister] = useState({
-    aproved: false,
-    error: false,
-    loading: false,
-    message: "",
-  });
 
   const handleLocation = ({
-    latitude,
-    longitude,
+    latitud,
+    longitud,
   }: {
-    latitude: number;
-    longitude: number;
+    latitud: number;
+    longitud: number;
   }) => {
-    setLat(latitude);
-    setLng(longitude);
+    setLat(latitud);
+    setLng(longitud);
   };
   const onSubmit: SubmitHandler<TFormValues> = async (data) => {
-    console.log(data);
-    console.log(lng, lat, "latlng");
-    if (!lng || !lat)
-      return setStateRegister({
-        ...stateRegister,
-        error: true,
-        message: "Seleccione la ubicacion de tu tienda",
-      });
+    if (!lng || !lat) return setError("Seleccione la ubicacion de su tienda");
 
-    setStateRegister({
-      ...stateRegister,
-      loading: true,
-    });
+    setStatus("loading");
     const {
-      Nombre,
-      Apellido,
-      Nombre_Del_Kiosko,
-      Contraseña,
-      Direccion,
-      Email,
-      Telefono,
+      name_kiosko,
+      name_user,
+      lastname_user,
+      email,
+      password,
+      direction,
+      phone,
     } = data;
-    const newStore = {
-      name: Nombre,
-      lastname: Apellido,
-      email: Email,
-      type: "Comerciante",
-      name_local: Nombre_Del_Kiosko,
-      password: Contraseña,
-      location: Direccion,
-      number_phone: Telefono,
-      lat,
-      lng,
-    };
 
     try {
-      const respon = await axios.post(
-        "http://localhost:3001/store/create",
-        newStore
-      );
-      setStateRegister({
-        ...stateRegister,
-        loading: false,
-        aproved: true,
-        message: "La tienda se creo correctamente",
+      const response = await storeService.create({
+        name: name_user,
+        lastname: lastname_user,
+        email,
+        role: "seller",
+        nameStore: name_kiosko,
+        password,
+        direction,
+        phone: phone.toString(),
+        latitud: lat,
+        longitud: lng,
       });
-      console.log(respon);
+      setStatus("success");
     } catch (error) {
-      setStateRegister({
-        aproved: false,
-        loading: false,
-        error: true,
-        message: "Error al crear la tienda",
-      });
+      setStatus("error");
+      setError(error.message);
       console.log(error);
     }
   };
@@ -108,9 +79,10 @@ const FormStore = () => {
         <div className="con-form">
           <Input
             type="text"
-            label="Nombre_Del_Kiosko"
+            label="Nombre Del Kiosko"
+            name="name_kiosko"
             register={register}
-            errors={errors.Nombre_Del_Kiosko}
+            errors={errors.name_kiosko}
             required
             placeholder="Los Sierras"
           />
@@ -118,8 +90,9 @@ const FormStore = () => {
           <Input
             type="text"
             label="Nombre"
+            name="name_user"
             register={register}
-            errors={errors.Nombre}
+            errors={errors.name_user}
             required
             placeholder="Angel"
           />
@@ -127,8 +100,9 @@ const FormStore = () => {
           <Input
             type="text"
             label="Apellido"
+            name="lastname_user"
             register={register}
-            errors={errors.Apellido}
+            errors={errors.lastname_user}
             required
             placeholder="Sierra"
           />
@@ -136,8 +110,9 @@ const FormStore = () => {
           <Input
             type="mail"
             label="Email"
+            name="email"
             register={register}
-            errors={errors.Email}
+            errors={errors.email}
             required
             placeholder="angel@gmail.com"
           />
@@ -145,36 +120,12 @@ const FormStore = () => {
           <Input
             type="phone"
             label="Telefono"
+            name="phone"
             register={register}
-            errors={errors.Telefono}
+            errors={errors.phone}
             required
             placeholder="381XXXXXXX"
           />
-
-          {/*<label htmlFor="">Foto de la tienda</label>
-                            <div>
-                                <div className='con-btn-image'>
-                                    {file ? (
-                                        <img src={path}
-                                        alt= ''
-                                        onClick={e =>  {
-                                            e.preventDefault()
-                                            inputImage.current.click()
-                                        }}
-                                        />
-                                    ): (
-                                    <button
-                                    className="btn-image"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        inputImage.current.click()
-                                    }}>Elegir Foto</button>
-                                    )
-                                    }
-                                </div>
-                                </div>*/}
-
-          {/*<input type="file" name="image" onChange={changeFile} style={{display:"none"}} ref={inputImage} />*/}
           <div className="con-map">
             <MapBox type="drag" handleLocation={handleLocation} />
 
@@ -186,8 +137,9 @@ const FormStore = () => {
           <Input
             type="text"
             label="Direccion"
+            name="direction"
             register={register}
-            errors={errors.Direccion}
+            errors={errors.direction}
             required
             placeholder="B san expedito mnz j lote 1"
           />
@@ -195,14 +147,26 @@ const FormStore = () => {
           <Input
             type="password"
             label="Contraseña"
+            name="password"
             register={register}
-            errors={errors.Contraseña}
+            errors={errors.password}
             required
           />
-          {stateRegister.error && <div>{stateRegister.message}</div>}
-          <button type="submit" className="btn-sb">
-            {stateRegister.loading ? "Loading" : "Crear tienda"}
+
+          <button
+            disabled={status === "loading"}
+            type="submit"
+            className="btn-sb"
+          >
+            {status === "loading" ? <CircularProgress /> : "Crear tienda"}
           </button>
+
+          {status === "success" && <p>La tienda se creo correctamente</p>}
+          {status === "error" && <p>{error}</p>}
+
+          <p>
+            Ya tienes una cuenta? <Link href="/login">Inicie sesion</Link>
+          </p>
         </div>
       </form>
     </SFormStore>

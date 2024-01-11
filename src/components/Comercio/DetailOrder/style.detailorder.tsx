@@ -1,40 +1,87 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
-export const StyleDetailOrder = styled.section`
-  width: 100%;
+export const StyledDetailOrder = styled.div`
   height: 100%;
-  align-items: center;
-  justify-content: center;
+  padding: 0 1rem;
 
-  .card {
+  .container-table-product {
     width: 100%;
-    max-width: 500px;
-    min-height: 700px;
-    background-color: white;
+    flex: 0 0 auto;
+    margin-bottom: 1.2rem;
+    margin-top: 1.2rem;
+    gap: 1rem;
   }
 
-  .card .container-map {
-    height: 50%;
-    margin-bottom: 0.8rem;
+  .container-order-status {
+    padding: 0 .5rem;
+    width: 100%;
+    height: fit-content;
   }
 
-  @media screen and (max-width: 766px) and (max-height: 900px) {
-    .card {
-      height: 100vh;
-    }
+  .txt-subtotal {
+    font-size: 14px;
+    font-weight: 700;
   }
-  @media screen and (min-width: 767px) and (max-width: 1023px) {
-    .card {
-      max-height: 760px;
-      background-color: white;
-    }
+  .order-status {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 100%;
+    padding: 1rem;
+    min-height: 200px;
+    border-radius: 1rem;
+    gap: .4rem;
+  }
+  & .container-infocustomer {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.2rem;
+    margin-top: 1rem;
+    overflow: auto;
+  }
+  .card-info {
+    flex-direction: row;
+    gap: 0.2rem;
+  }
+  .card-info div h6 {
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .card-info div span {
+    font-size: 12.8px;
+    font-weight: 400;
+    color: #717171;
   }
 
-  @media screen and (min-width: 1024px) {
-    .card {
-      max-height: 760px;
-      background-color: white;
-    }
+  .container-infosend {
+    margin-top: 1rem;
+    
+  }
+  .container-infosend h4{
+    margin-bottom: 0.7rem;
+  }
+  .map-con {
+    height: 300px;
+  }
+
+
+   @media only screen and (min-width: 480px) {
+   
+  }
+  @media only screen and (min-width: 768px) {
+    .container-order-status {
+    padding: 1rem;
+    width: 100%;
+    height: fit-content;
+  }
+  
+  }
+  @media only screen and (min-width: 1024px) {
+  .container-table-product {
+    width: 66%;
+   
+  }
+  .container-order-status {
+    width: 34%;
+  }
+
   }
 `;

@@ -1,50 +1,44 @@
 import { IoCartOutline } from "react-icons/io5";
-import { useContext } from "react";
-import Image from "next/image";
-import { Text } from "@styles/style";
 import { SCardProduct } from "./style";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
-import { CartProductContext } from "@context/cart";
+import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 interface Prop {
-  product: TProductInfo;
+  product: TProduct;
+  deleteToCart: (id: number) => void;
+  addToCart: (product: TProduct) => void;
+  isCart: boolean;
 }
 
-export const CardProduct = ({ product }: Prop) => {
-  const { state, addProduct, deleteProduct } = useContext(CartProductContext);
-  const isCart = state.cartProducts?.some((e) => e.id === product.id);
-
+export const CardProduct = ({
+  product,
+  deleteToCart,
+  addToCart,
+  isCart,
+}: Prop) => {
   return (
     <SCardProduct>
       <div className="con">
         <div className="conimg">
-          <img src={product.product.imgurl as string} alt="" />
+          <img src={product?.imgurl as string} alt="" />
         </div>
         <div className="con1">
-          <div>
-            <Text size="12px" weight="400" lineheight="15px" color="#ADADAD">
-              {product.product.categoria}
-            </Text>
-          </div>
-          <div>
-            <Text size="16px" weight="600" lineheight="20px" color="#253D4E">
-              {product.product.name}
-            </Text>
-          </div>
+          <p className="category">{product?.category_name}</p>
+
+          <h5 className="name">{product?.name}</h5>
         </div>
 
         <div className="con2">
-          <div>
-            <Text size="16px" weight="600" lineheight="20px" color="#FFB531">
-              {`$${product.product.precio}`}
-            </Text>
-          </div>
+          <WrapperFlex $flexdirection="row">
+            <p className="price">{`$${product.price}`}</p>
+            <span className="unit">{product.unit_measurement}</span>
+          </WrapperFlex>
 
           {isCart ? (
-            <button onClick={() => deleteProduct(product.id)}>
+            <button onClick={() => deleteToCart(product.id)}>
               <MdOutlineRemoveShoppingCart /> Delete
             </button>
           ) : (
-            <button onClick={() => addProduct(product)}>
+            <button onClick={() => addToCart(product)}>
               <IoCartOutline /> Add
             </button>
           )}

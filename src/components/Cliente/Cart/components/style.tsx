@@ -1,60 +1,55 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
-export const  SCardCartProduct = styled.div`
+export const SCardCartProduct = styled.div`
     width: 100%;
-    height: 100px;
     border-bottom: 0.1px solid #DADADA;
-    align-items: center;
-    justify-content: center;
+    padding: 0.5rem 0;
     
-    .con0 {
+    .cont{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
     }
-    .con{
-    width: 95%;
-    height: 90%;
-    flex-direction: row;
-    align-items: center;
+
+    .cont-img-name .name {
+        font-size: 0.75rem;
+        color: #0040ff;
     }
 
-    .con1, .con12{
-        width: 50%;
-        flex-direction: row;
-
-    }
-
-    .con12{
-        justify-content: space-between;
-    }
     .imgdiv img{
         width: 40px;
         height: 40px;
-        margin-right: 20px;
+        margin-right: 5px;
     }
-
-    .con-btndelete {
-        width: 60px;
+    .precio-text {
+        font-size: 0.875rem;
+        font-weight: 500;
     }
-
+    
     .btn-delete {
-        color: blue;
+        color: red;
         cursor: pointer;
+        font-size: 0.7rem;
+        width: fit-content;
+        border: none;
+        background-color: transparent;
+        margin-top: 0.5rem;
     }
 
-    .name, .precio-text {
-        font-size: 20px;
-        color: ${Color.Text}
-    }
 
-    @media (max-width: 700px) {
-        height: 80px;
+    @media only screen and (min-width: 480px) {
+   
+    }
+    @media only screen and (min-width: 768px) {
         .name, .precio-text {
-            font-size: 15px;
-        }
-
-        .btn-delete {
-            font-size: 10px;
-        }
+        font-size: 1rem;
+        color: ${({ theme: { colors } }) => colors.text};
+        font-weight: 500;
     }
-    `
+    
+    }
+    @media only screen and (min-width: 1024px) {
+   
+    }
+    `;

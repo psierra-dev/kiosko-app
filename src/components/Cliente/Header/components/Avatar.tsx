@@ -3,6 +3,7 @@ import { Avatar } from "@mui/material";
 import { SAvatar } from "./style.avatar";
 import { AiOutlineDown } from "react-icons/ai";
 import { IoExitOutline } from "react-icons/io5";
+import { useRouter } from "next/router";
 
 interface Prop {
   name: string;
@@ -10,6 +11,7 @@ interface Prop {
 }
 
 const AvatarC = ({ name, lastname }: Prop) => {
+  const router = useRouter();
   let firstName = name[0];
   let firstLastName = lastname[0];
   const [active, setActive] = useState<boolean>(false);
@@ -39,7 +41,13 @@ const AvatarC = ({ name, lastname }: Prop) => {
             <li className="menu-desple2">
               <IoExitOutline /> <span>Perfil</span>
             </li>
-            <li className="menu-desple2">
+            <li
+              className="menu-desple2"
+              onClick={() => {
+                document.cookie = "token=; max-age=0";
+                router.reload();
+              }}
+            >
               <IoExitOutline /> <span>Cerrar sesion</span>
             </li>
           </ul>

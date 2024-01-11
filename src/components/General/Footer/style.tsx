@@ -6,44 +6,36 @@ export const FooterStyle = styled.footer`
   border-top: 0.5px solid #00000033;
   margin-top: 2rem;
   background-color: #ffffff;
-  .con-footer0 {
-    width: 70%;
-    padding: 1em;
-  }
+  padding: .5rem;
 
-  .con-footer {
+  .cont_footer {
+    width: 95%;
+    margin: auto;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
-
-  .con-footer3 {
-    flex-direction: row;
-    gap: 5px;
+  .cont_footer h4{
+    color: ${({ theme: { colors } }) => colors.primary};
   }
 
-  .con-footer2 {
-    max-width: 4em;
-  }
 
-  .con-footer2 img {
-    width: 100%;
-    height: auto;
-  }
 
-  .footer-logo {
-    width: 2em;
-    height: 2em;
-  }
-
-  .footer-logo img {
-    width: 100%;
-    height: 100%;
-  }
-
-  @media (max-width: 700px) {
-    .con-footer0 {
-      width: 90%;
+   @media only screen and (min-width: 480px) {
+   
     }
+  @media only screen and (min-width: 768px) {
+    .cont_footer {
+      width: 80%;
+    }
+
+    .footer-logo {
+    width: 1.2em;
+    height: 1.2em;
+  }
+    
+  }
+  @media only screen and (min-width: 1024px) {
+  
   }
 `;

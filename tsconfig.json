@@ -5,7 +5,7 @@
       "@components/*": ["components/*"],
       "@context/*": ["context/*"],
       "@hooks/*": ["hooks/*"],
-      "@public/*": ["public/*"],
+      "@assets/*": ["assets/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
       "@lib/*":["lib/*"],
@@ -28,6 +28,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/styles/style.js", "src/components/Comercio/Edit/components/components/style.jsx", "src/lib/MapBoxReact/Map.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/styles/style.js", "src/components/Comercio/Product/components/components/style.jsx", "src/lib/MapBoxReact/Map.tsx"],
   "exclude": ["node_modules"]
 }

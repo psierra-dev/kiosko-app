@@ -1,19 +1,45 @@
-import Image from "next/image";
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HeaderStyle } from "./style";
-import { TodoContext } from "@context/context";
-import { Avatar, Drawer } from "@mui/material";
+import { Avatar, Drawer, Skeleton } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { BiMenu } from "react-icons/bi";
 import Nav from "../Nav/Nav";
+import useUser from "@hooks/useUser";
+import socket from "@lib/socket";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+import Notification from "./Notification";
+import Badge from "@components/General/Badge/Badge";
 const Header = () => {
-  const { todoState } = useContext(TodoContext);
-  const { currentUser } = todoState;
   const [menu, setMenu] = useState(false);
+  const { data, isLoading, error } = useUser();
+  const [noti, setNoti] = useState(0);
 
-  const fullName = `${currentUser?.name} ${currentUser?.lastname}`;
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    socket.on("notification", (nt) => {
+      toast("Tienes una nueva orden", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setNoti((prev) => prev + 1);
+    });
+
+    return () => {
+      socket.off("notification");
+    };
+  }, []);
+
+  const fullName = `${data?.name} ${data?.lastname}`;
   return (
     <HeaderStyle>
       <div className="cont">
@@ -32,14 +58,22 @@ const Header = () => {
           <Nav />
         </Drawer>
         <div className="cont-avatar-name">
-          <div>
-            <IoNotificationsOutline className="icon-notification" />
+          <div className="cont-noti">
+            <Badge n={noti} type="" onOpen={() => setIsOpen(!isOpen)}>
+              <IoNotificationsOutline />
+            </Badge>
+
+            {isOpen && <Notification onOpen={() => setIsOpen(false)} />}
           </div>
-          <Avatar className="avatar" sx={{ bgcolor: deepOrange[300] }}>
-            {currentUser?.name.at(0)}
-            {currentUser?.lastname.at(0)}
-          </Avatar>
-          <p>Pablo Sierra</p>
+          {isLoading ? (
+            <Skeleton variant="circular" height={40} width={40} />
+          ) : (
+            <Avatar className="avatar" sx={{ bgcolor: deepOrange[300] }}>
+              {data?.name.at(0)}
+              {data?.lastname.at(0)}
+            </Avatar>
+          )}
+          {isLoading ? <Skeleton height={30} width={80} /> : <p>{fullName}</p>}
         </div>
       </div>
     </HeaderStyle>

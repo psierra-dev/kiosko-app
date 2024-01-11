@@ -1,13 +1,11 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 export const SPresentation = styled.section`
-  margin-top: 4rem;
-  background-color: ${Color.Two};
-  padding: 1rem;
+  background-color: ${({ theme: { colors } }) => colors.secondary};
+  padding: 1rem 0;
 
-  .presentacion {
-      width: 100%;
+  .container {
+      width: 95%;
       margin: auto;
       flex-direction: row;
     }
@@ -17,15 +15,15 @@ export const SPresentation = styled.section`
     justify-content: center;
   }
 
-  .container-eslogan h1 {
-    font-size: 20px;
+  .container-eslogan h4 {
+    font-size: 1.25rem;
     font-weight: bold;
-    color: ${Color.Text};
+    color: ${({ theme: { colors } }) => colors.text};;
   }
   .container-eslogan p {
-    font-size: 13px;
+    font-size: 1rem;
     font-weight: normal;
-    color: #838383;
+    color: ${({ theme: { colors } }) => colors.textgray};;;
   }
 
   
@@ -49,7 +47,7 @@ export const SPresentation = styled.section`
   }
 
   @media only screen and (min-width: 480px) {
-    .container-eslogan h1 {
+    .container-eslogan h4 {
     font-size: 25px;
   }
   .container-eslogan p {
@@ -57,7 +55,7 @@ export const SPresentation = styled.section`
   }
     }
   @media only screen and (min-width: 768px) {
-    .container-eslogan h1 {
+    .container-eslogan h4 {
     font-size: 30px;
 
   }
@@ -65,12 +63,15 @@ export const SPresentation = styled.section`
     font-size: 20px;
   }
 
-  .presentacion {
+  & .container {
     width: 80%;
   }
     }
   @media only screen and (min-width: 1024px) {
-    .container-eslogan h1 {
+    & .container {
+    width: 70%;
+  }
+    .container-eslogan h4 {
     font-size: 45px;
   }
   .container-eslogan p {
@@ -79,4 +80,3 @@ export const SPresentation = styled.section`
     }
  
     `;
-    

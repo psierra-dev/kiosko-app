@@ -1,58 +1,77 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 export const SCart = styled.section`
-  width: 70%;
-  margin: auto;
-  padding: 3em;
-  background-color: ${Color.Pricipal};
-  border: 0.01px solid #dadada;
-  margin-top: 1.2em;
-  border-radius: 20px;
-  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.095);
+  
 
-  .con-pago {
-    margin-top: 1.8em;
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-  }
-  .con-pago1 {
-    width: 17em;
-    align-items: flex-end;
-    gap: 0.8em;
+  color: ${({ theme: { colors } }) => colors.text};
+
+  .store {
+    width: 100%;
+    color: #fff;
+    background-color: ${({ theme: { colors } }) => colors.text};
+    margin-bottom: 1em;
   }
 
-  .total {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  .store div {
+    width: 95%;
+    margin: auto;
+    padding: 1em 0;
+  }
+
+  .container {
+    width: 95%;
+    margin: auto;
+    flex-direction:row;
+    flex-wrap: wrap;
+
+  }
+
+  .products {
+    flex-shrink: 0;
     width: 100%;
   }
-
-  .text-total {
-    font-size: 1.2em;
-    margin: 0;
-    color: ${Color.Text};
+  .container .products header {
+    margin-bottom: 1em;
   }
-
-  .con-btn2 {
-    width: 40%;
-    gap: 10px;
+  .container .products h4 {
+    font-size: .8em;
+    font-weight: 700;
   }
-
+  .info-subtotal {
+    flex-shrink: 0;
+    width: 100%;
+  }
+  .info-subtotal .subtotal {
+    width: 100%;
+    align-items: center;
+    padding: 1em;
+    color: ${({ theme: { colors } }) => colors.text};
+    gap: 4px;
+    border-bottom: 0.1px solid #DADADA;
+    margin-bottom: 1em;
+  }
+  .info-subtotal .subtotal h4{
+    font-size: 1em;
+    font-weight: 600;
+  }
+  .info-subtotal .subtotal h3 {
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  
   .no-products {
     width: 100%;
     min-height: 300px;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 1em;
   }
 
   .no-products button {
     padding: 13px;
     border: none;
-    background-color: ${Color.One};
+    background-color: ${({ theme: { colors } }) => colors.primary};
     color: white;
     border-radius: 10px;
     cursor: pointer;
@@ -61,19 +80,29 @@ export const SCart = styled.section`
     color: #3a3a3a;
   }
 
-  @media (max-width: 700px) {
-    width: 90%;
-    padding: 20px;
-
-    .con-pago1 span {
-      font-size: 18px;
-    }
-    .btn-pago {
-      width: 150px;
-    }
-
-    .con-btn2 {
-      width: 100%;
-    }
+  @media only screen and (min-width: 480px) {
+   
   }
+@media only screen and (min-width: 768px) {
+  font-size: 18px;
+  .container, .store div {
+    width: 80%;
+
+  }
+  .products {
+    flex: 0 0 auto;
+    width: 66%;
+  }
+  .info-subtotal {
+    flex: 0 0 auto;
+    width: 33%;
+    padding: 1em;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .container, .store div{
+    width: 70%;
+
+  }
+}
 `;

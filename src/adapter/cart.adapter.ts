@@ -1,6 +1,5 @@
 
 export const storeOrder = (products: TProductInfo[]) => {
-    console.log(products)
     let arrayStore = products?.map( (e:TProductInfo): TCommerce => {
         return {
             id: e?.almacen?.id as number,
@@ -15,14 +14,10 @@ export const storeOrder = (products: TProductInfo[]) => {
             return found.hasOwnProperty(element.id )? false : (found[element?.id ]=true);
         });
 
-        console.log(idArray)
-
         return idArray
 }
 
 export const addQuanty = (arr1: any, arr2: any) => {
-
-    console.log(arr1, arr2)
     const newarr = arr1.map((e: any) => {
     
         const fil = arr2.filter((f: any) => f.id === e.id)
@@ -33,7 +28,5 @@ export const addQuanty = (arr1: any, arr2: any) => {
             product: {...e.product, quantity}
         }
     })
-
-    console.log(newarr)
     return newarr
 }

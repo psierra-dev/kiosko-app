@@ -1,4 +1,3 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 export const SNav = styled.div`
@@ -14,17 +13,36 @@ export const SNav = styled.div`
     gap: 1em;
   }
   .nav-items ul li {
-    color: ${Color.Text};
+    color:${({ theme: { colors } }) => colors.text};
   }
   .nav-items ul li a {
     display: flex;
     gap: 0.3em;
   }
   .nav-items ul li.active {
-    color: ${Color.One};
+    color: ${({ theme: { colors } }) => colors.primary};
+  }
+  .nav-items ul li:hover {
+    color: ${({ theme: { colors } }) => colors.primary};
   }
   .active a:active {
-    color: ${Color.One};
+    color: ${({ theme: { colors } }) => colors.primary};
+  }
+
+  .btn-exit {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    width: fit-content;
+    height: fit-content;
+    color: ${({ theme: { colors } }) => colors.text};
+    gap: 0.3rem;
+    border: none;
+    cursor: pointer;
+    margin-top: 5rem;
+  }
+  .btn-exit:hover {
+    color: ${({ theme: { colors } }) => colors.text};
   }
 
   @media screen and (min-width: 770px) {

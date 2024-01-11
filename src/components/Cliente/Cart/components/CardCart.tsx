@@ -1,55 +1,65 @@
 import { SCardCartProduct } from "./style";
 
-import { useContext, useEffect, useState } from "react";
-import { TodoContext } from "@context/context";
-import Image from "next/image";
-import DialogC from "@components/General/Dialogo/Dialogo";
+import { useContext, useState } from "react";
+import BtnQuantity from "./BtnQuantity";
+import { Div, Text } from "@styles/style";
 import { CartProductContext } from "@context/cart";
-import BtnQuality from "./BtnQuality";
+import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 
 interface Prop {
-  product: TProductInfo;
+  product: TProduct;
 }
 const CardCart = ({ product }: Prop) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const { todoState, updateProductCart, deleteProductCart } =
-    useContext(TodoContext);
+  const { deleteProduct, updatedPrice } = useContext(CartProductContext);
+  const price = product.price * product.quantity_aux;
 
-  const { deleteProduct } = useContext(CartProductContext);
+  const [quantity, setQuantity] = useState(1);
 
-  const price = parseFloat(product.product.precio) * product.quantity;
+  const handleSumQuantity = () => {
+    if (quantity === product.quantity) return;
+    let aux = quantity + 1;
+    setQuantity(aux);
+    updatedPrice(product.id, aux);
+  };
+  const handleSubtQuantity = () => {
+    if (quantity === 1) return;
+    let aux = quantity - 1;
+    setQuantity(aux);
 
-  const handleClick = () => {
-    deleteProduct(product.id);
+    updatedPrice(product.id, aux);
   };
   return (
     <SCardCartProduct>
-      <div className="con0">
-        <div className="con">
-          <div className={"con1"}>
-            <div className={"imgdiv"}>
-              <img src={product.product?.imgurl} alt="img" />
-            </div>
-            <div>
-              <p className="name">{product.product.name}</p>
-            </div>
-          </div>
-
-          <div className={"con12"}>
-            <BtnQuality tipo="unidad" id={product.id} cantidad={20} />
-
-            <div>
-              <p className="precio-text">$ {price}</p>
-            </div>
-          </div>
-        </div>
-        <div
-          onClick={() => deleteProduct(product.id)}
-          className="con-btndelete"
+      <div className="cont">
+        <WrapperFlex
+          $flexdirection="row"
+          $gap="0.4rem"
+          className="cont-img-name"
+          style={{ flex: 1 }}
         >
-          <span className="btn-delete">Eliminar</span>
-        </div>
+          <div className="imgdiv">
+            <img src={product.imgurl} alt="img" />
+          </div>
+
+          <p className="name">{product.name}</p>
+        </WrapperFlex>
+
+        <WrapperFlex $flexdirection="row" $gap="0.3rem" style={{ flex: 1 }}>
+          <BtnQuantity
+            quantity={quantity}
+            onChange={(e) => setQuantity(Number.parseInt(e.target.value))}
+            onSubtQuantity={handleSubtQuantity}
+            onSumQuantity={handleSumQuantity}
+          />
+
+          <span className="unit">{product.unit_measurement}</span>
+        </WrapperFlex>
+
+        <p className="precio-text">$ {price}</p>
       </div>
+      <button onClick={() => deleteProduct(product.id)} className="btn-delete">
+        Eliminar
+      </button>
     </SCardCartProduct>
   );
 };

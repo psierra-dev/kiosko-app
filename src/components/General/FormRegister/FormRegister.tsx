@@ -6,8 +6,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Auth } from "service/user";
 import Input from "../Input/Input";
 import Link from "next/link";
+import { WrapperFlex } from "../Wrapper/Wrapper";
+import { ButtonPrimary } from "../Button/Button";
 
-const serviceAuth = new Auth()
+const serviceAuth = new Auth();
 const FormRegister = () => {
   const {
     register,
@@ -17,30 +19,24 @@ const FormRegister = () => {
     resolver: yupResolver(schemaRegister),
   });
   const [status, setStatus] = useState<TStatus>("typing");
-  const [stateRegister, setStateRegister] = useState({
-    aproved: false,
-    error: false,
-    loading: false,
-    message: "",
-  });
 
   const onSubmit: SubmitHandler<TFormValues> = async (data) => {
     console.log("onSubmit: ", data);
-    setStatus("loading")
+    setStatus("loading");
     const newData: TUser = {
-      name: data.Nombre,
-      lastname: data.Apellido,
-      email: data.Email,
-      password: data.Contraseña,
+      name: data.name_user,
+      lastname: data.lastname_user,
+      email: data.email,
+      password: data.password,
       role: "client",
     };
 
     try {
-      const response = await serviceAuth.register(newData)
+      const response = await serviceAuth.register(newData);
       console.log(response);
-      setStatus("success")
+      setStatus("success");
     } catch (error) {
-      setStatus("error")
+      setStatus("error");
       console.error("Error de login: ", error);
     }
   };
@@ -48,16 +44,15 @@ const FormRegister = () => {
   return (
     <SLoginRegister>
       <div className="con-lr">
-        <div>
-          <h2>Register Cliente</h2>
-        </div>
+        <h2>Register Cliente</h2>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <WrapperFlex as="form" $gap="1.4em" onSubmit={handleSubmit(onSubmit)}>
           <Input
             type="text"
             label="Nombre"
+            name="name_user"
             register={register}
-            errors={errors.Nombre}
+            errors={errors.name_user}
             required
             placeholder="Angel"
           />
@@ -65,8 +60,9 @@ const FormRegister = () => {
           <Input
             type="text"
             label="Apellido"
+            name="lastname_user"
             register={register}
-            errors={errors.Apellido}
+            errors={errors.lastname_user}
             required
             placeholder="Chaves"
           />
@@ -74,8 +70,9 @@ const FormRegister = () => {
           <Input
             type="mail"
             label="Email"
+            name="email"
             register={register}
-            errors={errors.Email}
+            errors={errors.email}
             required
             placeholder="angelcha345@gmail.com"
           />
@@ -83,22 +80,19 @@ const FormRegister = () => {
           <Input
             type="password"
             label="Contraseña"
+            name="password"
             register={register}
-            errors={errors.Contraseña}
+            errors={errors.password}
             required
           />
 
-          <div className="div-btn">
-            <button type="submit">Registrar</button>
-          </div>
-        </form>
+          <ButtonPrimary type="submit">Registrar</ButtonPrimary>
+        </WrapperFlex>
         {status === "error" && <p>Error al registrarte</p>}
-        <div>
-          <p>
-            Ya tienes una cuenta? <Link href="/login">Login</Link>
-          </p>
-        </div>
-        <div></div>
+
+        <small>
+          Ya tienes una cuenta? <Link href="/login">Login</Link>
+        </small>
       </div>
     </SLoginRegister>
   );

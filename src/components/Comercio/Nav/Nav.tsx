@@ -1,9 +1,9 @@
 import { RiDashboardFill } from "react-icons/ri";
-import { BiStore, BiCog } from "react-icons/bi";
+import { BiCog } from "react-icons/bi";
 import { SNav } from "./style";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { MdInventory, MdLocalOffer } from "react-icons/md";
+import { MdExitToApp, MdInventory, MdLocalOffer } from "react-icons/md";
 
 const Nav = () => {
   const router = useRouter();
@@ -30,9 +30,11 @@ const Nav = () => {
             </Link>
           </li>
           <li
-            className={router.pathname === "/comercio/editar" ? "active" : ""}
+            className={
+              router.pathname === "/comercio/productos" ? "active" : ""
+            }
           >
-            <Link href="/comercio/editar">
+            <Link href="/comercio/productos">
               <MdLocalOffer />
               <span>Productos</span>
             </Link>
@@ -49,6 +51,17 @@ const Nav = () => {
           </li>
         </ul>
       </nav>
+
+      <button
+        onClick={() => {
+          document.cookie = "token=; max-age=0";
+          router.reload();
+        }}
+        className="btn-exit"
+      >
+        <MdExitToApp />
+        Salir
+      </button>
     </SNav>
   );
 };

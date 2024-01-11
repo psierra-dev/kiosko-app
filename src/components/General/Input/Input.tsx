@@ -1,39 +1,49 @@
-import React, { useState } from 'react'
-import { Path, UseFormRegister, FieldErrorsImpl, FieldError, ValidationRule} from "react-hook-form";
-import { SInput } from './style';
+import { Path, FieldError, ValidationRule } from "react-hook-form";
+import { StyledItemForm, StyledWrapperInput } from "../ItemsForm/ItemsForm";
 
 type InputProps = {
-    label: Path<TFormValues>;
-    register: UseFormRegister<TFormValues>;
-    required: boolean;
-    pattern?: ValidationRule<RegExp>
-    errors: FieldError | undefined
-    type: string
-    valueInp?: string,
-    placeholder?: string,
+  label: string;
+  name: Path<TFormValues | TFormUpdateProduct | TCreateProduct>;
+  register: any;
+  required: boolean;
+  pattern?: ValidationRule<RegExp>;
+  errors?: FieldError | undefined;
+  type: string;
+  valueInp?: string;
+  placeholder?: string;
+  value?: string;
 };
 
-const Input = ({ label, register, required, errors, type,pattern, valueInp, placeholder }: InputProps) => {
+const Input = ({
+  label,
+  register,
+  required,
+  errors,
+  type,
+  name,
+  placeholder,
+  value,
+}: InputProps) => {
+  return (
+    <>
+      <StyledWrapperInput>
+        <label>{label}</label>
+        {type === "textarea" ? (
+          <textarea {...register(name)} cols={30} rows={10}></textarea>
+        ) : (
+          <StyledItemForm
+            type={type}
+            {...register(name, { required })}
+            placeholder={placeholder}
+            defaultValue={value}
+            $error={errors !== undefined}
+          />
+        )}
 
-        return (
-        <>
-            <SInput>
-                    <label>{label}</label>
-                        {type === 'textarea'
-                            ? <textarea {...register(label)} cols={30} rows={10}></textarea> 
-                            :<input
-                                type={type}
-                                {...register(label, {required})}
-                                className={errors !== undefined ? "inpactive inpgeneral" : "inp inpgeneral"}
-                                
-                                placeholder={placeholder}
-                                />
-                        }       
-                
-                    {errors !== undefined && <p className='message'>{errors.message}</p>}
-            </SInput>
-        </>
-        )
-    };
+        {errors !== undefined && <p className="message">{errors.message}</p>}
+      </StyledWrapperInput>
+    </>
+  );
+};
 
-    export default Input;
+export default Input;

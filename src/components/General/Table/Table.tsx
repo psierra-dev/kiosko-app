@@ -1,14 +1,8 @@
-import React from 'react'
-import { TableStyle } from './style'
+import React from "react";
+import { TableStyle } from "./style";
 
-const Table = ({children, ndecolumn}) => {
-    return (
-        <TableStyle
-            ndecolumna={ndecolumn}
-        >
-            {children}
-        </TableStyle>
-    )
-}
+const Table = ({ children, ndecolumn }) => {
+  return <TableStyle>{children}</TableStyle>;
+};
 
-export default Table
+export default Table;

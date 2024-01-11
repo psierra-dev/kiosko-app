@@ -1,134 +1,112 @@
-import MapBox from "@lib/MapBox/MapBox";
+//import MapBox from "@lib/MapBox/MapBox";
 import React from "react";
 import { StyleCardDetailOrder } from "./style";
-import Table from "@components/General/Table/Table";
-import { StateOrder } from "@styles/style";
-import { BiDollar } from "react-icons/bi";
-import { MdOutlineDeliveryDining } from "react-icons/md";
+import { TableStyle } from "@components/General/Table/style";
+import { Div, StyledLabel, StyledSelect } from "@styles/style";
+import MapBox from "@lib/MapBoxReact/Map";
+import { FiUser } from "react-icons/fi";
+import { BiHomeAlt, BiPhone } from "react-icons/bi";
 
 interface Prop {
   order: TOrder;
 }
-const CardDetailOrder = ({ order }: Prop) => {
+const DetailOrder = ({ order }: Prop) => {
   return (
     <StyleCardDetailOrder>
-      <div>
-        <div className="cont-detail">
-          <h4 className="text-title">Informacion de la orden</h4>
+      <h2>Order #{order?.id.slice(0, 6)}</h2>
 
+      <div className="container">
+        <div className="container-table-product">
           <div className="table">
-            <div className="header">
-              <div className="row">
-                <div className="column">
-                  <span className="sub-title">Estado</span>
-                </div>
-                <div className="column-center">
-                  <span className="sub-title">Medios de pago</span>
-                </div>
-                <div className="column-end">
-                  <span className="sub-title">Entrega</span>
-                </div>
+            <TableStyle>
+              <thead>
+                <tr>
+                  {["PRODUCTOS", "PRICE", "CANTIDAD", "TOTAL"].map((d) => (
+                    <th key={d}>{d}</th>
+                  ))}
+                </tr>
+              </thead>
+
+              <tbody>
+                {order?.orderproduct.map((p) => (
+                  <tr key={p.id}>
+                    <td className="name-product">
+                      <Div flexdirection="row" gap="0.4rem">
+                        <img
+                          style={{ width: "50px", height: "50px" }}
+                          src={p.imgurl}
+                          alt="a"
+                        />
+                        {p.name}
+                      </Div>
+                    </td>
+                    <td className="price-product">${p.price}</td>
+                    <td className="quantity-product">
+                      {p.quantity}/{p.unit_measurement}
+                    </td>
+                    <td className="total-product">${p.quantity * p.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </TableStyle>
+          </div>
+
+          <div className="subtotal">
+            <p>Subtotal</p>
+            <p>${300}</p>
+          </div>
+          <div className="container-infocustomer">
+            <div className="card-info">
+              <FiUser />
+
+              <div>
+                <h6>Cliente</h6>
+                <span>
+                  {order.customer.name} {order.customer.lastname}
+                </span>
               </div>
             </div>
-            <div className="body">
-              <div className="row">
-                <div className="column">
-                  <StateOrder state={"pendiente"}>{order?.state}</StateOrder>
-                </div>
-                <div className="column-center">
-                  <span className="datos">
-                    <BiDollar className="i-dollars" /> {order?.type_payment}
-                  </span>
-                </div>
-                <div className="column-end">
-                  <span className="datos">
-                    <MdOutlineDeliveryDining /> Delivery
-                  </span>
-                </div>
+            <div className="card-info">
+              <BiHomeAlt />
+
+              <div>
+                <h6>Direcion</h6>
+                <span>{order.infosend.direction}</span>
               </div>
+            </div>
+            <div className="card-info">
+              <BiPhone />
+
+              <div>
+                <h6>Telefono</h6>
+                <span>{order.infosend.phone}</span>
+              </div>
+            </div>
+          </div>
+          <div className="container-infosend">
+            <h4>Informacion del envio</h4>
+            <div className="map-con">
+              <MapBox type="market" />
             </div>
           </div>
         </div>
 
-        <div className="cont-detail">
-          <h4 className="text-title">Productos</h4>
+        <div className="container-order-status">
+          <div className="order-status">
+            <h4>Estado de la Orden</h4>
 
-          <div className="table">
-            <div className="header">
-              <div className="row">
-                <div className="column">
-                  <span className="sub-title">Nombre</span>
-                </div>
-                <div className="column-center">
-                  <span className="sub-title">Kg/Unidad</span>
-                </div>
-                <div className="column-end">
-                  <span className="sub-title">Pecio Total</span>
-                </div>
-              </div>
-            </div>
-            {order?.detailorders.map((e) => (
-              <>
-                <div className="body body-product">
-                  <div className="row row-product">
-                    <div className="column">
-                      <span className="datos">{e.product.name}</span>
-                    </div>
-                    <div className="column-center">
-                      <span className="datos">{e.quantity} </span>
-                    </div>
-                    <div className="column-end">
-                      <span className="datos">{e.precio}</span>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ))}
-          </div>
-
-          <div className="total">
-            <h4>Total</h4>
-            <span className="sub-tilte">{order?.amount}</span>
-          </div>
-        </div>
-
-        <div className="cont-detail">
-          <h4 className="text-title">Info del cliente</h4>
-
-          <div className="table">
-            <div className="header">
-              <div className="row">
-                <div className="column">
-                  <span className="sub-title">Nombre</span>
-                </div>
-
-                <div className="column-center">
-                  <span className="sub-title">Direccion</span>
-                </div>
-
-                <div className="column-end">
-                  <span className="sub-title">Telefono</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="body">
-              <div className="row">
-                <div className="column">
-                  <span className="datos">
-                    {order?.user.name} {order?.user.lastname}
-                  </span>
-                </div>
-
-                <div className="column-center ">
-                  <span className="datos">B san expedito m j l1</span>
-                </div>
-
-                <div className="column-end">
-                  <span className="datos">+5903816209629</span>
-                </div>
-              </div>
-            </div>
+            <Div gap="0.2rem" margin="0 0 1rem 0">
+              <StyledLabel>Estado del pago</StyledLabel>
+              <StyledSelect>
+                <option value=""></option>
+              </StyledSelect>
+            </Div>
+            <Div gap="0.2rem">
+              <StyledLabel>Estado del pago</StyledLabel>
+              <StyledSelect>
+                <option value=""></option>
+              </StyledSelect>
+            </Div>
           </div>
         </div>
       </div>
@@ -136,4 +114,4 @@ const CardDetailOrder = ({ order }: Prop) => {
   );
 };
 
-export default CardDetailOrder;
+export default DetailOrder;

@@ -1,25 +1,16 @@
 import { api } from "@utils/axios";
-import React, { useContext, useEffect, useState } from "react";
-import useSWRImmutable from "swr/immutable";
-import { OrderContext } from "@context/order";
+import useSWR from "swr";
 
 const fetcher = async (url: string) => {
-  const res = await api.get(url);
-
+  const res = await api.get(url, {});
+  console.log(res);
   return res.data;
 };
 
-const useOrder = () => {
-  //const { data } = useSWR("/order/getorder", fetcher);
-  const { state, setOrders } = useContext(OrderContext);
-  const { data, error } = useSWRImmutable("order", fetcher);
+const useOrder = (query: string) => {
+  const { data, error, isLoading, mutate } = useSWR(`/order${query}`, fetcher);
 
-  useEffect(() => {
-    if (data) {
-      setOrders(data);
-    }
-  }, [data]);
-  return { state };
+  return { data, error, isLoading, mutate };
 };
 
 export default useOrder;

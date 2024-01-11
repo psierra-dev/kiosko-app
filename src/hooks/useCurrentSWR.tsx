@@ -1,6 +1,4 @@
 import { api } from "@utils/axios.js";
-import axios from "axios";
-import React, { useEffect } from "react";
 import useSWRImmutable from "swr/immutable";
 
 const fetcher = async (url: string) => {
@@ -11,12 +9,18 @@ const fetcher = async (url: string) => {
 };
 
 const useCurrentSWR = (url: string) => {
-  const { data = false, error, isLoading } = useSWRImmutable(url, fetcher);
+  const {
+    data = false,
+    error,
+    isLoading,
+    mutate,
+  } = useSWRImmutable(url, fetcher);
 
   return {
     data,
     isLoading,
     isError: error,
+    mutate,
   };
 };
 

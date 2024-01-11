@@ -8,8 +8,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "romapy.com",
+        protocol: "http",
+        hostname: "res.cloudinary.com",
         port: "",
         pathname: "/**",
       },

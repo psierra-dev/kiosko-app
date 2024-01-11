@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
 
 interface Prop {
-  state: string;
+  statu: string;
   setResponse: React.Dispatch<React.SetStateAction<boolean>>;
   setStateDrawer: ({ noti, order }: { noti: boolean; order: boolean }) => void;
   typePayment: string;
   text: string;
+  title: string;
 }
 
 const MessageRes = ({
-  state,
+  statu,
   setResponse,
   setStateDrawer,
   typePayment,
   text,
+  title,
 }: Prop) => {
   const handleState = () => {
     setStateDrawer({ noti: false, order: false });
@@ -25,21 +27,21 @@ const MessageRes = ({
   };
 
   useEffect(() => {
-    if (state === "aprobada" && typePayment === "mp") {
+    if (statu === "aprobada" && typePayment === "mp") {
       setStateDrawer({ noti: false, order: false });
       setResponse(false);
     }
   }, []);
+
   return (
     <div>
-      <img src="" alt="" />
-
+      <h2>{title}</h2>
       <p>{text}</p>
 
-      {state === "aprobada" && typePayment === "ef" && (
+      {statu === "aprobada" && typePayment === "cash" && (
         <button onClick={handleState}>Listo</button>
       )}
-      {state === "error" && (
+      {statu === "error" && (
         <button onClick={handleBack}>Volver a intentarlo</button>
       )}
     </div>

@@ -13,11 +13,9 @@ const useView = () => {
 
     // Agrega el listener para detectar cambios de tamaño de la ventana
     window.addEventListener("resize", actualizarEstadoPantalla);
+    actualizarEstadoPantalla();
 
     // Limpia el listener al desmontar el componente
-    return () => {
-      window.removeEventListener("resize", actualizarEstadoPantalla);
-    };
   }, []);
 
   return { phone };

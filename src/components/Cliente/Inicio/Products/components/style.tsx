@@ -1,30 +1,30 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 export const SCardProduct = styled.div`
-    background-color: ${Color.Pricipal};
+    background-color: #fff;
     width: 100%;
     height: auto;
     border: 1px solid rgba(173, 173, 173, 0.25);
     border-radius: 3px;
-    margin-bottom: 20px;
-
+    color: ${({ theme: { colors } }) => colors.text};
+    padding: 0.8rem;
     
 
-    .con{
-        margin: 5px;
-        height: 100%;
-        justify-content: space-around;
+    .conimg {
+        margin-bottom: 0.6rem;
     }
 
-    .conimg{
-        width: 100%;
-        height: 40%;
+    .con1 {
+        margin-bottom: 0.6rem;
     }
-
-    .conimg img{
-        width: 100%;
-        height: 100%;
+    .con1 .name{
+        font-size: .8rem;
+        font-weight: 600;
+    }
+    .con1 .category{
+        font-size: .75rem;
+        font-weight: 500;
+        color:#a5a5a5
     }
 
     .con2{
@@ -32,24 +32,32 @@ export const SCardProduct = styled.div`
         justify-content: space-between;
     }
 
+    .con2 .price {
+        font-size: 1rem;
+        color: ${({ theme: { colors } }) => colors.primary};
+    }
+    .con2 .unit {
+        font-size: .7rem;
+       
+    }
     .con2 button {
-        width: 89.5px;
+        width: 55%;
         height: 33.67px;
-        background-color: ${Color.Two};
-        color: ${Color.One};
+        background-color: ${({ theme: { colors } }) => colors.secondary};
+        color: ${({ theme: { colors } }) => colors.primary};
         border: none;
         border-radius: 2px;
         box-shadow: 5px 5px 5px 0px lightgray;
         cursor: pointer;
     }
 
-    @media (max-width: 700px) {
-        height: auto;
-        width: 100%;
-
-        .con2 button {
-            width: 65px;
-        }
+    @media only screen and (min-width: 480px) {
+        width: 50%;
     }
-
-`
+    @media only screen and (min-width: 768px) {
+        width: 33%;
+    }
+    @media only screen and (min-width: 1024px) {
+       width: 25%;
+    }
+`;

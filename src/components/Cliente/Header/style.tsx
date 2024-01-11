@@ -1,9 +1,8 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
-export const SHeader = styled.header`
+export const StyledHeader = styled.header`
   width: 100%;
-  background-color: ${Color.Pricipal};
+  background-color: ${({ theme: { colors } }) => colors.main};
   flex-direction: row;
   align-items: center;
   border-bottom: 0.5px solid #0000001f;
@@ -12,9 +11,13 @@ export const SHeader = styled.header`
   position: fixed;
   top: 0%;
   z-index: 20;
+  color: ${({ theme: { colors } }) => colors.text};
 
+  .logo {
+    color: ${({ theme: { colors } }) => colors.primary};;
+  }
   .con {
-    width: 90%;
+    width: 95%;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -23,76 +26,18 @@ export const SHeader = styled.header`
 
   .hamburger{
     cursor: pointer;
-    color: ${Color.Text}
   }
 
   .avatar {
     display: none;
   }
   
-  .concarrito {
-    flex-direction: row;
-    align-items: center;
+  @media only screen and (min-width: 480px) {
+   
   }
-
-  .carritonoti {
-    position: absolute;
-    top: -4px;
-    right: -2px;
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    background-color: ${Color.One};
-  }
-
-  .concarritoprecio {
-    margin-left: 4px;
-  }
-  .carritoprecio {
-    height: 16px;
-  }
-
-  .carritoprecio .name {
-    font-size: 12px;
-    line-height: 15px;
-    font-weight: 500;
-  }
-  .carritoprecio .precio {
-    font-size: 10px;
-    line-height: 15px;
-    font-weight: 500;
-  }
-  .mas {
-    height: 11px;
-  }
-
-  .btnrorl {
-    flex-direction: row;
-    gap: 8px;
-  }
-
-  .order-cart-noti {
-    flex-direction: row;
-    gap: 1em;
-  }
-
-  .btnrorl button {
-    border: none;
-    border-radius: 2px;
-    padding: 5px;
-    font-family: "Nova Slim", cursive;
-    font-size: 14px;
-    box-shadow: 5px 5px 5px 0px lightgray;
-  }
-
-  .btnlogin {
-    background-color: ${Color.One};
-    color: ${Color.Pricipal};
-  }
-  
-  @media only screen and (min-width: 765px) {
-    .con {
-      width: 70%;
+@media only screen and (min-width: 768px) {
+  .con {
+      width: 80%; 
     }
     .hamburger {
           display: none;
@@ -101,23 +46,32 @@ export const SHeader = styled.header`
         .avatar {
           display: flex;
         }
+  
+}
+@media only screen and (min-width: 1024px) {
+  .con {
+      width: 70%; 
     }
+}
 
 `;
 
-export const StyleNav = styled.div`
+export const StyledNav = styled.div`
   padding: 1rem;
   min-width: 200px;
   align-items: center;
 
+  .logo{
+    color: ${({ theme: { colors } }) => colors.text};
+  }
   .close {
     align-self: end;
     cursor: pointer;
-    color: ${Color.Text};
+    color: ${({ theme: { colors } }) => colors.text};
   }
 
   nav {
-    color: ${Color.Text};
+    color: ${({ theme: { colors } }) => colors.text};
     font-size: .9rem;
     font-weight: bolder;
     margin-top: 10px;
@@ -126,4 +80,4 @@ export const StyleNav = styled.div`
   nav ul li{
     margin-bottom: 7px;
   }
-`
+`;

@@ -2,14 +2,14 @@ import { useSesionStorage } from "@hooks/useSesionStorage";
 import { stat } from "fs";
 import { createContext, useEffect, useReducer } from "react";
 interface ISTATE {
-  cartProducts: TProductInfo[];
+  cartProducts: TProduct[];
 }
 
 type CartProductContextProp = {
   state: ISTATE;
-  setProducts: (products: TProductInfo[]) => void;
+  setProducts: (products: TProduct[]) => void;
   deleteProduct: (id: number) => void;
-  addProduct: (product: TProductInfo) => void;
+  addProduct: (product: TProduct) => void;
   updatedPrice: (id: number, quantity: number) => void;
 };
 export const CartProductContext = createContext<CartProductContextProp>(
@@ -22,25 +22,30 @@ const INITIAL_STATE: ISTATE = {
 
 export function ProductCartProvider({ children }) {
   const [state, dispatch] = useReducer(ProductReducer, INITIAL_STATE);
-  const { deleteProductCart, addProductCart } =
-    useSesionStorage("productscart");
+  const { deleteProductCart, addProductCart } = useSesionStorage("cart");
 
-  const setProducts = (products: TProductInfo[]) => {
+  const setProducts = (products: TProduct[]) => {
     dispatch({ type: "SET_CART_PRODUCTS", payload: products });
   };
 
   const deleteProduct = (id: number) => {
-    deleteProductCart(id);
     dispatch({ type: "DELETE_PRODUCT", payload: id });
   };
-  const addProduct = (product: TProductInfo) => {
-    const newProduct = { ...product, quantity: 1 };
-    addProductCart(newProduct);
-    dispatch({ type: "ADD_PRODUCT", payload: newProduct });
+  const addProduct = (product: TProduct) => {
+    dispatch({ type: "ADD_PRODUCT", payload: product });
   };
   const updatedPrice = (id: number, quantity: number) => {
     dispatch({ type: "UPDATE_PRICE_PRODUCT", payload: { id, quantity } });
   };
+
+  const deleteForSession = () => {
+    window.sessionStorage.removeItem("cart");
+  };
+  const getForSession = () => {
+    const items = window.sessionStorage.get("cart");
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <CartProductContext.Provider
@@ -56,11 +61,15 @@ export function ProductCartProvider({ children }) {
     </CartProductContext.Provider>
   );
 }
+
+const deleteForSession = () => {
+  window.sessionStorage.removeItem("cart");
+};
 //Reducer
 type ProductAction =
-  | { type: "SET_CART_PRODUCTS"; payload: TProductInfo[] }
+  | { type: "SET_CART_PRODUCTS"; payload: TProduct[] }
   | { type: "DELETE_PRODUCT"; payload: number }
-  | { type: "ADD_PRODUCT"; payload: TProductInfo }
+  | { type: "ADD_PRODUCT"; payload: TProduct }
   | { type: "UPDATE_PRICE_PRODUCT"; payload: { id: number; quantity: number } };
 
 function ProductReducer(state: ISTATE, action: ProductAction) {
@@ -71,8 +80,12 @@ function ProductReducer(state: ISTATE, action: ProductAction) {
       };
     case "DELETE_PRODUCT":
       const id = action.payload;
+      const newData = state.cartProducts.filter((p) => p.id !== id);
+
+      deleteForSession();
+      window.sessionStorage.setItem("cart", JSON.stringify(newData));
       return {
-        cartProducts: state.cartProducts.filter((p) => p.id !== id),
+        cartProducts: newData,
       };
     case "ADD_PRODUCT":
       let newCart = [];
@@ -81,6 +94,10 @@ function ProductReducer(state: ISTATE, action: ProductAction) {
       } else {
         newCart = [...state.cartProducts, action.payload];
       }
+
+      deleteForSession();
+      window.sessionStorage.setItem("cart", JSON.stringify(newCart));
+
       return {
         cartProducts: newCart,
       };
@@ -89,13 +106,13 @@ function ProductReducer(state: ISTATE, action: ProductAction) {
         if (p.id === action.payload.id) {
           return {
             ...p,
-            quantity: action.payload.quantity,
+            quantity_aux: action.payload.quantity,
           };
         }
         return p;
       });
       return {
-        cartProducts: newArray as TProductInfo[],
+        cartProducts: newArray as TProduct[],
       };
     default:
       return state;

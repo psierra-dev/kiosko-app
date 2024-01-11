@@ -4,85 +4,112 @@ import styled from "styled-components";
 export const StyleCardDetailOrder = styled.div`
   gap: 1rem;
   font-size: 1rem;
-  .table {
-    width: 100%;
-  }
-
-  .table > div {
-    padding: 0.5em;
-  }
-  .row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .column-center {
-    align-items: center;
-  }
-  .column-end {
-    align-items: end;
-  }
-
-  .details {
-    color: black;
-    gap: 1em;
-  }
-
-  .icon-state {
+  color: ${Color.Text};
+  
+  .container {
+    padding: .5rem;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    flex-wrap: wrap;
   }
-
-  .text-title {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1em;
-    line-height: 19px;
-    letter-spacing: -0.02em;
-
-    color: rgb(7, 7, 7);
-  }
-  .sub-title {
-    font-size: 0.8em;
-    font-weight: 600;
-    color: rgb(20, 20, 20);
-  }
-  .datos {
-    flex-direction: row;
-    font-size: 0.7em;
-    font-weight: 500;
-    color: rgb(14, 14, 14);
-  }
-
-  .i-dollars {
-    color: #188818;
-    font-size: 1em;
-  }
-
-  .table > .body-product {
-    padding: 0;
-  }
-  .row-product {
-    background-color: #ffa60055;
-    padding: 0.4em;
-  }
-  .body .row-product:nth-child(2n) {
-    background-color: #ffa600ae;
-    padding: 0.4em;
-  }
-
-  .total {
+  .container-table-product {
     width: 100%;
+    flex: 0 0 auto;
+    margin-bottom: 1.2rem;
+  }
+  .container-table-product .table {
+    overflow: auto;
+  }
+
+  .container-order-status {
+    padding: 0 .5rem;
+    width: 100%;
+    height: fit-content;
+  }
+
+  .container-infosend {
+    margin-top: 1rem;
+    
+  }
+  .container-infosend h4{
+    margin-bottom: 0.7rem;
+  }
+  .map-con {
+    height: 300px;
+  }
+
+  .container-infocustomer {
     flex-direction: row;
     justify-content: space-between;
-    padding: 0.5rem;
+    padding: 1.2rem;
+    margin-top: 1rem;
+  }
+  .card-info {
+    flex-direction: row;
+    gap: 0.2rem;
+  }
+  .card-info div h6 {
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .card-info div span {
+    font-size: 12.8px;
+    font-weight: 400;
+    color: #717171;
+  }
+  .order-status {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 100%;
+    padding: 1rem;
+    min-height: 200px;
+    border-radius: 1rem;
   }
 
-  .info-order {
+  .order-status h4 {
+    margin-bottom: 0.7rem;
+  }
+
+  .name-product {
+    font-size: 13px;
+    font-weight: 400;
+    min-width: 300px;
+    color: ${Color.One};
+  }
+
+  .subtotal {
+    display: flex;
     flex-direction: row;
-    width: 100%;
     justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(203,208,221,0.54);
+  }
+
+  .subtotal p {
+    font-weight: 600;
+  }
+
+  @media only screen and (min-width: 480px) {
+   
+  }
+  @media only screen and (min-width: 768px) {
+    .container-order-status {
+    padding: 1rem;
+    width: 100%;
+    height: fit-content;
+  }
+  
+  }
+  @media only screen and (min-width: 1024px) {
+  .container-table-product {
+    width: 66%;
+   
+  }
+  .container-order-status {
+    width: 33%;
+  }
+
+  .order-status {
+    
+  }
   }
 `;

@@ -8,6 +8,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { Auth } from "service/user";
 import { useRouter } from "next/router";
+import { ButtonPrimary } from "../Button/Button";
+import { Alert } from "@mui/material";
+import { WrapperFlex } from "../Wrapper/Wrapper";
 
 const auth = new Auth();
 
@@ -33,19 +36,16 @@ export const FormLogin = () => {
       ...state,
       loading: true,
     });
-    const credentials = {
-      email: data.Email,
-      password: data.Contraseña,
-    };
+
+    const { email, password } = data;
 
     try {
-      const response = await auth.login(credentials);
+      const response = await auth.login({ email, password });
       document.cookie = `token=${response.token}`;
       document.cookie = `role=${response.role}`;
-      window.localStorage.setItem("token", response.token as string);
-      
+      router.reload();
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setState({
         ...state,
         loading: false,
@@ -57,15 +57,15 @@ export const FormLogin = () => {
   return (
     <SLoginRegister>
       <div className="con-lr">
-        <div>
-          <h2 className="">Login</h2>
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <h3 className="">Login</h3>
+
+        <WrapperFlex $gap="1.4em" as="form" onSubmit={handleSubmit(onSubmit)}>
           <Input
             type="email"
             label="Email"
+            name="email"
             register={register}
-            errors={errors.Email}
+            errors={errors.email}
             required
             placeholder="kiosko@gmail.com"
           />
@@ -73,34 +73,21 @@ export const FormLogin = () => {
           <Input
             type="password"
             label="Contraseña"
+            name="password"
             register={register}
-            errors={errors.Contraseña}
+            errors={errors.password}
             required
           />
 
-          <div className="div-btn">
-            <button ref={btnRef} type="submit">
-              {state.loading ? "Cargando..." : "Login"}
-            </button>
-          </div>
-        </form>
-        {state.error.state && (
-          <div className="msg-error">
-            <p>Contraseña o email incorrectos</p>
-            <button
-              onClick={() =>
-                setState({ ...state, error: { state: false, msg: "" } })
-              }
-            >
-              X
-            </button>
-          </div>
-        )}
-        <div>
-          <p>
-            No tenes una cuenta? <Link href="/register">Sign up</Link>
-          </p>
-        </div>
+          {state.error.state && (
+            <Alert severity="error">Contraseña o email incorrecto</Alert>
+          )}
+          <ButtonPrimary>Login</ButtonPrimary>
+        </WrapperFlex>
+
+        <small>
+          No tenes una cuenta? <Link href="/register">Sign up</Link>
+        </small>
       </div>
     </SLoginRegister>
   );

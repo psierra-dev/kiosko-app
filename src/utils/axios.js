@@ -1,25 +1,23 @@
 import axios from "axios";
 import { getCookie } from "cookies-next";
 
-const isServer = () => {
-  return typeof window === "undefined";
-};
-
 const token = getCookie("token");
 let accessToken = "";
 export const setAccessToken = (_accessToken) => {
   accessToken = _accessToken;
 };
-let context = {};
 export const setContext = (_context) => {
   context = _context;
 };
+
+console.log("API_URL", process.env.API_URL);
+console.log("NEXT_PUBLIC_API_URL: ", process.env.NEXT_PUBLIC_API_URL);
 export const api = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
 });
 
 api.interceptors.request.use((config) => {
-  console.log(token);
+  console.log(token, "tokeeen");
   if (token) {
     config.headers.Authorization = `${token}`;
   }

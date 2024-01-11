@@ -1,12 +1,10 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
-export const SBtnQuality = styled.form`
+export const StyledBtnQuantity = styled.form`
   display: flex;
   align-items: center;
-  height: 40px;
-  width: 120px;
-  padding: 10px;
+  width: 80px;
+  padding: 3px;
   overflow: hidden;
   border: 1px solid rgb(29, 29, 29);
   border-radius: 4px;

@@ -39,7 +39,38 @@ export const HeaderStyle = styled.header`
   .avatar {
     width: 1.5em;
     height: 1.5em;
+    font-size: .8em;
+    padding: 1em;
   }
+
+  .notification {
+    position: fixed;
+    top: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: aliceblue;
+    animation: .3s example;
+    padding: 1rem;
+  }
+
+  .notification header {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+  .notification button {
+    font-size: 20px;
+    border: none;
+    color: ${({ theme: { colors } }) => colors.text};
+    cursor: pointer;
+
+  }
+  @keyframes example {
+    from {transform: scale(0.5);}
+    to {transform: scale(1);}
+}
 
   @media screen and (min-width: 770px) {
     & .cont .logo {
@@ -47,6 +78,19 @@ export const HeaderStyle = styled.header`
     }
     & .menu {
       display: none;
+    }
+
+    .notification {
+      position: absolute;
+      top: 50px;
+      bottom: inherit;
+      left: inherit;
+      min-width: 300px;
+      border-radius: 1rem;
+    }
+
+    .notification .wrapper-noti {
+      min-height: 400px;
     }
   }
 `;

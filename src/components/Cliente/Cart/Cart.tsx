@@ -1,82 +1,83 @@
-import { TodoContext } from "@context/context";
-import { useCart } from "@hooks/useCart";
-import { Button, Text } from "@styles/style";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CardCart from "./components/CardCart";
 import ProcesOrder from "./components/ProcesOrder/ProcesOrder";
 import { SCart } from "./style";
+import { CartProductContext } from "@context/cart";
 import { useRouter } from "next/router";
+import useStore from "@hooks/useStore";
+import { ButtonPrimary } from "@components/General/Button/Button";
 
 const Cart = () => {
+  const { setProducts, state } = useContext(CartProductContext);
+  const { cartProducts } = state;
+
+  const [drawer, setDrawer] = useState(false);
+
+  const total = cartProducts
+    .map((p) => p.price * p.quantity_aux)
+    .reduce((p, c) => p + c, 0);
   const router = useRouter();
-  const {
-    total,
-    commercesCart,
-    productsCartFilter,
-    storeActive,
-    setStoreActive,
-  } = useCart();
-  const { setStateDrawer } = useContext(TodoContext);
+
+  const { id } = router.query;
+  const { store, isLoading } = useStore(id, "customer");
+
+  useEffect(() => {
+    const items = window.sessionStorage.getItem("cart");
+    const products =
+      items && id
+        ? JSON.parse(items)
+            .filter((p) => p.storeId == id)
+            .map((p) => {
+              return {
+                ...p,
+                quantity_aux: 1,
+              };
+            })
+        : [];
+
+    setProducts(products);
+  }, [id]);
   return (
     <SCart>
-      <div>
-        <div>Carrito</div>
-
-        {productsCartFilter || commercesCart ? (
-          <>
-            <div>
-              {commercesCart?.map((e) => (
-                <Text
-                  onClick={() => setStoreActive(e)}
-                  color={storeActive?.id === e.id ? "orange" : "#253D4E"}
-                  size="14px"
-                  weight="400"
-                  lineheight="20px"
-                  cursor="pointer"
-                  key={e.id}
-                >
-                  {e.name}
-                </Text>
-              ))}
-            </div>
-            <div>
-              {productsCartFilter?.map((e) => (
-                <CardCart product={e} key={e.id} />
-              ))}
-            </div>
-
-            <div className="con-pago">
-              <div className="con-pago1">
-                <div className="total">
-                  <p className="text-total">Total</p>
-                  <span className="text-total">${total}</span>
-                </div>
-
-                <Button
-                  width="100%"
-                  height="2.5em"
-                  colortext="#ffffff"
-                  onClick={() => setStateDrawer({ noti: false, order: true })}
-                >
-                  Procesar
-                </Button>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div className="no-products">
-            <h5>Tu carrito esta vacio</h5>
-            <button onClick={() => router.push("/inicio")}>
-              Ver productos
-            </button>
-          </div>
-        )}
+      <div className="store">
+        <div>
+          <h4>{store?.name}</h4>
+        </div>
       </div>
-      <ProcesOrder
-        store={storeActive}
-        amount={total}
-        productsCart={productsCartFilter}
-      />
+      <div className="container">
+        <div className="products">
+          <header>
+            <h4>Tu Carrito</h4>
+          </header>
+
+          <div>
+            {cartProducts?.map((e) => (
+              <CardCart product={e} key={e.id} />
+            ))}
+          </div>
+        </div>
+
+        <div className="info-subtotal">
+          <div className="subtotal">
+            <h4>Subtotal</h4>
+            <h3>${total}</h3>
+          </div>
+
+          <ButtonPrimary onClick={() => setDrawer(true)}>
+            Proceder
+          </ButtonPrimary>
+        </div>
+      </div>
+
+      {
+        <ProcesOrder
+          storeId={id as string}
+          amount={total}
+          productsCart={cartProducts}
+          drawer={drawer}
+          onCloseDrawer={() => setDrawer(false)}
+        />
+      }
     </SCart>
   );
 };

@@ -1,0 +1,53 @@
+.container {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.container h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.container_card {
+    padding: 8px;
+}
+
+.card {
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-bottom: 1px solid rgb(185, 185, 185);
+}
+
+.title {
+    font-size: 16px;
+}
+
+.card .checkbox {
+    min-width: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.card .info h4 {
+    font-size: 15px;
+}
+
+.card .info p {
+    font-size: 14px;
+}
+
+.card .info button {
+    width: fit-content;
+    padding: 8px;
+    border: none;
+    background-color: rgb(19, 139, 194);
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    color: white;
+    margin-top: 5px;
+    cursor: pointer;
+}

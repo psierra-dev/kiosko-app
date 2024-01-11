@@ -1,17 +1,17 @@
 import { createContext, useReducer } from "react";
 interface ISTATE {
-  products: TProductInfo[];
+  products: TProductStore[];
 }
 
 type ProductContextProp = {
   state: ISTATE;
-  setProducts: (pruducts: TProductInfo[]) => void;
+  setProducts: (pruducts: TProductStore[]) => void;
   updateProduct: (obj: {
     id: number;
     product_updated: { precio: string; stock: boolean };
   }) => void;
   deleteProduct: (id: number) => any;
-  filterProducts: (products: TProductInfo[]) => void;
+  filterProducts: (products: TProductStore[]) => void;
 };
 export const ProductContext = createContext<ProductContextProp>(
   {} as ProductContextProp
@@ -24,7 +24,7 @@ const INITIAL_STATE: ISTATE = {
 export function ProductProvider({ children }) {
   const [state, dispatch] = useReducer(ProductReducer, INITIAL_STATE);
 
-  const setProducts = (products: TProductInfo[]) => {
+  const setProducts = (products: TProductStore[]) => {
     console.log(products);
     dispatch({ type: "SET_PRODUCT", payload: products });
   };
@@ -40,7 +40,7 @@ export function ProductProvider({ children }) {
     dispatch({ type: "DELETE_PRODUCT", payload: id });
   };
 
-  const filterProducts = (products: TProductInfo[]) => {
+  const filterProducts = (products: TProductStore[]) => {
     dispatch({ type: "FILTER_PRODUCT", payload: products });
   };
   return (
@@ -60,7 +60,7 @@ export function ProductProvider({ children }) {
 
 //Reducer
 type ProductAction =
-  | { type: "SET_PRODUCT"; payload: TProductInfo[] }
+  | { type: "SET_PRODUCT"; payload: TProductStore[] }
   | {
       type: "UPDATE_PRODUCT";
       payload: {
@@ -69,7 +69,7 @@ type ProductAction =
       };
     }
   | { type: "DELETE_PRODUCT"; payload: number }
-  | { type: "FILTER_PRODUCT"; payload: TProductInfo[] };
+  | { type: "FILTER_PRODUCT"; payload: TProductStore[] };
 
 function ProductReducer(state: ISTATE, action: ProductAction) {
   switch (action.type) {
@@ -94,7 +94,7 @@ function ProductReducer(state: ISTATE, action: ProductAction) {
           return {
             ...p,
             product: {
-              ...p.product,
+              ...p.info_product,
               precio: precio,
               stock: stock,
             },

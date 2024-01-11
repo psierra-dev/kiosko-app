@@ -1,48 +1,28 @@
 import { SCardKiosko } from "./style";
-import { useState } from "react";
-import cc from "./cardcomercio.module.css";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { AiOutlineCreditCard, AiOutlineStar } from "react-icons/ai";
-import { IoLocationOutline } from "react-icons/io5";
-import { MdOutlineDeliveryDining } from "react-icons/md";
+import { FaRegHeart } from "react-icons/fa";
 
 interface Prop {
-  commerce: TCommerce;
-  handleSelect?: (id: number) => void;
+  store: TStore;
 }
-const CardKiosko = ({ commerce, handleSelect }: Prop) => {
-  const router = useRouter();
-  const { storeid } = router.query;
-  const activeStore = Number(storeid) === commerce.id;
+const CardKiosko = ({ store }: Prop) => {
   return (
-    <SCardKiosko
-      onClick={() => handleSelect(commerce.id)}
-      activeColor={activeStore ? "#ffb331e5" : undefined}
-      className={activeStore ? "active-store" : ""}
-    >
+    <SCardKiosko>
       <div className="container">
-
-      <div className="conimg">
-        <img src={commerce.imgurl} alt="imgurl" />
-      </div>
-
-      <div className="info">
-        <h5>{commerce.name}</h5>
-        <div className="delivery-pago">
-          <AiOutlineCreditCard />
-          <span>Pago online</span>
+        <div className="conimg">
+          <img
+            src="https://images.pexels.com/photos/916446/pexels-photo-916446.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="imgurl"
+          />
         </div>
-        <div className="delivery-pago">
-          <MdOutlineDeliveryDining />
-          <span>Con Delivery</span>
-        </div>
-      </div>
 
-      <AiOutlineStar className="icon-start" />
-      </div>
-      <div className="open">
-        Abierto
+        <div className="info">
+          <div className="info-title">
+            <h5>{store.name}</h5>
+            <FaRegHeart />
+          </div>
+
+          <p className="txt-state">{store.open ? "Abierto" : "Cerrado"}</p>
+        </div>
       </div>
     </SCardKiosko>
   );

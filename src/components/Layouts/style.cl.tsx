@@ -1,10 +1,9 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 export const SCommerce = styled.div`
   width: 100%;
   min-height: 100vh;
-  color: ${Color.Text};
+  color: ${({ theme: { colors } }) => colors.text};
   .container {
     width: 100%;
   }
@@ -15,13 +14,14 @@ export const SCommerce = styled.div`
 
   .main {
     display: block;
-    padding-top: 4rem;
+    padding-top: 70px;
   }
 
   @media screen and (min-width: 770px) {
     .main {
-      padding-left: calc(15rem + env(safe-area-inset-left));
+      padding-left: calc(14rem + env(safe-area-inset-left));
       padding-right: calc(env(safe-area-inset-right));
+      padding-top: 70px;
     }
 
     .nav-pc {

@@ -1,8 +1,7 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 export const SLoReLayout = styled.main`
-    color: ${Color.Text}; 
+    color: ${({ theme: { colors } }) => colors.text}; 
     .con {
         position: relative;
         overflow: hidden;
@@ -29,57 +28,47 @@ export const SLoReLayout = styled.main`
         min-height: 100vh;
     }
 
-    .con11 {
+    header {
         flex-direction: row;
         justify-content: space-between;
+        padding: 1rem;
     }
     .con1-figure {
         
-        width: 154px;
-        height: 50px;
-        background-color: #f52f41;
+        width: 100px;
+        height: auto;
     }
 
 
-    .btn-cs {
-        
-        width: 150px;
-        height: 30px;
-        background-color: darkgray;
-        border: none;
-        cursor: pointer;
-        z-index: 30;
-    }
+    
     .con12 {
         box-sizing: border-box;
         display: flex;
         flex-direction: row;
-        width: 70%;
+        width: 96%;
         margin: auto;
         
         justify-content: center;
     }
 
-    .con123 {
-        width: 50%;
+    .slogan {
+        display: none;
+    }
+
+    .form {
+        width: 100%;
+        max-width: 500px;
         justify-content: center;
+        margin-bottom: 40px;
     }
 
-    .con124 {
-        display: table-cell;
-        vertical-align: middle;
-        height: auto;
-    }
-
-    .con124 h2 {
+    .slogan div h2 {
         font-size:2em;
     }
 
     .con124-form{
         width: 50%;
-        max-width: 500px;
-        justify-content: center;
-        margin-bottom: 40px;
+       
     }
 
     .con0 {
@@ -103,13 +92,13 @@ export const SLoReLayout = styled.main`
 
     .con011-card {
         height: 100%;
-        width: 30%;
+        width: 100%;
         min-width: 150px;
         //background-color: #0d6fc4;
         flex-direction: row;
         justify-content: center;
         color: #253D4E;
-        gap: 10%;
+        
         align-items: center;
     }
 
@@ -137,31 +126,29 @@ export const SLoReLayout = styled.main`
         color: #ADADAD;
     }
 
-    @media only screen and (max-width: 765px) {
-        .con12 {
-            width: 95%;
-        }
-
-        .con011 {
-            gap: 2em;
-        }
-        .con011-card {
-            width: 100%;
-        }
-        .con124-form {
-            width: 100%;
-        }
-        .con123 {
-            display: none;
-        }
+    @media only screen and (min-width: 480px) {
+   
+    }
+  @media only screen and (min-width: 768px) {
+    .con12 {
+        width: 80%;
+    }
+    
+  }
+  @media only screen and (min-width: 1024px) {
+    .con12 {
+        width: 80%;
+    }
+    .slogan {
+        display: flex;
+        width: 50%;
+        justify-content: center;
     }
 
-    @media only screen and (min-width: 765px) and (max-width: 1023px) {
-        .con12 {
-            width: 80%;
-        }
-        .con124-form {
-            width: 100%;
-        }
+    .slogan .div {
+        display: table-cell;
+        vertical-align: middle;
+        height: auto;
     }
-`
+  }
+`;

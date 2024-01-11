@@ -1,4 +1,3 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 export const SAvatar = styled.div`
@@ -50,6 +49,6 @@ export const SAvatar = styled.div`
   }
   .menu-desple2 span {
     font-size: 12px;
-    color: ${Color.Text};
+    color: ${({ theme: { colors } }) => colors.text};
   }
 `;

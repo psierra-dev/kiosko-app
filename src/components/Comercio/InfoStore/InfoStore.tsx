@@ -1,7 +1,6 @@
 import React from "react";
 import { SInfoStore } from "./style";
 import useCurrentSWR from "@hooks/useCurrentSWR";
-import Image from "next/image";
 
 const InfoStore = () => {
   const { data, isLoading } = useCurrentSWR("/store/getstore");

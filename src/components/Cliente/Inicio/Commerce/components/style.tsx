@@ -1,4 +1,3 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 type Prop = {
@@ -6,19 +5,18 @@ type Prop = {
 };
 
 export const SCardKiosko = styled.div.attrs(({ props }: { props: Prop }) => ({
-  activeColor: props?.activeColor || "rgba(173, 173, 173, 0.25)",
+  activeColor: props?.activeColor || "rgba(126, 126, 126, 0.363)",
 }))`
   margin-right: 10px;
   min-width: 220px;
+  border-radius: 10px;
   
   .container {
-    padding: 1rem;
-    display: flex;
-    flex-direction: row;
-    background-color: ${Color.Pricipal};
+    border-radius: 10px;
+    background-color: ${({ theme: { colors } }) => colors.main};
     border: 1px solid ${(props) => props.activeColor};
     cursor: pointer;
-    color: ${Color.Text};
+    color: ${({ theme: { colors } }) => colors.text};
 
   }
 
@@ -27,15 +25,32 @@ export const SCardKiosko = styled.div.attrs(({ props }: { props: Prop }) => ({
   }
 
   .conimg {
-    width: 50px;
-    height: 50px;
-    margin-right: 8px;
-    border-radius: 50%;
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
   }
 
-  .info h5 {
+  .conimg img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  .info {
+    margin-top: 0.3rem;
+    padding: 0.5rem;
+  }
+
+  .info .info-title {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.1rem;
+    
+  }
+  .info .info-title h5 {
     margin-bottom: 3px;
-    font-size: 15px;
+    font-size: 0.875rem;
     font-weight: bold;
   }
   .info span, svg {
@@ -46,14 +61,12 @@ export const SCardKiosko = styled.div.attrs(({ props }: { props: Prop }) => ({
     margin-left: 3px;
   }
 
+  .info .txt-state {
+    font-size: 12px;
+    color: ${({ theme: { colors } }) => colors.primary};
+  }
   .info div {
     flex-direction: row;
-  }
-
-  .icon-start {
-    position: absolute;
-    top: 4px;
-    right: 4px;
   }
 
   .conimg img {
@@ -69,13 +82,19 @@ export const SCardKiosko = styled.div.attrs(({ props }: { props: Prop }) => ({
   }
 
   &:hover {
-    box-shadow: 1px 2px 5px grey;
+    border: 1px solid orange;
   }
-  .open {
-    background-color: #219233;
-    text-align: center;
-    color: #062F0D;
-    border-radius: 0 0px 10px 10px;
-    font-size: small;
+
+  @media only screen and (min-width: 480px) {
+   
   }
+  @media only screen and (min-width: 768px) {
+    width: 80%;
+  
+  }
+  @media only screen and (min-width: 1024px) {
+    width: 70%;
+    
+  }
+ 
 `;
