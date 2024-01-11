@@ -1,4 +1,3 @@
-import { Color } from "@styles/color";
 import styled from "styled-components";
 
 export const SProducts = styled.section`
