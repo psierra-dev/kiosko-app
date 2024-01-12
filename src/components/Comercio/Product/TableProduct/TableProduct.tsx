@@ -20,7 +20,8 @@ const TableProduct = ({ products }: { products: TProduct[] }) => {
         </tr>
       </thead>
       <tbody>
-        {products.length > 0 &&
+        {products &&
+          products?.length > 0 &&
           products?.map((product) => (
             <CardProduct key={product.id} product={product} />
           ))}
