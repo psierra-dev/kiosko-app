@@ -9,6 +9,7 @@ import MapBox from "@lib/MapBoxReact/Map";
 import { StoreService } from "@service/store";
 import { CircularProgress } from "@mui/material";
 import Link from "next/link";
+import { ButtonPrimary } from "../Button/Button";
 
 const storeService = new StoreService();
 
@@ -153,13 +154,13 @@ const FormStore = () => {
             required
           />
 
-          <button
+          <ButtonPrimary
             disabled={status === "loading"}
             type="submit"
             className="btn-sb"
           >
             {status === "loading" ? <CircularProgress /> : "Crear tienda"}
-          </button>
+          </ButtonPrimary>
 
           {status === "success" && <p>La tienda se creo correctamente</p>}
           {status === "error" && <p>{error}</p>}
