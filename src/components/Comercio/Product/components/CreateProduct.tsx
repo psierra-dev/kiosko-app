@@ -29,7 +29,7 @@ const CreateProduct = () => {
 
   const { mutate } = useProductStore();
   const { data } = useCurrentSWR("/category");
-
+  console.log("erros", errors);
   const [selectedImage, setSelectedImage] = useState("");
   const [file, setFile] = useState<File | null>(null);
 
@@ -60,6 +60,7 @@ const CreateProduct = () => {
   console.log(errors, "errors");
   return (
     <WrapperFlex
+      as="form"
       className="form-cp"
       $gap="0.7rem"
       onSubmit={handleSubmit(onSubmit)}
@@ -114,7 +115,7 @@ const CreateProduct = () => {
       </WrapperFlex>
 
       <ButtonPrimary disabled={status === "loading"} type="submit">
-        {status === "loading" ? <CircularProgress /> : "Crear"}
+        {status === "loading" ? <CircularProgress size="small" /> : "Crear"}
       </ButtonPrimary>
       {status === "success" && (
         <Alert severity="success">El producto se creo correctamente</Alert>

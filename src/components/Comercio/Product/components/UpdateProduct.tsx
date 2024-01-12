@@ -175,7 +175,11 @@ const UpdateProduct = ({ product }: Prop) => {
       </StyledWrapperInput>
 
       <ButtonPrimary disabled={!isChange} type="submit">
-        {status === "loading" ? <CircularProgress size="small" /> : "Crear"}
+        {status === "loading" ? (
+          <CircularProgress size="small" />
+        ) : (
+          "Actualizar"
+        )}
       </ButtonPrimary>
       {status === "success" && (
         <Alert severity="success">El producto se actualizo correctamente</Alert>
