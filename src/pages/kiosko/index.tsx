@@ -19,16 +19,16 @@ const index = ({ products, store }) => {
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
   const store = context.query;
-
-  const res = await fetch(
-    "http://localhost:3001/api/v1/products/instock/" + store.id,
-    {
-      headers: {
-        Authorization: `${token}`,
-      },
-    }
-  );
-
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  console.log(API_URL, "APIURL");
+  const res = await fetch(`${API_URL}/products/instock/${store.id}`, {
+    headers: {
+      Authorization: `${token}`,
+    },
+  });
+  if (!res.ok) {
+    throw new Error("Couldn't fetch");
+  }
   const repo = await res.json();
   return { props: { products: repo, store } };
 };
