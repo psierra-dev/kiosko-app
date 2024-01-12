@@ -2,7 +2,7 @@ import React from "react";
 import StyledTableProduct from "./styled";
 import CardProduct from "../components/CardProduct";
 
-const TableProduct = ({ products }) => {
+const TableProduct = ({ products }: { products: TProduct[] }) => {
   return (
     <StyledTableProduct>
       <thead>
@@ -20,9 +20,10 @@ const TableProduct = ({ products }) => {
         </tr>
       </thead>
       <tbody>
-        {products?.map((product) => (
-          <CardProduct key={product.id} product={product} />
-        ))}
+        {products.length > 0 &&
+          products?.map((product) => (
+            <CardProduct key={product.id} product={product} />
+          ))}
       </tbody>
     </StyledTableProduct>
   );
