@@ -12,7 +12,7 @@ export class StoreService {
     
     async create(data: TCreate) {
         try {
-            const response = await api.post(`$/stores/`, data)
+            const response = await api.post(`/stores/`, data)
             return response
         } catch (error) {
             console.log(error)
