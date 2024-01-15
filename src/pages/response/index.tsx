@@ -9,11 +9,11 @@ const ResponsePage = () => {
 
   console.log(router.query, "state response");
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (!state) {
       router.replace("/comercio");
     }
-  }, [state]);
+  }, [state]);*/
   return (
     <main>
       <Response state={state as TStatus} />

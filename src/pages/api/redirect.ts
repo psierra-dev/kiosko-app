@@ -16,10 +16,10 @@ export default async function handler(
                     'Authorization': `${token}`
                 }
             })
-            res.redirect("https://kisko-app.vercel.app/response?state=" + "success")
+            //res.redirect("https://kisko-app.vercel.app/response?state=" + "success")
         } catch (error) {
             console.log(error,'error')
-            res.redirect('https://kisko-app.vercel.app/response?state=' + "error")
+           // res.redirect('https://kisko-app.vercel.app/response?state=' + "error")
             
         }
 }
