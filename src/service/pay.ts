@@ -1,8 +1,8 @@
-import { API_BASE_URL } from "@config/config";
+
 import { api } from "@utils/axios";
 
 
-type TCreate = TUser & TStore
+
 type ApiError = {
     message: string,
     statusCode: number

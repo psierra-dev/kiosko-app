@@ -10,11 +10,16 @@ const OrderPage = ({ order }) => {
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
   const { id } = context.query;
-  const res = await fetch("http://localhost:3001/api/v1/order/" + id, {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const res = await fetch(`${API_URL}/order/${id}`, {
     headers: {
       Authorization: `${token}`,
     },
   });
+
+  if (!res.ok) {
+    throw new Error("Couldn't fetch");
+  }
 
   const data = await res.json();
 
