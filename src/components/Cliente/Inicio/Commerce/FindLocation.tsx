@@ -18,7 +18,7 @@ const FindLocationStyle = styled.section`
     max-height: 700px;
     background-color: white;
     margin: auto;
-
+    color: ${({ theme: { colors } }) => colors.text};
     .container-map {
         height: 500px;
     }
@@ -35,8 +35,10 @@ const FindLocationStyle = styled.section`
         z-index: 1;
         border: none;
         background-color: transparent;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         cursor: pointer;
+        color: inherit;
+
     }
 
 `;
@@ -120,7 +122,7 @@ const FindLocation = ({ onCloseModal }: { onCloseModal: () => void }) => {
           </div>
 
           <WrapperFlex $gap="9px" $padding="2rem">
-            <WrapperFlex as="form" onSubmit={handleSubmit}>
+            <WrapperFlex as="form" $gap="0.6rem" onSubmit={handleSubmit}>
               <h3>Cual es tu direccion?</h3>
 
               <StyledItemForm

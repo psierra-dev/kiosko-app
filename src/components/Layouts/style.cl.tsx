@@ -14,7 +14,7 @@ export const SCommerce = styled.div`
 
   .main {
     display: block;
-    padding-top: 70px;
+    padding-top: 50px;
   }
 
   @media screen and (min-width: 770px) {

@@ -12,6 +12,10 @@ const FilterBarStyle = styled.section`
     width: 100%;
     gap: 1rem;
     flex-wrap: wrap;
+
+    .chip-container::-webkit-scrollbar {
+    display: none;
+}
 `;
 
 type Props = {
@@ -44,6 +48,7 @@ const FilterBar = ({
         $flexdirection="row"
         $gap="0.5rem"
         $width="fit-content"
+        className="chip-container"
       >
         {categoryData?.map((slide, index) => (
           <div key={slide.name}>

@@ -7,6 +7,11 @@ import { CartProductContext } from "@context/cart";
 const ListProductsStyle = styled.section`
     margin-top: 2rem;
     min-height: 300px;
+    
+    .container-products {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
 `;
 
 const ListProducts = ({

@@ -14,7 +14,8 @@ const HeroStyle = styled.section`
     justify-content: space-around;
     align-items: center;
     flex-direction: row;
-   margin-top: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     border-radius: 20px;
 
     .switch {
@@ -64,8 +65,11 @@ const Hero = () => {
         ) : (
           <h2>{store?.name}</h2>
         )}
-        <p>Bienvenido a tu panel de control de tu tienda</p>
-        <ButtonPrimary onClick={() => router.push("/comercio/editar")}>
+        <p>Bienvenido al panel de control de tu tienda</p>
+        <ButtonPrimary
+          $width="200px"
+          onClick={() => router.push("/comercio/editar")}
+        >
           Editar tienda
         </ButtonPrimary>
       </div>

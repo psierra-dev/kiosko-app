@@ -12,7 +12,7 @@ const StyledTableOrder = styled.table`
         border-bottom: 1px solid rgba(203, 208, 221, 0.54);
     }
 
-    & thead tr th:nth-child(4) {
+    & thead tr th:nth-child(7) {
         text-align: end;
     }
     & tbody tr td:nth-child(4) {

@@ -4,6 +4,7 @@ import { SAvatar } from "./style.avatar";
 import { AiOutlineDown } from "react-icons/ai";
 import { IoExitOutline } from "react-icons/io5";
 import { useRouter } from "next/router";
+import { FiUser } from "react-icons/fi";
 
 interface Prop {
   name: string;
@@ -39,7 +40,7 @@ const AvatarC = ({ name, lastname }: Prop) => {
         <nav className="menu-desple" ref={divmas} style={{ display: "none" }}>
           <ul className="menu-desple1">
             <li className="menu-desple2">
-              <IoExitOutline /> <span>Perfil</span>
+              <FiUser /> <span>Perfil</span>
             </li>
             <li
               className="menu-desple2"

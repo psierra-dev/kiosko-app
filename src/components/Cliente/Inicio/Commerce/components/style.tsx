@@ -28,12 +28,18 @@ export const SCardKiosko = styled.div.attrs(({ props }: { props: Prop }) => ({
     width: 100%;
     height: 150px;
     border-radius: 10px;
+    align-items: center;
+    justify-content: center;
   }
 
   .conimg img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
+  }
+
+  .conimg .not-store  svg{
+    font-size: 6rem;
   }
 
   .info {

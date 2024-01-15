@@ -23,6 +23,7 @@ export const SCommerce = styled.section`
   }
 
   .direction button {
+    cursor: pointer;
     border: none;
     font-size: 1.2rem;
     width: fit-content;

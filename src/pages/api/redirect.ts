@@ -1,5 +1,4 @@
 import { api } from '@utils/axios'
-import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next'
  
  
@@ -11,16 +10,16 @@ export default async function handler(
     const { code } = req.query;
     const token = req.cookies.token;
         try {
-                await axios.get(`http://localhost:3001/api/v1/mp/redirect?code=${code}`, {
+                await api.get(`/mp/redirect?code=${code}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                'Authorization': `${token}`
+                    'Authorization': `${token}`
                 }
             })
-            res.redirect("http://localhost:3000/response?state=" + "success")
+            res.redirect("https://kisko-app.vercel.app/response?state=" + "success")
         } catch (error) {
             console.log(error,'error')
-            res.redirect('http://localhost:3000/response?state=' + "error")
+            res.redirect('https://kisko-app.vercel.app/response?state=' + "error")
             
         }
 }

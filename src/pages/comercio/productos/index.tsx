@@ -63,7 +63,7 @@ const ProductsPage: NextPageWithLayout = () => {
           as="input"
           type="text"
           $height="2.2em"
-          placeholder="Buscar por nombre de la orden"
+          placeholder="Buscar producto"
           $width="300px"
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -80,7 +80,7 @@ const ProductsPage: NextPageWithLayout = () => {
             onChange={(e) => setFilter(e.target.value)}
             name="category"
           >
-            <option value="">Estado del pago</option>
+            <option value="">Categoria</option>
             {category.map((d) => (
               <option key={d.name} value={d.name}>
                 {d.name.toUpperCase()}

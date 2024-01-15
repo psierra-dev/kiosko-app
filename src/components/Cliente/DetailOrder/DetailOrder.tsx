@@ -1,9 +1,6 @@
 import React from "react";
 import DetailOrderStyle from "./style";
-import {
-  MdAccessTime,
-  MdOutlinePaid,
-} from "react-icons/md";
+import { MdAccessTime, MdOutlinePaid } from "react-icons/md";
 import { PayService } from "@service/pay";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import TableProducts from "@components/General/TableProducts/TableProducts";

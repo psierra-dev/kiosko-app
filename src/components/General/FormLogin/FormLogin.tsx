@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Auth } from "service/user";
 import { useRouter } from "next/router";
 import { ButtonPrimary } from "../Button/Button";
-import { Alert } from "@mui/material";
+import { Alert, CircularProgress } from "@mui/material";
 import { WrapperFlex } from "../Wrapper/Wrapper";
 
 const auth = new Auth();
@@ -29,7 +29,6 @@ export const FormLogin = () => {
     ok: false,
     error: { state: false, msg: "" },
   });
-  const btnRef = useRef<HTMLButtonElement>(null);
 
   const onSubmit: SubmitHandler<TFormValues> = async (data) => {
     setState({
@@ -82,7 +81,9 @@ export const FormLogin = () => {
           {state.error.state && (
             <Alert severity="error">Contraseña o email incorrecto</Alert>
           )}
-          <ButtonPrimary>Login</ButtonPrimary>
+          <ButtonPrimary disabled={state.loading} type="submit">
+            {state.loading ? <CircularProgress size="small" /> : "Login"}
+          </ButtonPrimary>
         </WrapperFlex>
 
         <small>

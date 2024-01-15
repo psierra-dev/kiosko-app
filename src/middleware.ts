@@ -43,6 +43,8 @@ export async function middleware(request: NextRequest) {
         if (
           role === "client" 
           && !routeClient.includes(nextUrl.pathname)
+          && !nextUrl.pathname.startsWith("/order")
+          && !nextUrl.pathname.startsWith("/api")
         ) {
           console.log("aqui client", nextUrl.pathname)
           return NextResponse.redirect(new URL("/inicio", request.url));

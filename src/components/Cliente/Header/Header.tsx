@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyledHeader, StyledNav } from "./style";
 import AvatarC from "./components/Avatar";
 import Link from "next/link";
-import { FaHamburger } from "react-icons/fa";
+
 import { Drawer } from "@mui/material";
 import { AiOutlineClose } from "react-icons/ai";
 import useUser from "@hooks/useUser";
@@ -15,6 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import { ButtonIcon } from "@components/General/Button/Button";
 import Badge from "@components/General/Badge/Badge";
+import { FiMenu, FiUser } from "react-icons/fi";
+import { IoExitOutline } from "react-icons/io5";
 const Nav = ({ onClose }) => {
   const router = useRouter();
 
@@ -23,11 +25,14 @@ const Nav = ({ onClose }) => {
       <div className="close">
         <AiOutlineClose />
       </div>
-      <h4 className="logo">Kiosko</h4>
+      <h3 className="logo">Kiosko</h3>
       <nav>
         <ul>
           <li>
-            <Link href="/perfil">Perfil</Link>
+            <Link href="/perfil">
+              {" "}
+              <FiUser /> Perfil
+            </Link>
           </li>
           <li
             onClick={() => {
@@ -35,7 +40,7 @@ const Nav = ({ onClose }) => {
               router.reload();
             }}
           >
-            <span>Cerrar Sesion</span>
+            <IoExitOutline /> <span>Cerrar Sesion</span>
           </li>
         </ul>
       </nav>
@@ -86,7 +91,7 @@ const HeaderClient = ({ pathname }) => {
         <ToastContainer />
         {pathname !== "/cart" && (
           <div className="hamburger" onClick={handleDrawer}>
-            <FaHamburger />
+            <FiMenu />
           </div>
         )}
 

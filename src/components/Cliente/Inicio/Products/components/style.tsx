@@ -2,16 +2,20 @@ import styled from "styled-components";
 
 export const SCardProduct = styled.div`
     background-color: #fff;
-    width: 100%;
     height: auto;
-    border: 1px solid rgba(173, 173, 173, 0.25);
+
     border-radius: 3px;
     color: ${({ theme: { colors } }) => colors.text};
-    padding: 0.8rem;
-    
+    padding: 0.6rem;
+     width: 50%;
 
     .conimg {
         margin-bottom: 0.6rem;
+        width: 100%;
+    }
+    .conimg img{
+    
+        width: 100%;
     }
 
     .con1 {
@@ -41,7 +45,7 @@ export const SCardProduct = styled.div`
        
     }
     .con2 button {
-        width: 55%;
+        width: 100%;
         height: 33.67px;
         background-color: ${({ theme: { colors } }) => colors.secondary};
         color: ${({ theme: { colors } }) => colors.primary};
@@ -52,12 +56,15 @@ export const SCardProduct = styled.div`
     }
 
     @media only screen and (min-width: 480px) {
-        width: 50%;
+       
     }
-    @media only screen and (min-width: 768px) {
+    @media only screen and (min-width: 530px) {
         width: 33%;
     }
+    @media only screen and (min-width: 768px) {
+        width: 25%;
+    }
     @media only screen and (min-width: 1024px) {
-       width: 25%;
+       width: 20%;
     }
 `;

@@ -52,6 +52,7 @@ const DetailOrderStyle = styled.section`
         width: 95%;
         margin: auto;
         height: 100%;
+        gap: 1rem;
     }
     
     .btn-mp {

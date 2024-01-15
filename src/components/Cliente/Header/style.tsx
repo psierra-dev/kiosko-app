@@ -59,10 +59,10 @@ export const StyledHeader = styled.header`
 export const StyledNav = styled.div`
   padding: 1rem;
   min-width: 200px;
-  align-items: center;
+ 
 
   .logo{
-    color: ${({ theme: { colors } }) => colors.text};
+    color: ${({ theme: { colors } }) => colors.primary};
   }
   .close {
     align-self: end;
@@ -77,7 +77,15 @@ export const StyledNav = styled.div`
     margin-top: 10px;
   }
 
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
   nav ul li{
     margin-bottom: 7px;
+    display: inline-flex;
+    gap: 0.3rem;
   }
 `;

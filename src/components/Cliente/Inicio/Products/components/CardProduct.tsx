@@ -1,7 +1,11 @@
 import { IoCartOutline } from "react-icons/io5";
 import { SCardProduct } from "./style";
-import { MdOutlineRemoveShoppingCart } from "react-icons/md";
+import {
+  MdOutlineHideImage,
+  MdOutlineRemoveShoppingCart,
+} from "react-icons/md";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
+import Image from "next/image";
 interface Prop {
   product: TProduct;
   deleteToCart: (id: number) => void;
@@ -19,7 +23,18 @@ export const CardProduct = ({
     <SCardProduct>
       <div className="con">
         <div className="conimg">
-          <img src={product?.imgurl as string} alt="" />
+          {product.imgurl ? (
+            <Image
+              src={product?.imgurl as string}
+              width={100}
+              height={100}
+              alt="productimg"
+            />
+          ) : (
+            <span className="not-store">
+              <MdOutlineHideImage />
+            </span>
+          )}
         </div>
         <div className="con1">
           <p className="category">{product?.category_name}</p>
