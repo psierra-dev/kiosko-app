@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DetailOrderStyle from "./style";
 import { MdAccessTime, MdOutlinePaid } from "react-icons/md";
 import { PayService } from "@service/pay";
@@ -6,13 +6,19 @@ import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import TableProducts from "@components/General/TableProducts/TableProducts";
 import CardInfo from "@components/General/CardInfo/CardInfo";
 import { BiStoreAlt } from "react-icons/bi";
+import { useRouter } from "next/router";
+import { CircularProgress } from "@mui/material";
 
 const payService = new PayService();
 
 const DetailOrder = ({ order }: { order: TOrder }) => {
   const n_order = order.id.slice(0, 7);
+  const router = useRouter();
+
+  const [statu, setStatu] = useState<TStatus>("typing");
 
   const handlePay = async () => {
+    setStatu("loading");
     const products = order.orderproduct.map((p) => {
       const { id, price, name, quantity, category_name, imgurl } = p;
       return {
@@ -27,12 +33,12 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
     try {
       const response = await payService.pay(products, order.store.id);
       console.log("response: ", response);
+      router.push(response.data.init_point);
     } catch (error) {
+      setStatu("error");
       console.log(error);
     }
   };
-
-  console.log(order, ": order");
 
   return (
     <DetailOrderStyle>
@@ -51,8 +57,16 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
           </WrapperFlex>
 
           {order.paymentType === "mp" && !order.paid && (
-            <button className="btn-mp" onClick={handlePay}>
-              Pagar
+            <button
+              disabled={statu === "loading"}
+              className="btn-mp"
+              onClick={handlePay}
+            >
+              {statu === "loading" ? (
+                <CircularProgress size="small" />
+              ) : (
+                "Pagar"
+              )}
             </button>
           )}
           {order.state === "cancelled" && (
