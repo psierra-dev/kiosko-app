@@ -31,7 +31,12 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
       };
     });
     try {
-      const response = await payService.pay(products, order.store.id, order.id);
+      const response = await payService.pay(
+        products,
+        order.store.id,
+        order.id,
+        order.customer.id
+      );
       console.log("response: ", response);
       router.push(response.data.init_point);
     } catch (error) {

@@ -11,10 +11,10 @@ type ApiError = {
 export class PayService {
     constructor(){}
     
-    async pay(products, storeId, orderId) {
+    async pay(products, storeId, orderId, customerId) {
 
         try {
-            const response = await api.post("/pay", {products, storeId, orderId})
+            const response = await api.post("/pay", {products, storeId, orderId, customerId})
 
             return response
         } catch (error) {
