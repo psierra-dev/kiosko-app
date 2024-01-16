@@ -11,7 +11,7 @@ type ApiError = {
 export class PayService {
     constructor(){}
     
-    async pay(products, storeId) {
+    async pay(products, storeId, orderId) {
 
         try {
             const response = await api.post("/pay", {products, storeId})
