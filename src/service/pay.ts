@@ -14,7 +14,7 @@ export class PayService {
     async pay(products, storeId, orderId) {
 
         try {
-            const response = await api.post("/pay", {products, storeId})
+            const response = await api.post("/pay", {products, storeId, orderId})
 
             return response
         } catch (error) {
