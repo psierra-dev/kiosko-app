@@ -38,6 +38,10 @@ export const SCardCartProduct = styled.div`
     }
 
 
+    .unit {
+        font-size: 13px;
+    }
+
     @media only screen and (min-width: 480px) {
    
     }

@@ -122,11 +122,15 @@ main {
   margin-top: 53px;
 }
 
-
+@media screen and (min-width: 770px) {
+  .main_client {
+    margin-top: 64px;
+  }
+}
 
 ::-webkit-scrollbar {
   width: 0.5rem;
-  height: 0.5rem;
+  height: 0.3rem;
 }
 
 ::-webkit-scrollbar-thumb {

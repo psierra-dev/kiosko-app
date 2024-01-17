@@ -44,9 +44,11 @@ const DetailOrderStyle = styled.section`
         border: none;
         background-color: #FF5E5E;
         border-radius: 10px;
+        min-width: 130px;
         color: #fff;
-        width: 110px;
         font-weight: 500;
+        padding: 0.6rem 0.8rem;
+        cursor: pointer;
     }
     .container {
         width: 95%;

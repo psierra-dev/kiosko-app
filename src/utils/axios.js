@@ -6,14 +6,13 @@ let accessToken = "";
 export const setAccessToken = (_accessToken) => {
   accessToken = _accessToken;
 };
+
 export const setContext = (_context) => {
   context = _context;
 };
 
-console.log("API_URL", process.env.API_URL);
-console.log("NEXT_PUBLIC_API_URL: ", process.env.NEXT_PUBLIC_API_URL);
 export const api = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,
 });
 
 api.interceptors.request.use((config) => {

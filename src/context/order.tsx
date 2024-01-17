@@ -92,8 +92,6 @@ function ORDERReducer(state: ISTATE, action: ProductAction) {
         orders: action.payload,
       };
     case "UPDATE_ORDER":
-      const id_product = action.payload.id;
-      const { precio, stock } = action.payload.product_updated;
       return {
         orders: [],
       };

@@ -1,5 +1,4 @@
 import { RiDashboardFill } from "react-icons/ri";
-import { BiCog } from "react-icons/bi";
 import { SNav } from "./style";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -7,12 +6,10 @@ import { MdExitToApp, MdInventory, MdLocalOffer } from "react-icons/md";
 
 const Nav = () => {
   const router = useRouter();
-
   return (
     <SNav>
-      <div className="logo">
-        <h1>Kiosko</h1>
-      </div>
+      <h3 className="logo">Kiosko</h3>
+
       <nav className="nav-items">
         <ul>
           <li className={router.pathname === "/comercio" ? "active" : ""}>
@@ -37,16 +34,6 @@ const Nav = () => {
             <Link href="/comercio/productos">
               <MdLocalOffer />
               <span>Productos</span>
-            </Link>
-          </li>
-          <li
-            className={
-              router.pathname === "/comercio/configuracion" ? "active" : ""
-            }
-          >
-            <Link href="/comercio/configuracion">
-              <BiCog />
-              <span>Configuracion</span>
             </Link>
           </li>
         </ul>

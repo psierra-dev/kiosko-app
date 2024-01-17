@@ -1,4 +1,3 @@
-import { useSesionStorage } from "@hooks/useSesionStorage";
 import { createContext, useEffect, useReducer } from "react";
 interface ISTATE {
   cartProducts: TProduct[];
@@ -21,7 +20,6 @@ const INITIAL_STATE: ISTATE = {
 
 export function ProductCartProvider({ children }) {
   const [state, dispatch] = useReducer(ProductReducer, INITIAL_STATE);
-  const { deleteProductCart, addProductCart } = useSesionStorage("cart");
 
   const setProducts = (products: TProduct[]) => {
     dispatch({ type: "SET_CART_PRODUCTS", payload: products });
@@ -36,15 +34,6 @@ export function ProductCartProvider({ children }) {
   const updatedPrice = (id: number, quantity: number) => {
     dispatch({ type: "UPDATE_PRICE_PRODUCT", payload: { id, quantity } });
   };
-
-  const deleteForSession = () => {
-    window.sessionStorage.removeItem("cart");
-  };
-  const getForSession = () => {
-    const items = window.sessionStorage.get("cart");
-  };
-
-  useEffect(() => {}, []);
 
   return (
     <CartProductContext.Provider
@@ -74,6 +63,7 @@ type ProductAction =
 function ProductReducer(state: ISTATE, action: ProductAction) {
   switch (action.type) {
     case "SET_CART_PRODUCTS":
+      window.sessionStorage.setItem("cart", JSON.stringify(action.payload));
       return {
         cartProducts: action.payload,
       };

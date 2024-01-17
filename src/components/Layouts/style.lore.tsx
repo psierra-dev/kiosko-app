@@ -84,16 +84,15 @@ export const SLoReLayout = styled.main`
     }
 
     .con011 {
+        
         padding: 1em;
         flex-direction: row;
-        justify-content: space-between;
         flex-wrap: wrap;
+        gap: 1rem;
     }
 
     .con011-card {
-        height: 100%;
         width: 100%;
-        min-width: 150px;
         //background-color: #0d6fc4;
         flex-direction: row;
         justify-content: center;
@@ -108,13 +107,14 @@ export const SLoReLayout = styled.main`
     }
 
     .con-text {
-        max-width:70%;
+        width: 100%;
+        text-align: center;
     }
     .-con-text1 {
         font-size: 1.2em;
         font-weight: 600;
         line-height: 22.5px;
-        margin-bottom: 10px;
+        margin-bottom: 0.2rem;
         
     }
 
@@ -133,6 +133,11 @@ export const SLoReLayout = styled.main`
     .con12 {
         width: 80%;
     }
+
+    .con011 {
+        flex-wrap: nowrap;
+    }
+    
     
   }
   @media only screen and (min-width: 1024px) {

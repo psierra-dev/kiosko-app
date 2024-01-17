@@ -16,7 +16,7 @@ const Inicio = ({ stores, products }) => {
 
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
   console.log(API_URL, "APIURL");
   const res = await fetch(`${API_URL}/stores/around`, {
     headers: {

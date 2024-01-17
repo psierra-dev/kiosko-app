@@ -76,6 +76,7 @@ export const FormLogin = () => {
             register={register}
             errors={errors.password}
             required
+            isPassword={true}
           />
 
           {state.error.state && (

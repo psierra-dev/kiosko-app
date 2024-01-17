@@ -3,7 +3,7 @@ import useSWR from "swr";
 
 const fetcher = async (url: string) => {
   const res = await api.get(url, {});
-  console.log(res);
+
   return res.data;
 };
 

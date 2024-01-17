@@ -1,50 +1,33 @@
-import React, { useEffect } from "react";
+import {
+  ButtonOutline,
+  ButtonPrimary,
+} from "@components/General/Button/Button";
+import React, { ReactNode } from "react";
+import StyledMessage from "./style.msg";
 
 interface Prop {
-  statu: string;
-  setResponse: React.Dispatch<React.SetStateAction<boolean>>;
-  setStateDrawer: ({ noti, order }: { noti: boolean; order: boolean }) => void;
-  typePayment: string;
-  text: string;
+  children: ReactNode;
   title: string;
+  onClick: () => void;
+  onBack: () => void;
 }
 
-const MessageRes = ({
-  statu,
-  setResponse,
-  setStateDrawer,
-  typePayment,
-  text,
-  title,
-}: Prop) => {
-  const handleState = () => {
-    setStateDrawer({ noti: false, order: false });
-    setResponse(false);
-  };
-
-  const handleBack = () => {
-    setResponse(false);
-  };
-
-  useEffect(() => {
-    if (statu === "aprobada" && typePayment === "mp") {
-      setStateDrawer({ noti: false, order: false });
-      setResponse(false);
-    }
-  }, []);
-
+const MessageRes = ({ children, title, onClick, onBack }: Prop) => {
   return (
-    <div>
+    <StyledMessage>
       <h2>{title}</h2>
-      <p>{text}</p>
+      {children}
 
-      {statu === "aprobada" && typePayment === "cash" && (
-        <button onClick={handleState}>Listo</button>
-      )}
-      {statu === "error" && (
-        <button onClick={handleBack}>Volver a intentarlo</button>
-      )}
-    </div>
+      <div className="container-btn">
+        <ButtonOutline $width="50%" onClick={onBack}>
+          Volver
+        </ButtonOutline>
+        <ButtonPrimary $width="50%" onClick={onClick}>
+          Detalle
+        </ButtonPrimary>
+      </div>
+      <button></button>
+    </StyledMessage>
   );
 };
 

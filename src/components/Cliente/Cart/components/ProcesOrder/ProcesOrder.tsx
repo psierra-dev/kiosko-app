@@ -19,6 +19,7 @@ import useCurrentSWR from "@hooks/useCurrentSWR";
 import socket from "@lib/socket";
 import { OrderService } from "@service/order";
 import { ButtonPrimary } from "@components/General/Button/Button";
+import { useRouter } from "next/router";
 
 const orderService = new OrderService();
 interface Prop {
@@ -26,10 +27,16 @@ interface Prop {
   amount: number;
   productsCart: TProduct[];
   drawer: boolean;
-  onCloseDrawer: () => void
+  onCloseDrawer: () => void;
 }
 
-const ProcesOrder = ({ storeId, amount, productsCart, drawer, onCloseDrawer }: Prop) => {
+const ProcesOrder = ({
+  storeId,
+  amount,
+  productsCart,
+  drawer,
+  onCloseDrawer,
+}: Prop) => {
   const {
     register,
     formState: { errors },
@@ -37,32 +44,46 @@ const ProcesOrder = ({ storeId, amount, productsCart, drawer, onCloseDrawer }: P
   } = useForm<TFormValues>({
     resolver: yupResolver(schemaFormCart),
   });
-  const { data } = useCustomer();
+  const { data: customer } = useCustomer();
   const { data: store } = useCurrentSWR(`/stores/store/${storeId}`);
   const [typePayment, setTypePayment] = useState("mp");
   const [delivery, setDelivery] = useState(true);
   const [statu, setStatu] = useState<TStatus>("typing");
   const [response, setResponse] = useState(false);
+  const [orderId, setOrderId] = useState("");
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<TFormValues> = async (dataForm) => {
+    const { latitud, longitud, userId } = customer;
+    const { direction, phone } = dataForm;
+
     const newData = {
       customer: {
-        latitud: data?.latitud,
-        longitud: data.longitud,
-        direction: dataForm.direction,
-        phone: dataForm.phone,
-        userId: data.userId,
+        latitud,
+        longitud,
+        direction,
+        phone,
+        userId,
       },
       products: productsCart.map((p) => {
+        const {
+          quantity_aux,
+          id,
+          price,
+          name,
+          imgurl,
+          unit_measurement,
+          category_name,
+        } = p;
         return {
-          quantity: p.quantity_aux,
-          productStoreId: p.id,
-          price: p.price,
-          name: p.name,
-          category_name: p.category_name,
-          imgurl: p.imgurl,
-          unit_measurement: p.unit_measurement,
-          productId: p.id,
+          quantity: quantity_aux,
+          productStoreId: id,
+          price,
+          name,
+          category_name,
+          imgurl,
+          unit_measurement,
+          productId: id,
         };
       }),
       orderData: {
@@ -80,7 +101,8 @@ const ProcesOrder = ({ storeId, amount, productsCart, drawer, onCloseDrawer }: P
       const response = await orderService.create(newData);
 
       console.log(response);
-      socket.emit("notification", data, storeId);
+      socket.emit("notification", { msg: "Se creo una nueva orden" }, storeId);
+      setOrderId(response.data.orderId);
       setStatu("success");
     } catch (error) {
       console.log(error);
@@ -113,14 +135,14 @@ const ProcesOrder = ({ storeId, amount, productsCart, drawer, onCloseDrawer }: P
                       type: "store",
                     },
                     {
-                      latitud: data?.latitud,
-                      longitud: data?.longitud,
+                      latitud: customer?.latitud,
+                      longitud: customer?.longitud,
                       type: "client",
                     },
                   ]}
                   initialLocation={{
-                    latitud: data?.latitud,
-                    longitud: data?.longitud,
+                    latitud: customer?.latitud,
+                    longitud: customer?.longitud,
                   }}
                 />
               </div>
@@ -231,8 +253,8 @@ const ProcesOrder = ({ storeId, amount, productsCart, drawer, onCloseDrawer }: P
                 <h5>Datos de la tienda</h5>
 
                 <div className="info">
-                  <p>Dir. B San Expedito</p>
-                  <p>Tel. +54381949829</p>
+                  <p>{store?.direction}</p>
+                  <p>Tel. {store?.phone}</p>
                 </div>
               </div>
             </>
@@ -240,10 +262,16 @@ const ProcesOrder = ({ storeId, amount, productsCart, drawer, onCloseDrawer }: P
           {response && (
             <div className="cont-state">
               {statu === "loading" && <CircularProgress />}
-              {statu === "success" && (
-                <div className="message">
-                  <h2>Orden Creada</h2>
-
+              {statu === "success" && orderId.length > 0 && (
+                <MessageRes
+                  title="Orden Creada"
+                  onClick={() => {
+                    router.push(`/order/${orderId}`);
+                  }}
+                  onBack={() => {
+                    router.reload();
+                  }}
+                >
                   <div className="detail">
                     <p>
                       Su pedido ha sido realizado y será procesado lo antes
@@ -260,22 +288,7 @@ const ProcesOrder = ({ storeId, amount, productsCart, drawer, onCloseDrawer }: P
                       orden.
                     </p>
                   </div>
-
-                  <div className="btn">
-                    <button className="back">Volver a comprar</button>
-                    <button className="detail">Orden detalle</button>
-                  </div>
-                </div>
-              )}
-              {statu === "error" && (
-                <MessageRes
-                  statu="error"
-                  title="La orden no pudo ser creada"
-                  text="Hubo un error al crear la orden"
-                  setResponse={setResponse}
-                  setStateDrawer={null}
-                  typePayment={typePayment}
-                />
+                </MessageRes>
               )}
             </div>
           )}

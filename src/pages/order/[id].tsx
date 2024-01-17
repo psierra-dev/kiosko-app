@@ -3,14 +3,13 @@ import { getLayout } from "@components/Layouts/ClienteLayout";
 import React from "react";
 
 const OrderPage = ({ order }) => {
-  console.log(order, "order");
   return <DetailOrder order={order} />;
 };
 
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
   const { id } = context.query;
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
   const res = await fetch(`${API_URL}/order/${id}`, {
     headers: {
       Authorization: `${token}`,

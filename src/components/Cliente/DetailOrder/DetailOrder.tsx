@@ -8,13 +8,17 @@ import CardInfo from "@components/General/CardInfo/CardInfo";
 import { BiStoreAlt } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { CircularProgress } from "@mui/material";
+import { OrderService } from "@service/order";
+import time from "@utils/time";
+import socket from "@lib/socket";
 
 const payService = new PayService();
+const orderService = new OrderService();
 
 const DetailOrder = ({ order }: { order: TOrder }) => {
   const n_order = order.id.slice(0, 7);
   const router = useRouter();
-
+  const dateOrder = time(order.date);
   const [statu, setStatu] = useState<TStatus>("typing");
 
   const handlePay = async () => {
@@ -45,14 +49,36 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
     }
   };
 
+  const hancleCancel = async () => {
+    setStatu("loading");
+    try {
+      await orderService.update({ state: "cancelled" }, order.id);
+      setStatu("success");
+      socket.emit(
+        "notification",
+        { msg: "Se cancelo una orden" },
+        order.store.id
+      );
+
+      router.reload();
+    } catch (error) {
+      console.log(error);
+      setStatu("error");
+    }
+  };
+
   return (
     <DetailOrderStyle>
       <header className="header">
         <div className="cont">
-          <WrapperFlex>
+          <WrapperFlex $width="fit-content">
             <h4>N° Orden: {n_order}</h4>
             <WrapperFlex $flexdirection="row" $gap="0.5rem">
-              <p className={`state-order ${order.state}`}>{order.state}</p>
+              <p className={`state-order ${order.state}`}>
+                {order.state === "pendding" && "Pendiente"}
+                {order.state === "cancelled" && "Cancelada"}
+                {order.state === "success" && "Aprobada"}
+              </p>
               <p
                 className={`state-paid ${order.paid ? "success" : "cancelled"}`}
               >
@@ -61,22 +87,32 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
             </WrapperFlex>
           </WrapperFlex>
 
-          {order.paymentType === "mp" && !order.paid && (
+          {order.paymentType === "mp" &&
+            order.state === "success" &&
+            !order.paid && (
+              <button
+                disabled={statu === "loading"}
+                className="btn-mp"
+                onClick={handlePay}
+              >
+                {statu === "loading" ? (
+                  <CircularProgress size="small" />
+                ) : (
+                  "Pagar"
+                )}
+              </button>
+            )}
+          {order.state === "pendding" && (
             <button
               disabled={statu === "loading"}
-              className="btn-mp"
-              onClick={handlePay}
+              className="btn-cancel"
+              onClick={hancleCancel}
             >
               {statu === "loading" ? (
                 <CircularProgress size="small" />
               ) : (
-                "Pagar"
+                "Cancelar"
               )}
-            </button>
-          )}
-          {order.state === "cancelled" && (
-            <button className="btn-cancel" onClick={handlePay}>
-              Cancelar
             </button>
           )}
         </div>
@@ -94,11 +130,7 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
               info={order.store.name}
               icon={<BiStoreAlt />}
             />
-            <CardInfo
-              title="Tiempo"
-              info={order.store.name}
-              icon={<MdAccessTime />}
-            />
+            <CardInfo title="Tiempo" info={dateOrder} icon={<MdAccessTime />} />
             <CardInfo
               title="Pago"
               info={

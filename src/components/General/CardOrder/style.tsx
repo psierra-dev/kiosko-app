@@ -8,8 +8,13 @@ const StyledCardOrder = styled.div`
         margin-bottom: 0.5rem;
         
     }
-    .img img {
+    .img {
         width: 80px;
+        height: auto;
+ 
+    }
+    .img img {
+        width: 100%;
         height: auto;
     }
 

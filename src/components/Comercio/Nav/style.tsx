@@ -6,6 +6,10 @@ export const SNav = styled.div`
   padding: 0 1rem;
   padding-top: 0.8rem;
   width: 300px;
+
+  .logo {
+    color: ${({ theme: { colors } }) => colors.primary};
+  }
   .nav-items {
     padding-top: 1rem;
   }

@@ -96,11 +96,7 @@ const CardGuia = ({
                 disabled={statusMp === "loading"}
                 onClick={handleConnectMP}
               >
-                {statusMp === "loading" ? (
-                  <CircularProgress size={"small"} />
-                ) : (
-                  "Conectar con mercado pago"
-                )}
+                Conectar con mercado pago
               </ButtonPrimary>
             ) : (
               <ButtonPrimary onClick={onClick}>

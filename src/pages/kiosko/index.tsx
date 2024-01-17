@@ -18,7 +18,7 @@ const index = ({ products, store }) => {
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
   const store = context.query;
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
   const storeRes = await fetch(`${API_URL}/stores/store/${store.id}`, {
     headers: {
       Authorization: `${token}`,
@@ -34,6 +34,7 @@ export const getServerSideProps = async (context) => {
     throw new Error("Couldn't fetch");
   }
   const repo = await res.json();
+  console.log(repo, "repo");
   return { props: { products: repo, store: await storeRes.json() } };
 };
 index.getLayout = getLayout;

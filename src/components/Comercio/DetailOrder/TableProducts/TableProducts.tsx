@@ -1,5 +1,6 @@
 import StyledTableOrder from "@components/Comercio/Order/TableOrder/style";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
+
 import React from "react";
 
 const TableProducts = ({ products }: { products: TProduct[] }) => {
@@ -18,11 +19,6 @@ const TableProducts = ({ products }: { products: TProduct[] }) => {
           <tr key={p.id}>
             <td className="name-product">
               <WrapperFlex $flexdirection="row" $gap="0.4rem">
-                <img
-                  style={{ width: "50px", height: "50px" }}
-                  src={p.imgurl}
-                  alt="a"
-                />
                 {p.name}
               </WrapperFlex>
             </td>

@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import BtnQuantity from "./BtnQuantity";
 import { CartProductContext } from "@context/cart";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
+import Image from "next/image";
 
 interface Prop {
   product: TProduct;
@@ -37,7 +38,7 @@ const CardCart = ({ product }: Prop) => {
           style={{ flex: 1 }}
         >
           <div className="imgdiv">
-            <img src={product.imgurl} alt="img" />
+            <Image src={product.imgurl} width={50} height={50} alt="img" />
           </div>
 
           <p className="name">{product.name}</p>

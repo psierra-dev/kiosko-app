@@ -1,4 +1,3 @@
-import { API_BASE_URL } from "@config/config"
 import { api } from "@utils/axios"
 import axios, { AxiosError } from "axios"
 type TerrorAxios = {
@@ -46,7 +45,7 @@ class ProducStoreService {
     }
     async bestProductsStore(storeId: number) {
         try {
-            const products = axios.get(`${API_BASE_URL}/products-store/bestproducts/${storeId}`)
+            const products = api.get(`/products-store/bestproducts/${storeId}`)
     
             return (await products).data
         } catch (error) {

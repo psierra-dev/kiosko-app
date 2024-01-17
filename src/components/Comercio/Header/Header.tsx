@@ -12,22 +12,28 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Notification from "./Notification";
 import Badge from "@components/General/Badge/Badge";
+import { useRouter } from "next/router";
+
 const Header = () => {
   const [menu, setMenu] = useState(false);
-  const { data, isLoading, error } = useUser();
+  const { data, isLoading } = useUser();
   const [noti, setNoti] = useState(0);
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const fullName = `${data?.name} ${data?.lastname}`;
+
+  const router = useRouter();
+
   useEffect(() => {
     socket.on("notification", (nt) => {
-      toast("Tienes una nueva orden", {
+      toast(nt?.msg, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
+        pauseOnHover: false,
+        draggable: false,
         progress: undefined,
         theme: "light",
       });
@@ -39,7 +45,13 @@ const Header = () => {
     };
   }, []);
 
-  const fullName = `${data?.name} ${data?.lastname}`;
+  useEffect(() => {
+    setMenu(false);
+    return () => {
+      setIsOpen(false);
+    };
+  }, [router]);
+
   return (
     <HeaderStyle>
       <div className="cont">
@@ -63,7 +75,12 @@ const Header = () => {
               <IoNotificationsOutline />
             </Badge>
 
-            {isOpen && <Notification onOpen={() => setIsOpen(false)} />}
+            {isOpen && (
+              <Notification
+                onResetCount={() => setNoti(0)}
+                onOpen={() => setIsOpen(false)}
+              />
+            )}
           </div>
           {isLoading ? (
             <Skeleton variant="circular" height={40} width={40} />

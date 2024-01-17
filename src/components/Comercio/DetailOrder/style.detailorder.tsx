@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledDetailOrder = styled.div`
   height: 100%;
   padding: 0 1rem;
+  padding-top: 0.5rem;
 
   .container-table-product {
     width: 100%;
@@ -36,6 +37,7 @@ export const StyledDetailOrder = styled.div`
     padding: 1.2rem;
     margin-top: 1rem;
     overflow: auto;
+    gap: 1.5rem;
   }
   .card-info {
     flex-direction: row;

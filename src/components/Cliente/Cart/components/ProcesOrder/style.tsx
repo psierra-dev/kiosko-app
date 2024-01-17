@@ -160,46 +160,4 @@ export const SProcesOrder = styled.div`
     
 
 
-    .message h2 {
-        text-align: center;
-        margin-bottom: .8rem;
-    }
-
-    .message .detail {
-        width: 100%;
-       
-    }
-    .message .detail p {
-        text-align: center;
-        font-size: 14px;
-        margin-bottom: .5rem;
-    }
-
-    .message .btn {
-        flex-direction: row;
-        gap: 1rem;
-        width: auto;
-        margin: 1rem;
-    }
-    .message .btn button{
-        border: none;
-        width: 50%;
-        padding: .8rem;
-        font-weight: 700;
-        border-radius: 8px;
-        cursor: pointer;
-    }
-    .message .btn .back{
-        color:${({ theme: { colors } }) => colors.text};
-    }
-    .message .btn .back:hover {
-        background-color: #8080807d;
-    }
-    .message .btn .detail{
-        color:#fff;
-        background-color: #ffa60099;
-    }
-    .message .btn .detail:hover{
-        background-color: ${({ theme: { colors } }) => colors.primary};
-    }
     `;

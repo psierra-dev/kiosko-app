@@ -48,7 +48,7 @@ const GuiaStore = ({ store }: { store: TStore }) => {
           {store ? (
             <CardGuia
               description="La tienda ofrecera pago con mercado pago."
-              description_two="La tienda no ofrecera pago con efectivo."
+              description_two="La tienda no ofrecera pago con mercado pago."
               title="Pago con mercado pago activado"
               title_two="Pago con mercado pago desactivado"
               initialChecked={

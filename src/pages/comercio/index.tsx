@@ -8,7 +8,7 @@ import useUser from "@hooks/useUser";
 
 const ComercioPage: NextPageWithLayout = () => {
   const { data } = useUser();
-  const { store, error, isLoading } = useStore(data?.id, "seller");
+  const { store } = useStore(data?.id, "seller");
 
   return (
     <>

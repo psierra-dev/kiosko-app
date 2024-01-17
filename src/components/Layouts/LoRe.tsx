@@ -4,6 +4,7 @@ import { SLoReLayout } from "./style.lore";
 
 import { BiStore } from "react-icons/bi";
 import { ButtonPrimary } from "@components/General/Button/Button";
+import Footer from "@components/General/Footer/Footer";
 
 type Prop = {
   children: React.ReactNode;
@@ -58,19 +59,23 @@ const LoRe = ({ children }: Prop) => {
             </div>
             <div className="con011-card">
               <div className="con-text">
-                <h4 className="-con-text1">Los mejores precios</h4>
-                <h5 className="-con-text2">Precios muy accesible</h5>
+                <h4 className="-con-text1">Directo hasta tu casa</h4>
+                <h5 className="-con-text2">Con delivery</h5>
               </div>
             </div>
             <div className="con011-card">
               <div className="con-text">
-                <h4 className="-con-text1">Los mejores precios</h4>
-                <h5 className="-con-text2">Precios muy accesible</h5>
+                <h4 className="-con-text1">Pago seguros</h4>
+                <h5 className="-con-text2">
+                  Pagos en efectivo o por mercado pago
+                </h5>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <Footer />
     </SLoReLayout>
   );
 };

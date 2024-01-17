@@ -1,5 +1,7 @@
 import { Path, FieldError, ValidationRule } from "react-hook-form";
 import { StyledItemForm, StyledWrapperInput } from "../ItemsForm/ItemsForm";
+import { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 type InputProps = {
   label: string;
@@ -12,6 +14,7 @@ type InputProps = {
   valueInp?: string;
   placeholder?: string;
   value?: string;
+  isPassword?: boolean;
 };
 
 const Input = ({
@@ -23,7 +26,10 @@ const Input = ({
   name,
   placeholder,
   value,
+  isPassword,
 }: InputProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <>
       <StyledWrapperInput>
@@ -31,13 +37,27 @@ const Input = ({
         {type === "textarea" ? (
           <textarea {...register(name)} cols={30} rows={10}></textarea>
         ) : (
-          <StyledItemForm
-            type={type}
-            {...register(name, { required })}
-            placeholder={placeholder}
-            defaultValue={value}
-            $error={errors !== undefined}
-          />
+          <>
+            <StyledItemForm
+              type={isPassword ? (showPassword ? "text" : "password") : type}
+              {...register(name, { required })}
+              placeholder={placeholder}
+              defaultValue={value}
+              $error={errors !== undefined}
+            />
+            {isPassword && (
+              <button
+                className="btn-show"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setShowPassword(() => !showPassword);
+                }}
+              >
+                {showPassword ? <FiEye /> : <FiEyeOff />}
+              </button>
+            )}
+          </>
         )}
 
         {errors !== undefined && <p className="message">{errors.message}</p>}

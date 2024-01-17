@@ -14,7 +14,7 @@ export const CardOrder = ({ order }: Prop) => {
   const { mutate } = useOrder("?type=store");
   const date = time(order.date);
   const router = useRouter();
-  console.log(order);
+
   return (
     <StyledCardOrder
       onClick={() => router.push("/comercio/pedidos/" + order?.id)}

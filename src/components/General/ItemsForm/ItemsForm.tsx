@@ -45,5 +45,14 @@ export const StyledWrapperInput = styled.div`
         color: red;
         font-size: 0.9em;
     }
+
+    .btn-show {
+      border: none;
+      width: fit-content;
+      cursor: pointer;
+      position: absolute;
+      right: 12px;
+      top: 34px;
+    }
   
   `;

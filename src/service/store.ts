@@ -1,5 +1,4 @@
 import { api } from "@utils/axios";
-import axios from "axios";
 
 type TCreate = TUser & TStore
 type ApiError = {

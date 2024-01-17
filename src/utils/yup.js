@@ -22,7 +22,10 @@ const schema = {
     .string()
     .email("Escribe un email valido")
     .required("Escribe un email por favor"),
-  password: yup.string().required(""),
+  password: yup
+    .string()
+    .min(8, "La contraseña debe tener al menos 8 caracteres")
+    .required("La contraseña es requerida"),
   direction: yup.string().required("Escribe una direccion"),
   phone: yup.string().phone("", "", "Debe ser un numero de telefono valido"),
   description: yup.string(),

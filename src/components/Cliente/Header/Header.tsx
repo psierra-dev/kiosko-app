@@ -84,7 +84,7 @@ const HeaderClient = ({ pathname }) => {
     return () => {
       setOpen(false);
     };
-  }, [router]);
+  }, [router.pathname]);
   return (
     <StyledHeader>
       <div className="con">

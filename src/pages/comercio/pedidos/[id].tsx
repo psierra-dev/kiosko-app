@@ -1,22 +1,26 @@
-import CardInfoUser from "@components/Comercio/DetailOrder/CardInfoUser/CardInfoUser";
 import FormStateOrder from "@components/Comercio/DetailOrder/FormStateOrder/FormStateOrder";
 import TableProducts from "@components/Comercio/DetailOrder/TableProducts/TableProducts";
 import { StyledDetailOrder } from "@components/Comercio/DetailOrder/style.detailorder";
+import CardInfo from "@components/General/CardInfo/CardInfo";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import { getLayout } from "@components/Layouts/ComercioLayout";
 import useOrder from "@hooks/useOrder";
 import MapBox from "@lib/MapBoxReact/Map";
+import time from "@utils/time";
 import { useRouter } from "next/router";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { BiHomeAlt, BiPhone } from "react-icons/bi";
 import { FiClock, FiUser } from "react-icons/fi";
+import { MdAttachMoney, MdOutlineDeliveryDining } from "react-icons/md";
 
 const DetailOrderPage = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { data: order, error, isLoading } = useOrder(`/${id}`);
-  const [stateOrder, setStateOrder] = useState("");
-  console.log(order);
+
+  const { data: order, isLoading } = useOrder(`/${id}`);
+
+  const dateOrder = time(order?.date);
+
   const total = useMemo(
     () =>
       order?.orderproduct
@@ -31,7 +35,19 @@ const DetailOrderPage = () => {
 
   return (
     <StyledDetailOrder>
-      <h2>Order #{order?.id.slice(0, 6)}</h2>
+      <WrapperFlex $flexdirection="row" $justifycontent="space-between">
+        <h2>Order #{order?.id.slice(0, 6)}</h2>
+
+        <WrapperFlex
+          $gap="0.2rem"
+          $alignitems="center"
+          $flexdirection="row"
+          $width="fit-content"
+        >
+          <FiClock />
+          <p>{dateOrder}</p>
+        </WrapperFlex>
+      </WrapperFlex>
 
       <WrapperFlex $flexdirection="row" $flexwrap="wrap">
         <div className="container-table-product">
@@ -60,26 +76,33 @@ const DetailOrderPage = () => {
           <WrapperFlex>
             <h4>Detalle de la Orden</h4>
             <div className="container-infocustomer">
-              <CardInfoUser
+              <CardInfo
                 title="Cliente"
-                info={order?.customer.name}
+                info={`${order?.customer.name} ${order?.customer.lastname}`}
                 icon={<FiUser />}
               />
 
-              <CardInfoUser
-                title="Direccion"
-                info={order?.infosend.direction}
-                icon={<BiHomeAlt />}
-              />
-              <CardInfoUser
+              <CardInfo
                 title="Telefono"
                 info={order?.infosend.phone}
                 icon={<BiPhone />}
               />
-              <CardInfoUser
-                title="Order Date"
-                info={order?.date}
-                icon={<FiClock />}
+              <CardInfo
+                title="Direccion"
+                info={order?.infosend.direction}
+                icon={<BiHomeAlt />}
+              />
+              <CardInfo
+                title="Pago"
+                info={
+                  order?.paymentType === "cash" ? "Efectivo" : "Mercado Pago"
+                }
+                icon={<MdAttachMoney />}
+              />
+              <CardInfo
+                title="Delivery"
+                info={order?.delivery ? "Con delivery" : "Sin Delivery"}
+                icon={<MdOutlineDeliveryDining />}
               />
             </div>
           </WrapperFlex>

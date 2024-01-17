@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 const StyledCardInfo = styled.div`
-    &  {
+  min-width: 93px;
+
+  &  {
     flex-direction: row;
     gap: 0.2rem;
   }
@@ -10,7 +12,7 @@ const StyledCardInfo = styled.div`
     font-weight: 700;
   }
   & div span {
-    font-size: 12.8px;
+    font-size: 12.2px;
     font-weight: 400;
     color: #717171;
   }

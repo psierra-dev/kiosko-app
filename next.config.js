@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   env: {
-    NEXT_PUBLIC_API_URL: "https://api-marketplace.onrender.com/api/v1",
+    NEXT_PUBLIC_API_URL: "https://api-marketplace.onrender.com",
     NEXT_PUBLIC_TOKEN_MAPBOX:
       "pk.eyJ1IjoicGFibG9zNTciLCJhIjoiY2w1ZnUyaDl1MTNtMjNqbnRwcWRtaDY2cCJ9.yhPZqGTzceXkygvQ_DWDAw",
   },
