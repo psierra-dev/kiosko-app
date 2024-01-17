@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { CardProduct } from "./CardProduct";
 import styled from "styled-components";
-import useCart2 from "@hooks/useCart2";
 import { CartProductContext } from "@context/cart";
 
 const ListProductsStyle = styled.section`
