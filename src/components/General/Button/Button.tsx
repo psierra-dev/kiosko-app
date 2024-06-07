@@ -3,7 +3,9 @@ import styled from "styled-components";
 const Button = styled.button<{ $width?: string }>`
     padding: 0.625rem 1.375rem;
     border-radius: 5px;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 0.9375rem;
     font-weight: 600;
     width: ${(props) => props.$width || "100%"};

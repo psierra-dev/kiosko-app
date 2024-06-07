@@ -5,12 +5,14 @@ import {
   StyledItemForm,
   StyledWrapperInput,
 } from "@components/General/ItemsForm/ItemsForm";
+import Loader from "@components/General/Loader/Loader";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import useCurrentSWR from "@hooks/useCurrentSWR";
 import useProductStore from "@hooks/useProductStore";
 import { Alert, CircularProgress, Switch } from "@mui/material";
 import ProducStoreService from "@service/productstore";
 import React, { useState } from "react";
+import { BiLoader } from "react-icons/bi";
 
 const productStoreService = new ProducStoreService();
 
@@ -174,9 +176,11 @@ const UpdateProduct = ({ product }: Prop) => {
         </StyledItemForm>
       </StyledWrapperInput>
 
-      <ButtonPrimary disabled={!isChange} type="submit">
+      <ButtonPrimary disabled={status === "loading"} type="submit">
         {status === "loading" ? (
-          <CircularProgress size="small" />
+          <Loader>
+            <BiLoader />
+          </Loader>
         ) : (
           "Actualizar"
         )}

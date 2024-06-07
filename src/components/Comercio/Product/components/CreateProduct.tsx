@@ -12,6 +12,8 @@ import useProductStore from "@hooks/useProductStore";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import { ButtonPrimary } from "@components/General/Button/Button";
 import { StyledWrapperInput } from "@components/General/ItemsForm/ItemsForm";
+import Loader from "@components/General/Loader/Loader";
+import { BiLoader } from "react-icons/bi";
 
 const prouctStoreService = new ProducStoreService();
 
@@ -57,7 +59,6 @@ const CreateProduct = () => {
     }
   };
 
-  console.log(errors, "errors");
   return (
     <WrapperFlex
       as="form"
@@ -115,7 +116,13 @@ const CreateProduct = () => {
       </WrapperFlex>
 
       <ButtonPrimary disabled={status === "loading"} type="submit">
-        {status === "loading" ? <CircularProgress size="small" /> : "Crear"}
+        {status === "loading" ? (
+          <Loader>
+            <BiLoader />
+          </Loader>
+        ) : (
+          "Crear"
+        )}
       </ButtonPrimary>
       {status === "success" && (
         <Alert severity="success">El producto se creo correctamente</Alert>

@@ -15,7 +15,7 @@ import { MdCreate } from "react-icons/md";
 
 const ProductsPage: NextPageWithLayout = () => {
   const [modalCreate, setModalCreate] = useState(false);
-  const { data: products, isLoading } = useProductStore();
+  const { data: products } = useProductStore();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
 

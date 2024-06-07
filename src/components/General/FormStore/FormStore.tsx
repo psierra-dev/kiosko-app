@@ -7,9 +7,11 @@ import Input from "../Input/Input";
 import { SFormStore } from "./style";
 import MapBox from "@lib/MapBoxReact/Map";
 import { StoreService } from "@service/store";
-import { CircularProgress } from "@mui/material";
+import { Alert, CircularProgress } from "@mui/material";
 import Link from "next/link";
 import { ButtonPrimary } from "../Button/Button";
+import Loader from "../Loader/Loader";
+import { BiLoader } from "react-icons/bi";
 
 const storeService = new StoreService();
 
@@ -22,6 +24,7 @@ const FormStore = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<TFormValues>({
     resolver: yupResolver(schemaRegisterStore),
   });
@@ -51,7 +54,7 @@ const FormStore = () => {
     } = data;
 
     try {
-      const response = await storeService.create({
+      await storeService.create({
         name: name_user,
         lastname: lastname_user,
         email,
@@ -64,6 +67,7 @@ const FormStore = () => {
         longitud: lng,
       });
       setStatus("success");
+      reset();
     } catch (error) {
       setStatus("error");
       setError(error.message);
@@ -85,7 +89,7 @@ const FormStore = () => {
             register={register}
             errors={errors.name_kiosko}
             required
-            placeholder="Los Sierras"
+            placeholder="Kiosko"
           />
 
           <Input
@@ -95,7 +99,7 @@ const FormStore = () => {
             register={register}
             errors={errors.name_user}
             required
-            placeholder="Angel"
+            placeholder="Nombre"
           />
 
           <Input
@@ -105,7 +109,7 @@ const FormStore = () => {
             register={register}
             errors={errors.lastname_user}
             required
-            placeholder="Sierra"
+            placeholder="Apellido"
           />
 
           <Input
@@ -115,7 +119,7 @@ const FormStore = () => {
             register={register}
             errors={errors.email}
             required
-            placeholder="angel@gmail.com"
+            placeholder="kiosko@gmail.com"
           />
 
           <Input
@@ -149,21 +153,27 @@ const FormStore = () => {
             type="password"
             label="Contraseña"
             name="password"
+            placeholder="********"
             register={register}
             errors={errors.password}
             required
+            isPassword
           />
 
-          <ButtonPrimary
-            disabled={status === "loading"}
-            type="submit"
-            className="btn-sb"
-          >
-            {status === "loading" ? <CircularProgress /> : "Crear tienda"}
+          <ButtonPrimary disabled={status === "loading"} type="submit">
+            {status === "loading" ? (
+              <Loader>
+                <BiLoader />
+              </Loader>
+            ) : (
+              "Crear Tienda"
+            )}
           </ButtonPrimary>
 
-          {status === "success" && <p>La tienda se creo correctamente</p>}
-          {status === "error" && <p>{error}</p>}
+          {status === "success" && (
+            <Alert severity="success">La tienda se creo correctamente</Alert>
+          )}
+          {status === "error" && <Alert severity="error">{error}</Alert>}
 
           <p>
             Ya tienes una cuenta? <Link href="/login">Inicie sesion</Link>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Input from "../Input/Input";
 import { SLoginRegister } from "./style";
 import { schemaLogin } from "@utils/yup";
@@ -9,8 +9,10 @@ import Link from "next/link";
 import { Auth } from "service/user";
 import { useRouter } from "next/router";
 import { ButtonPrimary } from "../Button/Button";
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert } from "@mui/material";
 import { WrapperFlex } from "../Wrapper/Wrapper";
+import Loader from "../Loader/Loader";
+import { BiLoader } from "react-icons/bi";
 
 const auth = new Auth();
 
@@ -24,17 +26,10 @@ export const FormLogin = () => {
     resolver: yupResolver(schemaLogin),
   });
 
-  const [state, setState] = useState({
-    loading: false,
-    ok: false,
-    error: { state: false, msg: "" },
-  });
-
+  const [status, setStatus] = useState<TStatus>("typing");
+  const [msgError, setMsgError] = useState("");
   const onSubmit: SubmitHandler<TFormValues> = async (data) => {
-    setState({
-      ...state,
-      loading: true,
-    });
+    setStatus("loading");
 
     const { email, password } = data;
 
@@ -45,11 +40,8 @@ export const FormLogin = () => {
       router.reload();
     } catch (error) {
       console.log(error);
-      setState({
-        ...state,
-        loading: false,
-        error: { state: true, msg: error },
-      });
+      setStatus("error");
+      setMsgError(error.message as string);
     }
   };
 
@@ -73,23 +65,28 @@ export const FormLogin = () => {
             type="password"
             label="Contraseña"
             name="password"
+            placeholder="********"
             register={register}
             errors={errors.password}
             required
             isPassword={true}
           />
 
-          {state.error.state && (
-            <Alert severity="error">Contraseña o email incorrecto</Alert>
-          )}
-          <ButtonPrimary disabled={state.loading} type="submit">
-            {state.loading ? <CircularProgress size="small" /> : "Login"}
+          {status === "error" && <Alert severity="error">{msgError}</Alert>}
+          <ButtonPrimary disabled={status === "loading"} type="submit">
+            {status === "loading" ? (
+              <Loader>
+                <BiLoader />
+              </Loader>
+            ) : (
+              "Login"
+            )}
           </ButtonPrimary>
         </WrapperFlex>
 
-        <small>
+        <p>
           No tenes una cuenta? <Link href="/register">Sign up</Link>
-        </small>
+        </p>
       </div>
     </SLoginRegister>
   );

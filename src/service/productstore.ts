@@ -1,8 +1,5 @@
 import { api } from "@utils/axios"
-import axios, { AxiosError } from "axios"
-type TerrorAxios = {
-    msg: string
-}
+
 
 type ApiError = {
     message: string,

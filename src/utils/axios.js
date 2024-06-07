@@ -10,7 +10,7 @@ export const setAccessToken = (_accessToken) => {
 export const setContext = (_context) => {
   context = _context;
 };
-
+console.log(process.env.NEXT_PUBLIC_API_URL, "api_url");
 export const api = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,
 });

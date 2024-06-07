@@ -1,13 +1,19 @@
+import React, { useState } from "react";
+import Link from "next/link";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegister } from "@utils/yup";
-import React, { useState } from "react";
-import { SLoginRegister } from "../FormLogin/style";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { BiLoader } from "react-icons/bi";
+
 import { Auth } from "service/user";
+
 import Input from "../Input/Input";
-import Link from "next/link";
+
 import { WrapperFlex } from "../Wrapper/Wrapper";
 import { ButtonPrimary } from "../Button/Button";
+import { SLoginRegister } from "../FormLogin/style";
+import Loader from "../Loader/Loader";
+import { Alert } from "@mui/material";
 
 const serviceAuth = new Auth();
 const FormRegister = () => {
@@ -15,13 +21,14 @@ const FormRegister = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<TFormValues>({
     resolver: yupResolver(schemaRegister),
   });
   const [status, setStatus] = useState<TStatus>("typing");
+  const [msgError, setMsgError] = useState("");
 
   const onSubmit: SubmitHandler<TFormValues> = async (data) => {
-    console.log("onSubmit: ", data);
     setStatus("loading");
     const newData: TUser = {
       name: data.name_user,
@@ -33,11 +40,11 @@ const FormRegister = () => {
 
     try {
       const response = await serviceAuth.register(newData);
-      console.log(response);
       setStatus("success");
+      reset();
     } catch (error) {
       setStatus("error");
-      console.error("Error de login: ", error);
+      setMsgError(error.message as string);
     }
   };
 
@@ -54,7 +61,7 @@ const FormRegister = () => {
             register={register}
             errors={errors.name_user}
             required
-            placeholder="Angel"
+            placeholder="Nombre"
           />
 
           <Input
@@ -64,7 +71,7 @@ const FormRegister = () => {
             register={register}
             errors={errors.lastname_user}
             required
-            placeholder="Chaves"
+            placeholder="Apellido"
           />
 
           <Input
@@ -74,25 +81,38 @@ const FormRegister = () => {
             register={register}
             errors={errors.email}
             required
-            placeholder="angelcha345@gmail.com"
+            placeholder="example345@gmail.com"
           />
 
           <Input
             type="password"
             label="Contraseña"
+            placeholder="********"
             name="password"
             register={register}
             errors={errors.password}
             required
+            isPassword
           />
 
-          <ButtonPrimary type="submit">Registrar</ButtonPrimary>
+          <ButtonPrimary disabled={status === "loading"} type="submit">
+            {status === "loading" ? (
+              <Loader>
+                <BiLoader />
+              </Loader>
+            ) : (
+              "Registrar"
+            )}
+          </ButtonPrimary>
         </WrapperFlex>
-        {status === "error" && <p>Error al registrarte</p>}
+        {status === "error" && <Alert severity="error">{msgError}</Alert>}
+        {status === "success" && (
+          <Alert severity="success">Se registro correctamente</Alert>
+        )}
 
-        <small>
+        <p>
           Ya tienes una cuenta? <Link href="/login">Login</Link>
-        </small>
+        </p>
       </div>
     </SLoginRegister>
   );
