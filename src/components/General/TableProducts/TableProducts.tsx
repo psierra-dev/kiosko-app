@@ -1,4 +1,4 @@
-import StyledTableOrder from "@components/Comercio/Order/TableOrder/style";
+import StyledTableOrder from "@components/Commerce/Order/TableOrder/style";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import Image from "next/image";
 import React from "react";

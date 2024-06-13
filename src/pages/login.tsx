@@ -1,5 +1,5 @@
-import { FormLogin } from "@components/General/FormLogin/FormLogin";
-import { getLayout } from "@components/Layouts/LoRe";
+import { FormLogin } from "@components/Auth/FormLogin/FormLogin";
+import { getLayout } from "@components/Layouts/AuthLayout";
 import React from "react";
 import { NextPageWithLayout } from "./_app";
 

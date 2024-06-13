@@ -1,8 +1,8 @@
-import { SDashboard } from "@components/Comercio/Dashboard/style";
+import { SDashboard } from "@components/Commerce/Dashboard/style";
 import { NextPageWithLayout } from "pages/_app";
 import { getLayout } from "@components/Layouts/ComercioLayout";
-import GuiaStore from "@components/Comercio/Guia/GuiaStore";
-import Hero from "@components/Comercio/Dashboard/Hero";
+import GuiaStore from "@components/Commerce/Guia/GuiaStore";
+import Hero from "@components/Commerce/Dashboard/Hero";
 import useStore from "@hooks/useStore";
 import useUser from "@hooks/useUser";
 

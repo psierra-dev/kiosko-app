@@ -2,8 +2,8 @@ import React from "react";
 import Head from "next/head";
 import { NextPageWithLayout } from "./_app";
 
-import { getLayout } from "@components/Layouts/LoRe";
-import FormStore from "@components/General/FormStore/FormStore";
+import { getLayout } from "@components/Layouts/AuthLayout";
+import FormStore from "@components/Auth/FormStore/FormStore";
 
 const RegisterCommerce: NextPageWithLayout = () => {
   return (

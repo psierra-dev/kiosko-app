@@ -87,12 +87,12 @@ export const schemaRegister = yup
 export const schemaRegisterStore = yup
   .object({
     name_user: schema.name_user,
-    Nombre_Del_Kiosko: schema.Nombre_Del_Kiosko,
-    Apellido: schema.Apellido,
-    Email: schema.Email,
-    Telefono: schema.Telefono,
-    Contraseña: schema.Contraseña,
-    Direccion: schema.Direccion,
+    name_kiosko,
+    direction,
+    phone,
+    lastname_user: schema.lastname_user,
+    email: schema.email,
+    password: schema.password,
   })
   .required();
 export const schemaUpdateStore = yup

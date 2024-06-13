@@ -18,7 +18,6 @@ export const StyledItemForm = styled.input<{
     border-radius: 0.5em;
     color: #4b566b;
     border: 1px solid ${(props) => (props.$error ? "red" : "#dae1e7")};
-
     &:focus {
       border-color:${(props) =>
         props.$error ? "red" : "rgba(255, 180, 55, 0.35)"};
@@ -37,6 +36,7 @@ export const StyledWrapperInput = styled.div`
         font-size: 0.8em;
         font-weight: bold;
         margin-bottom: 3px;
+        text-align: start;
     }
 
     .message {

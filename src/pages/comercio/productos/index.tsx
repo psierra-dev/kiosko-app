@@ -1,6 +1,6 @@
-import TableProduct from "@components/Comercio/Product/TableProduct/TableProduct";
-import CreateProduct from "@components/Comercio/Product/components/CreateProduct";
-import StyledProducts from "@components/Comercio/Product/style.edi";
+import TableProduct from "@components/Commerce/Product/TableProduct/TableProduct";
+import CreateProduct from "@components/Commerce/Product/components/CreateProduct";
+import StyledProducts from "@components/Commerce/Product/style.edi";
 import { ButtonOutline } from "@components/General/Button/Button";
 import { StyledItemForm } from "@components/General/ItemsForm/ItemsForm";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";

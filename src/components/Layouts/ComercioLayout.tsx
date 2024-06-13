@@ -1,5 +1,5 @@
-import Header from "@components/Comercio/Header/Header";
-import Nav from "@components/Comercio/Nav/Nav";
+import Header from "@components/Commerce/Header/Header";
+import Nav from "@components/Commerce/Nav/Nav";
 import React, { ReactElement } from "react";
 import { SCommerce } from "./style.cl";
 import { ProductProvider } from "@context/product";

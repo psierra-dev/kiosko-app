@@ -1,5 +1,5 @@
-import DetailOrder from "@components/Cliente/DetailOrder/DetailOrder";
-import { getLayout } from "@components/Layouts/ClienteLayout";
+import DetailOrder from "@components/Client/DetailOrder/DetailOrder";
+import { getLayout } from "@components/Layouts/ClientLayout";
 import React from "react";
 
 const OrderPage = ({ order }) => {

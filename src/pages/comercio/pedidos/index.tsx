@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
 import { getLayout } from "@components/Layouts/ComercioLayout";
 import { NextPageWithLayout } from "pages/_app";
-import StyledOrder from "@components/Comercio/Order/style";
+import StyledOrder from "@components/Commerce/Order/style";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
-import TableOrder from "@components/Comercio/Order/TableOrder/TableOrder";
+import TableOrder from "@components/Commerce/Order/TableOrder/TableOrder";
 import useOrder from "@hooks/useOrder";
 import { StyledItemForm } from "@components/General/ItemsForm/ItemsForm";
 

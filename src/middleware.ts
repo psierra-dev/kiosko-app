@@ -10,11 +10,11 @@ type JwtPayload = {
 export async function middleware(request: NextRequest) {
   const { nextUrl, cookies } = request;
   const jwt = cookies.get("token");
-  const routePublic = ["/login", "/registe", "/registercommerce"]
+  const routePublic = ["/" , "/login", "/registe", "/registercommerce"]
   const routeClient = ["/inicio", "/kiosko", "/cart", "/order/"]
  
 
-  if (
+  /*if (
     !jwt && !jwt?.value &&
     !routePublic.includes(nextUrl.pathname)
   ) return NextResponse.redirect(new URL("/login", request.url));
@@ -24,7 +24,7 @@ export async function middleware(request: NextRequest) {
     try {
       const {role, exp} = jwtDecode<JwtPayload>(jwt.value);
 
-      if(!role || !exp) return NextResponse.redirect(new URL("/login", request.url))
+      if(!role || !exp) return NextResponse.redirect(new URL("/", request.url))
       
       const now = new Date()
       const time = now.getTime().toString().slice(0, 10)
@@ -63,16 +63,16 @@ export async function middleware(request: NextRequest) {
 
   }else {
     if (!routePublic.includes(nextUrl.pathname)) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
-  }
+  }*/
 
     return NextResponse.next();
 } 
 
 export const config = {
   matcher: [
-    "/inicio",
+    "/home",
     "/comercio/:path*",
     "/",
     "/cart",

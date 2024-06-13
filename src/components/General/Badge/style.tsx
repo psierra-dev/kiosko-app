@@ -20,6 +20,7 @@ const StyledBadge = styled.div`
         align-items: center;
         justify-content: center;
         color: #fff;
+        z-index: 20;
     }
 
     .num{

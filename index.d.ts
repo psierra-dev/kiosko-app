@@ -1,5 +1,5 @@
 //User
-type TUser = {
+interface TUser  {
     id?: string;
     name: string;
     lastname: string;
@@ -10,8 +10,16 @@ type TUser = {
     verifyEmail?: boolean; 
 }
 
+interface TCustomer extends TUser {
+    direction?: string,
+    latitud: number,
+    longitud: number,
+    phone: string,
+    userId: string
+}
+
 //Store
-type TStore = {
+interface TStore  {
     id?:number;
     name?: string;
     nameStore?: string;
@@ -20,15 +28,16 @@ type TStore = {
     phone: string;
     latitud: number;
     longitud: number;
-    payment_type?: string;
-    active_type?: string;
+    payment_type?: "cash" |"mp" | "both";
+    active_type?: "cash" |"mp" | "both";
     open?: boolean;
+    favorite?: boolean;
 }
 
 
 
 //Product
-type TProduct = {
+interface TProduct  {
     id?: number;
     name: string;
     imgurl: string;
@@ -38,9 +47,11 @@ type TProduct = {
     quantity_aux?: number;
     price?: number;
     state?: boolean;
+    storeId?: number;
 }
 
-type  TProductStore = {
+
+interface  TProductStore  {
     id?: number;
     quantity?: number;
     quantity_aux?: number;
@@ -49,7 +60,9 @@ type  TProductStore = {
     info_product?: TProduct;
 }
 
-type TInfoSend = {
+
+
+interface TInfoSend  {
     id: number;
     direction: string;
     latitud: number;
@@ -57,14 +70,14 @@ type TInfoSend = {
     phone: string;
     }
 
-type TOrderProduct = {
+interface TOrderProduct  {
     id: number;
     price: number;
     quantity: number;
     product: TProduct;
 }
 
-type TOrder = {
+interface TOrder  {
     id: string;
     amount: number;
     state: "success" | "cancelled" | "pendding";
@@ -79,7 +92,7 @@ type TOrder = {
 }
 
 //Form
-type TFormValues = {
+interface TFormValues  {
     direction?: string,
     phone?: string,
     description?: string,
@@ -92,27 +105,27 @@ type TFormValues = {
     file?: FileList | string,
     }
 
-type TCreateProduct = {
+interface TCreateProduct  {
     category_name: string,
     name_product: string,
     unit_measurement: string,
     file: FileList
     }
 
-type TFormUpdateProduct = {
+interface TFormUpdateProduct  {
     Stock: string,
     Precio: string
     }
 
 
-type TFormValuesUpdateStore = {
+interface TFormValuesUpdateStore  {
     Direccion?: string,
     Telefono?: string,
     Nombre?: string,
     }
 
 //State
-type TState = {
+interface TState  {
     //userLogin
     currentUser: TUser | null,
     //Product

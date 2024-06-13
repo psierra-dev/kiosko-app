@@ -1,5 +1,5 @@
-import FormUpdate from "@components/Comercio/Edit/FormUpdate";
-import StyledEdit from "@components/Comercio/Edit/style";
+import FormUpdate from "@components/Commerce/Edit/FormUpdate";
+import StyledEdit from "@components/Commerce/Edit/style";
 import { getLayout } from "@components/Layouts/ComercioLayout";
 import useStore from "@hooks/useStore";
 import useUser from "@hooks/useUser";

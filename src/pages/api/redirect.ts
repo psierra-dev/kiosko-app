@@ -10,7 +10,7 @@ export default async function handler(
     const { code } = req.query;
     const token = req.cookies.token;
         try {
-                await api.get(`/mp/redirect?code=${code}`, {
+                await api.post(`/mp/redirect?code=${code}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `${token}`

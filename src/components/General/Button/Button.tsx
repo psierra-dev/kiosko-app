@@ -1,106 +1,31 @@
 import styled from "styled-components";
 
-const Button = styled.button<{ $width?: string }>`
-    padding: 0.625rem 1.375rem;
+export const Button = styled.button<{
+  $width?: string;
+  $variant?: string;
+  $color?: string;
+}>`
+    padding: 7px 13px;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.9375rem;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 500;
     width: ${(props) => props.$width || "100%"};
     cursor: pointer;
-
+    ${(props) =>
+      props.theme.button.colors[props.$color ?? "primary"].variants[
+        props.$variant ?? "solid"
+      ]}
 `;
 
-export const ButtonPrimary = styled(Button)`
-    background-color: ${({
-      theme: {
-        colors: { btn },
-      },
-    }) => btn.primary.bg || ""};
-    color: ${({
-      theme: {
-        colors: { btn },
-      },
-    }) => btn.primary.text || "#fff"};
-    border: none;
-
-    &:hover {
-        background-color: ${({
-          theme: {
-            colors: { btn },
-          },
-        }) => btn.primary.hover || "#fff"};
-    }
-    &:disabled {
-        background-color: ${({
-          theme: {
-            colors: { btn },
-          },
-        }) => btn.primary.disabled || "#fff"};
-    }
-`;
-
-export const ButtonOutline = styled(Button)`
-    background-color: ${({
-      theme: {
-        colors: { btn },
-      },
-    }) => btn.outline.bg || ""};
-
-    border: 1px solid ${({
-      theme: {
-        colors: { btn },
-      },
-    }) => btn.outline.border || ""};
-    color:  ${({
-      theme: {
-        colors: { btn },
-      },
-    }) => btn.outline.text || ""};
-
-    &:hover {
-        background-color: ${({
-          theme: {
-            colors: { btn },
-          },
-        }) => btn.outline.hover || "#fff"};
-    }
-    &:disabled {
-        background-color: ${({
-          theme: {
-            colors: { btn },
-          },
-        }) => btn.primary.disabled || "#fff"};
-    }
-`;
-
-export const ButtonIcon = styled(Button)`
-    background-color: ${({
-      theme: {
-        colors: { btn },
-      },
-    }) => btn.icon.bg || ""};
-
-    color:  ${({
-      theme: {
-        colors: { btn },
-      },
-    }) => btn.icon.text || ""};
-    border: none;
-    padding: 0.1em;
-    &:hover {
-        background-color: ${({
-          theme: {
-            colors: { btn },
-          },
-        }) => btn.icon.hover || "#fff"};
-        color: ${({
-          theme: {
-            colors: { btn },
-          },
-        }) => btn.icon.hovertext || "#fff"};
-    }
-    
+export const ButtonIcon = styled.button<{ $color?: string; $size?: string }>`
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  font-size: ${(props) => props.$size || "16px"};
+  color: ${(props) => props.$color || props.theme.colors.text};
+  border: none;
+  cursor: pointer;
 `;

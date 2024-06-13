@@ -1,6 +1,6 @@
-import FormStateOrder from "@components/Comercio/DetailOrder/FormStateOrder/FormStateOrder";
-import TableProducts from "@components/Comercio/DetailOrder/TableProducts/TableProducts";
-import { StyledDetailOrder } from "@components/Comercio/DetailOrder/style.detailorder";
+import FormStateOrder from "@components/Commerce/DetailOrder/FormStateOrder/FormStateOrder";
+import TableProducts from "@components/Commerce/DetailOrder/TableProducts/TableProducts";
+import { StyledDetailOrder } from "@components/Commerce/DetailOrder/style.detailorder";
 import CardInfo from "@components/General/CardInfo/CardInfo";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import { getLayout } from "@components/Layouts/ComercioLayout";

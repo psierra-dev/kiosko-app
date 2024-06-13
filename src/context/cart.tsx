@@ -29,6 +29,7 @@ export function ProductCartProvider({ children }) {
     dispatch({ type: "DELETE_PRODUCT", payload: id });
   };
   const addProduct = (product: TProduct) => {
+    console.log(product, "product");
     dispatch({ type: "ADD_PRODUCT", payload: product });
   };
   const updatedPrice = (id: number, quantity: number) => {

@@ -1,10 +1,18 @@
+import React from "react";
 import StyledBadge from "./style";
 
-const Badge = ({ children, ...prop }) => {
+interface Props {
+  children: React.ReactNode;
+  onClick: () => void;
+  count: number;
+  className?: string;
+}
+
+const Badge = ({ children, count, onClick, className }: Props) => {
   return (
-    <StyledBadge onClick={prop.onOpen}>
-      <div onClick={prop.onClick} className="container-num">
-        <span className="num">{prop.n}</span>
+    <StyledBadge onClick={onClick} className={className}>
+      <div className="container-num">
+        <span className="num">{count}</span>
       </div>
       <>{children}</>
     </StyledBadge>

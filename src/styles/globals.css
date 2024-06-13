@@ -119,12 +119,14 @@ main {
 }
 
 .main_client {
-  margin-top: 53px;
+  margin-top: 42px;
+  gap: 20px;
 }
 
 @media screen and (min-width: 770px) {
   .main_client {
-    margin-top: 64px;
+    margin-top: 50px;
+    gap: 30px;
   }
 }
 
