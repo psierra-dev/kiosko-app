@@ -52,7 +52,7 @@ const StyledInicio = styled.div`
 
     &::after {
         position: absolute;
-        top: 10%;
+        top: 15%;
         right: -2px;
         z-index: -20;
         content: '';
@@ -64,7 +64,7 @@ const StyledInicio = styled.div`
     }
     &::before {
         position: absolute;
-        top: 10%;
+        top: 15%;
         left: -2px;
         z-index: -20;
         content: '';

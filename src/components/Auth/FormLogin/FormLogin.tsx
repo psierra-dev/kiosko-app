@@ -39,8 +39,7 @@ export const FormLogin = () => {
       });
       document.cookie = `token=${response.token}`;
       document.cookie = `role=${response.role}`;
-      //router.reload();
-      router.push("/home");
+      router.reload();
     } catch (error) {
       console.log(error);
       setStatus("error");

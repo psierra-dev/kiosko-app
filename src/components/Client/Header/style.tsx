@@ -39,6 +39,8 @@ export const StyledHeader = styled.header`
     width: fit-content;
     height: fit-content;
     color: ${({ theme: { colors } }) => colors.text};
+    font-size: 15px;
+    background: transparent;
   }
   
     @media only screen and (min-width: 481px) {

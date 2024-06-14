@@ -9,7 +9,7 @@ const HomePage = ({ stores_found, favorite_stores }) => {
   return (
     <>
       <Container>
-        <SubTitle>Productos Ofrecidos</SubTitle>
+        <SubTitle>Productos Disponibles</SubTitle>
 
         <Categories />
       </Container>

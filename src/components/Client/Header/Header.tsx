@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useCustomer from "@hooks/useCustomer";
-import { Drawer, Modal } from "@mui/material";
+import { Drawer, Modal, Skeleton } from "@mui/material";
 
 import socket from "@lib/socket";
 
@@ -154,7 +154,7 @@ const HeaderClient = () => {
           {!isLoading ? (
             data && <AvatarC name={data?.name} lastname={data?.lastname} />
           ) : (
-            <span>Loading</span>
+            <Skeleton variant="circular" height={"1.5em"} width={"1.5em"} />
           )}
         </div>
       </WrapperFlex>

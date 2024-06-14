@@ -6,7 +6,7 @@ import ListStores from "../components/ListStores";
 
 const StyledFavoriteStores = styled.section`
     padding: 8px 10px;
-    min-height: 150px;
+    min-height: 270px;
     background-color: ${(props) => props.theme.colors["primary-100"]};
     .not-stores {
         justify-content: center;
