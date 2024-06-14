@@ -36,7 +36,7 @@ const CartPage = () => {
   }, [storeId]);
   return (
     <WrapperFlex>
-      <HeaderStore name="Los Sierras" />
+      <HeaderStore name="Cart" />
 
       <Container>
         {cartProducts.length > 0 ? (
