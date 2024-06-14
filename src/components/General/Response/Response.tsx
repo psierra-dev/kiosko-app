@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { MdCancel, MdCheckCircle } from "react-icons/md";
 import styled from "styled-components";
-import { ButtonPrimary } from "../Button/Button";
+import { Button } from "../Button/Button";
 
 const ResponseStyle = styled.div`
     padding: 1rem;
@@ -56,9 +56,9 @@ const Response = ({ state }: { state: TStatus }) => {
         </>
       )}
 
-      <ButtonPrimary onClick={() => router.replace("/comercio")}>
+      <Button onClick={() => router.replace("/comercio")}>
         Volver tu panel{" "}
-      </ButtonPrimary>
+      </Button>
     </ResponseStyle>
   );
 };
