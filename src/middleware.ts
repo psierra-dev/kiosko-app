@@ -11,10 +11,10 @@ export async function middleware(request: NextRequest) {
   const { nextUrl, cookies } = request;
   const jwt = cookies.get("token");
   const routePublic = ["/" , "/login", "/registe", "/registercommerce"]
-  const routeClient = ["/inicio", "/kiosko", "/cart", "/order/"]
+  const routeClient = ["/home", "/kiosko", "/cart", "/order/"]
  
 
-  /*if (
+  if (
     !jwt && !jwt?.value &&
     !routePublic.includes(nextUrl.pathname)
   ) return NextResponse.redirect(new URL("/login", request.url));
@@ -47,7 +47,7 @@ export async function middleware(request: NextRequest) {
           && !nextUrl.pathname.startsWith("/api")
         ) {
           console.log("aqui client", nextUrl.pathname)
-          return NextResponse.redirect(new URL("/inicio", request.url));
+          return NextResponse.redirect(new URL("/home", request.url));
         }
       } else {
         if (
@@ -65,7 +65,7 @@ export async function middleware(request: NextRequest) {
     if (!routePublic.includes(nextUrl.pathname)) {
       return NextResponse.redirect(new URL("/", request.url));
     }
-  }*/
+  }
 
     return NextResponse.next();
 } 

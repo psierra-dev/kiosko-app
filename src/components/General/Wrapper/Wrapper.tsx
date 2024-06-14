@@ -26,12 +26,12 @@ export const WrapperFlex = styled.div<{
     margin: ${(props) => props.$margin || null};
     padding: ${(props) => props.$padding || null};
     width: ${(props) => props.$width || "100%"};
-    height: ${(props) => props.$height || "100%"};
+    height: ${(props) => props.$height || "fit-content"};
     max-width: ${(props) => props.$maxwidth || null};
     overflow: ${(props) => props.$overflow || null};
     box-shadow: ${(props) => props.$boxshadow || null};
     border-radius: ${(props) => props.$borderradius || null};
-    background-color: ${(props) => props.$bg || props.theme.colors.main};;
+    background-color: ${(props) => props.$bg || "transparent"};;
     color: ${(props) => props.$color || props.theme.colors.text};;
     
 `;

@@ -1,7 +1,4 @@
-import {
-  ButtonOutline,
-  ButtonPrimary,
-} from "@components/General/Button/Button";
+import { Button } from "@components/General/Button/Button";
 import ImageLoader from "@components/General/ImageLoader.tsx/ImageLoader";
 import Input from "@components/General/Input/Input";
 import { StyledWrapperInput } from "@components/General/ItemsForm/ItemsForm";
@@ -10,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import MapBox from "@lib/MapBoxReact/Map";
 import { StoreService } from "@service/store";
 import { schemaUpdateStore } from "@utils/yup";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 const storeService = new StoreService();
@@ -45,6 +43,8 @@ const FormUpdate = ({ store, mutate }: Prop) => {
     file: store.imgurl,
     phone: store.phone,
   });
+  const router = useRouter();
+
   const handleLocation = ({
     latitud,
     longitud,
@@ -98,8 +98,17 @@ const FormUpdate = ({ store, mutate }: Prop) => {
         <h4>Actualizar tienda</h4>
 
         <WrapperFlex $flexdirection="row" $width="fit-content" $gap="0.5rem">
-          <ButtonOutline>Descartar</ButtonOutline>
-          <ButtonPrimary type="submit">Actualizar</ButtonPrimary>
+          <Button
+            $variant="bordered"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              router.push("/comercio");
+            }}
+          >
+            Descartar
+          </Button>
+          <Button type="submit">Actualizar</Button>
         </WrapperFlex>
       </WrapperFlex>
 

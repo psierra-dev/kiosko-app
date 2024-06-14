@@ -16,7 +16,6 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  console.log(token, "tokeeen");
   if (token) {
     config.headers.Authorization = `${token}`;
   }

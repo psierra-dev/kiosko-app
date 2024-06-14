@@ -1,9 +1,12 @@
-"use client";
 import { Skeleton } from "@mui/material";
 import style from "./guia.module.css";
 import CardGuia from "./CardGuia";
+import useUser from "@hooks/useUser";
+import useStore from "@hooks/useStore";
 
-const GuiaStore = ({ store }: { store: TStore }) => {
+const GuiaStore = () => {
+  const { data, error: errorUser } = useUser();
+  const { store, isLoading, error } = useStore(data?.id, "seller");
   return (
     <section className={style.container}>
       <h2>Guia de tienda</h2>

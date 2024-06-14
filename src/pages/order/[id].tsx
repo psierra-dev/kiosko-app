@@ -3,7 +3,7 @@ import { getLayout } from "@components/Layouts/ClientLayout";
 import React from "react";
 
 const OrderPage = ({ order }) => {
-  return <DetailOrder order={order} />;
+  return <DetailOrder key={order.id} order={order} />;
 };
 
 export const getServerSideProps = async (context) => {

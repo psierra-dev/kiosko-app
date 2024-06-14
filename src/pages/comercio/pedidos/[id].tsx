@@ -1,6 +1,7 @@
 import FormStateOrder from "@components/Commerce/DetailOrder/FormStateOrder/FormStateOrder";
 import TableProducts from "@components/Commerce/DetailOrder/TableProducts/TableProducts";
 import { StyledDetailOrder } from "@components/Commerce/DetailOrder/style.detailorder";
+import BadgeStatus from "@components/General/BadgeStatus/BadgeStatus";
 import CardInfo from "@components/General/CardInfo/CardInfo";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import { getLayout } from "@components/Layouts/ComercioLayout";
@@ -9,7 +10,7 @@ import MapBox from "@lib/MapBoxReact/Map";
 import time from "@utils/time";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
-import { BiHomeAlt, BiPhone } from "react-icons/bi";
+import { BiHomeAlt, BiPhone, BiX } from "react-icons/bi";
 import { FiClock, FiUser } from "react-icons/fi";
 import { MdAttachMoney, MdOutlineDeliveryDining } from "react-icons/md";
 
@@ -37,6 +38,15 @@ const DetailOrderPage = () => {
     <StyledDetailOrder>
       <WrapperFlex $flexdirection="row" $justifycontent="space-between">
         <h2>Order #{order?.id.slice(0, 6)}</h2>
+
+        {order.state === "cancelled" && (
+          <div className="state">
+            <BadgeStatus bg={"#FFE0DB"} color={"#B81800"}>
+              {order.state}
+              <BiX />
+            </BadgeStatus>
+          </div>
+        )}
 
         <WrapperFlex
           $gap="0.2rem"
@@ -134,18 +144,21 @@ const DetailOrderPage = () => {
             </div>
           </div>
         </div>
-        <div className="container-order-status">
-          <div className="order-status">
-            <h4>Estado</h4>
 
-            {order && (
-              <FormStateOrder
-                initialPaid={order.paid}
-                initialStateOrder={order.state}
-                orderId={order.id}
-              />
-            )}
-          </div>
+        <div className="container-order-status">
+          {order.state !== "cancelled" && (
+            <div className="order-status">
+              <h4>Estado</h4>
+
+              {order && (
+                <FormStateOrder
+                  initialPaid={order.paid}
+                  initialStateOrder={order.state}
+                  orderId={order.id}
+                />
+              )}
+            </div>
+          )}
         </div>
       </WrapperFlex>
     </StyledDetailOrder>

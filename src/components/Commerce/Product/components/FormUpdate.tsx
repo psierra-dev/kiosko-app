@@ -1,9 +1,10 @@
+import styled from "styled-components";
 import BtnQuantity from "@components/Client/Cart/components/BtnQuantity";
-import { ButtonPrimary } from "@components/General/Button/Button";
+
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import { Switch } from "@mui/material";
 import { BiX } from "react-icons/bi";
-import styled from "styled-components";
+import { Button } from "@components/General/Button/Button";
 
 const Form = styled.div`
     margin: 1em;
@@ -142,9 +143,9 @@ const FormUpdate = ({
           </span>
         </div>
       </div>
-      <ButtonPrimary onClick={onSubmit} disabled={!isChange}>
+      <Button onClick={onSubmit} disabled={!isChange}>
         Actualizar
-      </ButtonPrimary>
+      </Button>
     </Form>
   );
 };

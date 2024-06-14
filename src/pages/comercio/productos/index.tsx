@@ -1,8 +1,9 @@
 import TableProduct from "@components/Commerce/Product/TableProduct/TableProduct";
 import CreateProduct from "@components/Commerce/Product/components/CreateProduct";
 import StyledProducts from "@components/Commerce/Product/style.edi";
-import { ButtonOutline } from "@components/General/Button/Button";
+import { Button } from "@components/General/Button/Button";
 import { StyledItemForm } from "@components/General/ItemsForm/ItemsForm";
+import NotInventory from "@components/General/NotInventory";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import WrapperModal from "@components/General/WrapperModal/WrapperModal";
 import { getLayout } from "@components/Layouts/ComercioLayout";
@@ -43,12 +44,9 @@ const ProductsPage: NextPageWithLayout = () => {
       >
         <h3>Inventario</h3>
 
-        <ButtonOutline
-          $width="fit-content"
-          onClick={() => setModalCreate(true)}
-        >
+        <Button $width="fit-content" onClick={() => setModalCreate(true)}>
           <MdCreate /> Crear
-        </ButtonOutline>
+        </Button>
       </WrapperFlex>
 
       <WrapperFlex
@@ -91,7 +89,15 @@ const ProductsPage: NextPageWithLayout = () => {
       </WrapperFlex>
 
       <WrapperFlex $flexdirection="" $overflow="auto">
-        <TableProduct products={productFilter} />
+        {productFilter?.length > 0 ? (
+          <TableProduct products={productFilter} />
+        ) : (
+          <NotInventory
+            icon=""
+            title="No hay productos"
+            description="Cree sus productos"
+          />
+        )}
       </WrapperFlex>
       <Modal
         open={modalCreate}

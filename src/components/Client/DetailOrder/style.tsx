@@ -22,6 +22,7 @@ const DetailOrderStyle = styled.section`
     }
 
     .header h4 {
+        color: white;
         font-size: 0.9rem;
         margin-bottom: 0.3em;
     }

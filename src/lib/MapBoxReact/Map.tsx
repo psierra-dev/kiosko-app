@@ -89,7 +89,7 @@ const MapBox = ({
   const pins = useMemo(
     () =>
       locationMarket !== undefined &&
-      locationMarket.length > 0 &&
+      locationMarket?.length > 0 &&
       locationMarket?.map((marker, index) => (
         <Marker
           key={`marker-${index}`}
@@ -106,7 +106,7 @@ const MapBox = ({
   //Geolocation
   useEffect(() => {
     console.log(initialLocation, "initial");
-    if (!initialLocation || !initialLocation.latitud) {
+    if (!initialLocation || !initialLocation?.latitud) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
@@ -154,7 +154,7 @@ const MapBox = ({
           trackUserLocation={true}
         />
         {type === "market" && pins}
-        {type === "drag" && market.latitud && market.longitud && (
+        {type === "drag" && market?.latitud && market?.longitud && (
           <MarkerDrag
             initialLocation={market}
             handleLocation={handleLocation}

@@ -7,13 +7,14 @@ import useCurrentSWR from "@hooks/useCurrentSWR";
 import ImageLoader from "@components/General/ImageLoader.tsx/ImageLoader";
 import ProducStoreService from "@service/productstore";
 import Select from "@components/General/Select/Select";
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert } from "@mui/material";
 import useProductStore from "@hooks/useProductStore";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
-import { ButtonPrimary } from "@components/General/Button/Button";
+
 import { StyledWrapperInput } from "@components/General/ItemsForm/ItemsForm";
 import Loader from "@components/General/Loader/Loader";
 import { BiLoader } from "react-icons/bi";
+import { Button } from "@components/General/Button/Button";
 
 const prouctStoreService = new ProducStoreService();
 
@@ -30,8 +31,9 @@ const CreateProduct = () => {
   });
 
   const { mutate } = useProductStore();
-  const { data } = useCurrentSWR("/category");
+  const { data: categories } = useCurrentSWR("/category");
   console.log("erros", errors);
+  console.log(categories);
   const [selectedImage, setSelectedImage] = useState("");
   const [file, setFile] = useState<File | null>(null);
 
@@ -89,15 +91,14 @@ const CreateProduct = () => {
 
       <WrapperFlex $flexdirection="row" $gap="1rem">
         <WrapperFlex $width="fit-content" $gap=".5rem">
-          {data && data.length > 0 && (
+          {categories && categories.length > 0 && (
             <Select
               register={register}
               errors={errors.category_name}
               label="Categoria"
               name="category_name"
               required
-              options={data.map((e, i) => {
-                if (i === 0) return "-";
+              options={categories.map((e, i) => {
                 return e.name;
               })}
             />
@@ -115,15 +116,15 @@ const CreateProduct = () => {
         </WrapperFlex>
       </WrapperFlex>
 
-      <ButtonPrimary disabled={status === "loading"} type="submit">
+      <Button disabled={status === "loading"} type="submit">
         {status === "loading" ? (
-          <Loader>
+          <Loader size="sm">
             <BiLoader />
           </Loader>
         ) : (
           "Crear"
         )}
-      </ButtonPrimary>
+      </Button>
       {status === "success" && (
         <Alert severity="success">El producto se creo correctamente</Alert>
       )}

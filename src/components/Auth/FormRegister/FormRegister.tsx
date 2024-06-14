@@ -52,7 +52,13 @@ const FormRegister = () => {
   };
 
   return (
-    <WrapperFlex $width="100%" $padding="20px" $borderradius="10px" $gap="13px">
+    <WrapperFlex
+      $bg="white"
+      $width="100%"
+      $padding="20px"
+      $borderradius="10px"
+      $gap="13px"
+    >
       <h3>Registrar Cliente</h3>
 
       <WrapperFlex as="form" $gap="1.4em" onSubmit={handleSubmit(onSubmit)}>

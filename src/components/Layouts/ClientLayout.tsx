@@ -10,8 +10,7 @@ type Prop = {
 };
 
 const ClientLayout = ({ children }: Prop) => {
-  const { data, error } = useCustomer();
-  console.log(error);
+  const { data } = useCustomer();
   useConnectSocket(data?.userId);
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DetailOrderStyle from "./style";
 import { MdAccessTime, MdOutlinePaid } from "react-icons/md";
 import { PayService } from "@service/pay";
@@ -21,6 +21,11 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
   const router = useRouter();
   const dateOrder = time(order.date);
   const [status, setStatus] = useState<TStatus>("typing");
+  const [state, setState] = useState(order?.state);
+
+  useEffect(() => {
+    setState(order.state);
+  }, [order.state]);
 
   const handlePay = async () => {
     setStatus("loading");
@@ -42,7 +47,7 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
         order.id,
         order.customer.id
       );
-      console.log("response: ", response);
+
       router.push(response.data.init_point);
     } catch (error) {
       setStatus("error");
@@ -50,7 +55,7 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
     }
   };
 
-  const hancleCancel = async () => {
+  const handleCancel = async () => {
     setStatus("loading");
     try {
       await orderService.update({ state: "cancelled" }, order.id);
@@ -61,7 +66,7 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
         order.store.id
       );
 
-      router.reload();
+      setState("cancelled");
     } catch (error) {
       console.log(error);
       setStatus("error");
@@ -75,10 +80,10 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
           <WrapperFlex $width="fit-content">
             <h4>N° Orden: {n_order}</h4>
             <WrapperFlex $flexdirection="row" $gap="0.5rem">
-              <p className={`state-order ${order.state}`}>
-                {order.state === "pendding" && "Pendiente"}
-                {order.state === "cancelled" && "Cancelada"}
-                {order.state === "success" && "Aprobada"}
+              <p className={`state-order ${state}`}>
+                {state === "pendding" && "Pendiente"}
+                {state === "cancelled" && "Cancelada"}
+                {state === "success" && "Aprobada"}
               </p>
               <p
                 className={`state-paid ${order.paid ? "success" : "cancelled"}`}
@@ -88,28 +93,26 @@ const DetailOrder = ({ order }: { order: TOrder }) => {
             </WrapperFlex>
           </WrapperFlex>
 
-          {order.paymentType === "mp" &&
-            order.state === "success" &&
-            !order.paid && (
-              <button
-                disabled={status === "loading"}
-                className="btn-mp"
-                onClick={handlePay}
-              >
-                {status === "loading" ? (
-                  <Loader>
-                    <BiLoader />
-                  </Loader>
-                ) : (
-                  "Pagar"
-                )}
-              </button>
-            )}
-          {order.state === "pendding" && (
+          {order.paymentType === "mp" && state === "success" && !order.paid && (
+            <button
+              disabled={status === "loading"}
+              className="btn-mp"
+              onClick={handlePay}
+            >
+              {status === "loading" ? (
+                <Loader>
+                  <BiLoader />
+                </Loader>
+              ) : (
+                "Pagar"
+              )}
+            </button>
+          )}
+          {state === "pendding" && (
             <button
               disabled={status === "loading"}
               className="btn-cancel"
-              onClick={hancleCancel}
+              onClick={handleCancel}
             >
               {status === "loading" ? (
                 <CircularProgress size="small" />

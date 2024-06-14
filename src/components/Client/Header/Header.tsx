@@ -61,8 +61,6 @@ const HeaderClient = () => {
   const [modalLocation, setModalLocation] = useState(false);
   const router = useRouter();
 
-  console.log(data, "customer");
-
   const [drawer, setDrawer] = useState(false);
   const [noti, setNoti] = useState(0);
 

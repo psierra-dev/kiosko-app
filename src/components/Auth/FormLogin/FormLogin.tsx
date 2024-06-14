@@ -49,7 +49,13 @@ export const FormLogin = () => {
   };
 
   return (
-    <WrapperFlex $width="100%" $padding="20px" $borderradius="10px" $gap="13px">
+    <WrapperFlex
+      $bg="white"
+      $width="100%"
+      $padding="20px"
+      $borderradius="10px"
+      $gap="13px"
+    >
       <h3 className="">Inicie Sesion</h3>
 
       <WrapperFlex $gap="1.4em" as="form" onSubmit={handleSubmit(onSubmit)}>

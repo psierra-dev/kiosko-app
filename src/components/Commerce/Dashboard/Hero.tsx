@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 import { useRouter } from "next/router";
 import useUser from "@hooks/useUser";
-import { ButtonPrimary } from "@components/General/Button/Button";
+import { Button } from "@components/General/Button/Button";
 
 const HeroStyle = styled.section`
     width: 100%;
@@ -60,18 +60,15 @@ const Hero = () => {
   return (
     <HeroStyle>
       <div className="hero-con1">
-        {isLoading ? (
+        {isLoading || !store ? (
           <Skeleton height={40} width={90} />
         ) : (
           <h2>{store?.name}</h2>
         )}
         <p>Bienvenido al panel de control de tu tienda</p>
-        <ButtonPrimary
-          $width="200px"
-          onClick={() => router.push("/comercio/editar")}
-        >
+        <Button $width="200px" onClick={() => router.push("/comercio/editar")}>
           Editar tienda
-        </ButtonPrimary>
+        </Button>
       </div>
 
       <div className="hero-con2">

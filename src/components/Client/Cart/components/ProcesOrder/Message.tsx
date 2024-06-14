@@ -1,9 +1,6 @@
-import {
-  ButtonOutline,
-  ButtonPrimary,
-} from "@components/General/Button/Button";
 import React, { ReactNode } from "react";
 import StyledMessage from "./style.msg";
+import { Button } from "@components/General/Button/Button";
 
 interface Prop {
   children: ReactNode;
@@ -19,12 +16,12 @@ const MessageRes = ({ children, title, onClick, onBack }: Prop) => {
       {children}
 
       <div className="container-btn">
-        <ButtonOutline $width="50%" onClick={onBack}>
+        <Button $variant="bordered" $width="50%" onClick={onBack}>
           Volver
-        </ButtonOutline>
-        <ButtonPrimary $width="50%" onClick={onClick}>
+        </Button>
+        <Button $width="50%" onClick={onClick}>
           Detalle
-        </ButtonPrimary>
+        </Button>
       </div>
       <button></button>
     </StyledMessage>

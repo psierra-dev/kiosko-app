@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 import FavoriteButton from "@components/General/FeedBack/FavoriteButton";
-import { MdOutlineHideImage } from "react-icons/md";
+import { MdOutlineHideImage, MdStorefront } from "react-icons/md";
 
 const StyledCardStore = styled.div`
     margin-right: 10px;
@@ -12,7 +12,7 @@ const StyledCardStore = styled.div`
     border: 1px solid #e8e8e8;
     background-color: ${({ theme: { colors } }) => colors.main};
     color: ${({ theme: { colors } }) => colors.text};
-
+    max-width: 300px;
     .conimg {
         width: 100%;
         height: 90px;
@@ -34,7 +34,7 @@ const StyledCardStore = styled.div`
 
     .info {
         margin-top: 0.3rem;
-        padding: 0.5rem;
+        padding: 0.3rem;
     }
 
     .info .info-title {
@@ -46,8 +46,8 @@ const StyledCardStore = styled.div`
     }
     .info .info-title h5 {
         margin-bottom: 3px;
-        font-size: 0.875rem;
-        font-weight: bold;
+        font-size: 13px;
+        font-weight: 500;
 
         &:hover {
           color: ${(props) => props.theme.primary};
@@ -110,7 +110,7 @@ const CardStore = ({
             <Image src={img_url} width={200} height={150} alt="imgurl" />
           ) : (
             <span className="not-store">
-              <MdOutlineHideImage />
+              <MdStorefront />
             </span>
           )}
         </div>

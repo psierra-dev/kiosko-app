@@ -8,10 +8,13 @@ import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import price from "@assets/img-price.png";
 import delivery from "@assets/img-delivery.png";
 import mp from "@assets/img-mp.png";
+import phone from "@assets/sho-phone.png";
+import desktop from "@assets/cap-desktop.png";
 import Categories from "@components/General/Categories";
 import Container from "@components/General/Container";
 import Logo from "@components/General/Logo";
 import { SubTitle } from "@components/General/Text";
+import Footer from "@components/General/Footer/Footer";
 
 const StyledInicio = styled.div`
     gap: 16px;
@@ -49,7 +52,7 @@ const StyledInicio = styled.div`
 
     &::after {
         position: absolute;
-        top: 20%;
+        top: 10%;
         right: -2px;
         z-index: -20;
         content: '';
@@ -61,7 +64,7 @@ const StyledInicio = styled.div`
     }
     &::before {
         position: absolute;
-        top: 20%;
+        top: 10%;
         left: -2px;
         z-index: -20;
         content: '';
@@ -99,11 +102,25 @@ const StyledInicio = styled.div`
         background-color: #fdf2d9;
         align-items: center;
         text-align: center;
+        color: ${({ theme: { colors } }) => colors.text};
+
+        & p {
+          color: gray;
+          font-size: 13px;
+        }
+
+        & figure {
+          width: 85%;
+          margin: auto;
+        }
+        & img {
+          width: 100%;
+          height: auto;
+        }
     }
 
-    .info-web .container-form {
-      width: 100%;
-      max-width: 500px;
+    .img-desktop {
+      display: none;
     }
 
     .container-categories {
@@ -151,6 +168,8 @@ const StyledInicio = styled.div`
       & header, .container-categories, .container-info  {
         padding: 10px 20px;
       }
+
+      
     
     }
     @media only screen and (min-width: 769px) {
@@ -164,6 +183,19 @@ const StyledInicio = styled.div`
         .container-info {
             flex-direction: row;
             justify-content: space-between;
+        }
+
+        .info-web p {
+          font-size: 14px;
+        }
+      .info-web h4 {
+          font-size: 18px;
+        }
+        .img-phone {
+          display: none;
+        }
+        .img-desktop {
+        display: block;
         }
     }
     @media only screen and (min-width: 1025px) {
@@ -185,6 +217,11 @@ const StyledInicio = styled.div`
             color: gray;
             font-size: 20px;
             font-weight: 500;
+        }
+
+        
+      .info-web h4 {
+          font-size: 20px;
         }
     }
 `;
@@ -218,27 +255,28 @@ const Inicio = () => {
           <Logo size="lg" className="logo" />
 
           <div>
-            <h3>Todo lo que buscas en el dia</h3>
-            <h5>Encuentre los productos de tu kiosko favortito</h5>
+            <h3>Todo lo que buscas en el día</h3>
+            <h5>Encuentra los productos de tu kiosco favorito</h5>
           </div>
         </section>
         {
           //category
         }
         <Container>
-          <SubTitle>Productos Ofrecidos</SubTitle>
+          <SubTitle>Productos Disponibles</SubTitle>
 
           <Categories />
         </Container>
 
         <section className="info-web">
           <div>
-            <h3>Todo desde la web</h3>
-            <h5>Inicie sesion o create una cuenta</h5>
+            <h4>Todo desde la web</h4>
+            <p>Conéctate o crea una cuenta</p>
           </div>
 
           <figure>
-            <img src="" alt="" />
+            <Image src={phone} alt="phone" className="img-phone" />
+            <Image src={desktop} alt="desktop" className="img-desktop" />
           </figure>
         </section>
 
@@ -271,7 +309,7 @@ const Inicio = () => {
           </div>
         </section>
       </main>
-      <footer></footer>
+      <Footer />
     </StyledInicio>
   );
 };

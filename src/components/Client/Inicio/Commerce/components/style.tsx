@@ -10,6 +10,7 @@ export const SCardKiosko = styled.div.attrs(({ props }: { props: Prop }) => ({
   margin-right: 10px;
   min-width: 220px;
   border-radius: 10px;
+  max-width: 300px;
   
   .container {
     border-radius: 10px;
@@ -95,6 +96,7 @@ export const SCardKiosko = styled.div.attrs(({ props }: { props: Prop }) => ({
   }
   @media only screen and (min-width: 768px) {
     width: 80%;
+    
   
   }
   @media only screen and (min-width: 1024px) {

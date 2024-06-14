@@ -4,6 +4,9 @@ export const StyledDetailOrder = styled.div`
   height: 100%;
   padding: 0 1rem;
   padding-top: 0.5rem;
+  position: relative;
+
+ 
 
   .container-table-product {
     width: 100%;

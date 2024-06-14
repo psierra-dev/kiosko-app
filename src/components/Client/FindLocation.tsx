@@ -60,6 +60,7 @@ const FindLocationStyle = styled.section`
 
 const FindLocation = ({ onCloseModal }: { onCloseModal: () => void }) => {
   const { data, isLoading } = useCustomer();
+  console.log(data, "data");
 
   const [direction, setDirection] = useState(() =>
     !isLoading && data && data?.direction ? data?.direction : ""
@@ -114,7 +115,7 @@ const FindLocation = ({ onCloseModal }: { onCloseModal: () => void }) => {
         <BiXCircle />
       </button>
 
-      {true && (
+      {isLoading && (
         <div className="loading">
           <Loader>
             <BiLoader />
@@ -126,8 +127,8 @@ const FindLocation = ({ onCloseModal }: { onCloseModal: () => void }) => {
           <MapBox
             handleLocation={(lnglat) =>
               setGeolocation({
-                latitud: lnglat.latitud,
-                longitud: lnglat.longitud,
+                latitud: lnglat?.latitud,
+                longitud: lnglat?.longitud,
               })
             }
             initialLocation={{

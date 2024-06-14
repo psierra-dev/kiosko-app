@@ -5,52 +5,6 @@ import Container from "@components/General/Container";
 import { SubTitle } from "@components/General/Text";
 import Categories from "@components/General/Categories";
 
-const STORES = [
-  {
-    id: 1,
-    name: "Tienda A",
-    nameStore: "Nombre de la Tienda A",
-    imgurl:
-      "https://images.pexels.com/photos/916446/pexels-photo-916446.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    direction: "Dirección de la Tienda A",
-    phone: "123-456-7890",
-    latitud: 40.7128,
-    longitud: -74.006,
-    payment_type: "both",
-    active_type: "both",
-    open: true,
-    favorite: true,
-  },
-  {
-    id: 2,
-    name: "Tienda B",
-    nameStore: "Nombre de la Tienda B",
-    imgurl: "",
-    direction: "Dirección de la Tienda B",
-    phone: "987-654-3210",
-    latitud: 34.0522,
-    longitud: -118.2437,
-    payment_type: "mp",
-    active_type: "mp",
-    open: false,
-    favorite: false,
-  },
-  {
-    id: 3,
-    name: "Tienda C",
-    nameStore: "Nombre de la Tienda C",
-    imgurl: "",
-    direction: "Dirección de la Tienda C",
-    phone: "555-555-5555",
-    latitud: 51.5074,
-    longitud: -0.1278,
-    payment_type: "cash",
-    active_type: "cash",
-    open: true,
-    favorite: false,
-  },
-];
-
 const HomePage = ({ stores_found, favorite_stores }) => {
   return (
     <>
@@ -86,7 +40,7 @@ export const getServerSideProps = async (context) => {
 
   const stores = await response.json();
 
-  return { props: { stores_found: stores, favorite_stores: STORES } };
+  return { props: { stores_found: stores, favorite_stores: [] } };
 };
 
 HomePage.getLayout = getLayout;

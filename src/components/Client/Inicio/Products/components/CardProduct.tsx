@@ -53,7 +53,7 @@ export const CardProduct = ({
               <MdOutlineRemoveShoppingCart /> Delete
             </button>
           ) : (
-            <button onClick={() => addToCart(product)}>
+            <button onClick={() => addToCart({ ...product, quantity_aux: 0 })}>
               <IoCartOutline /> Add
             </button>
           )}

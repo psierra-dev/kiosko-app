@@ -14,9 +14,9 @@ type Prop = {
 };
 
 const ComercioLayout = ({ children }: Prop) => {
-  const { data } = useUser();
-  const { store } = useStore(data?.id, "seller");
-  useConnectSocket(store?.id);
+  //const { data } = useUser();
+  //const { store } = useStore(data?.id, "seller");
+  //useConnectSocket(store?.id);
 
   return (
     <ProductProvider>

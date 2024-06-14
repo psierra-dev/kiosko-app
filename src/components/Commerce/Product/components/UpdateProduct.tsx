@@ -1,5 +1,5 @@
 import BtnQuantity from "@components/Client/Cart/components/BtnQuantity";
-import { ButtonPrimary } from "@components/General/Button/Button";
+import { Button } from "@components/General/Button/Button";
 import ImageLoader from "@components/General/ImageLoader.tsx/ImageLoader";
 import {
   StyledItemForm,
@@ -9,7 +9,7 @@ import Loader from "@components/General/Loader/Loader";
 import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import useCurrentSWR from "@hooks/useCurrentSWR";
 import useProductStore from "@hooks/useProductStore";
-import { Alert, CircularProgress, Switch } from "@mui/material";
+import { Alert, Switch } from "@mui/material";
 import ProducStoreService from "@service/productstore";
 import React, { useState } from "react";
 import { BiLoader } from "react-icons/bi";
@@ -176,7 +176,7 @@ const UpdateProduct = ({ product }: Prop) => {
         </StyledItemForm>
       </StyledWrapperInput>
 
-      <ButtonPrimary disabled={status === "loading"} type="submit">
+      <Button disabled={status === "loading"} type="submit">
         {status === "loading" ? (
           <Loader>
             <BiLoader />
@@ -184,7 +184,7 @@ const UpdateProduct = ({ product }: Prop) => {
         ) : (
           "Actualizar"
         )}
-      </ButtonPrimary>
+      </Button>
       {status === "success" && (
         <Alert severity="success">El producto se actualizo correctamente</Alert>
       )}

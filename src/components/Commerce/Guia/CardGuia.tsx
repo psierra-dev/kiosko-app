@@ -3,7 +3,7 @@ import style from "./guia.module.css";
 import { Checkbox, CircularProgress } from "@mui/material";
 import { StoreService } from "@service/store";
 import { useRouter } from "next/router";
-import { ButtonPrimary } from "@components/General/Button/Button";
+import { Button } from "@components/General/Button/Button";
 const storeService = new StoreService();
 
 const CardGuia = ({
@@ -92,16 +92,14 @@ const CardGuia = ({
         {value === "mp" && (
           <>
             {type_payment !== "both" ? (
-              <ButtonPrimary
+              <Button
                 disabled={statusMp === "loading"}
                 onClick={handleConnectMP}
               >
                 Conectar con mercado pago
-              </ButtonPrimary>
+              </Button>
             ) : (
-              <ButtonPrimary onClick={onClick}>
-                Desconectar mercado pago
-              </ButtonPrimary>
+              <Button onClick={onClick}>Desconectar mercado pago</Button>
             )}
           </>
         )}

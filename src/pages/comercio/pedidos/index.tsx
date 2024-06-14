@@ -6,6 +6,7 @@ import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
 import TableOrder from "@components/Commerce/Order/TableOrder/TableOrder";
 import useOrder from "@hooks/useOrder";
 import { StyledItemForm } from "@components/General/ItemsForm/ItemsForm";
+import NotInventory from "@components/General/NotInventory";
 
 const PedidoPage: NextPageWithLayout = () => {
   const { data, error, isLoading } = useOrder("?type=store");
@@ -43,7 +44,6 @@ const PedidoPage: NextPageWithLayout = () => {
     });
   };
 
-  console.log(filter, "filter");
   return (
     <StyledOrder>
       <WrapperFlex>
@@ -104,7 +104,15 @@ const PedidoPage: NextPageWithLayout = () => {
       </WrapperFlex>
 
       <WrapperFlex $flexdirection="" $overflow="auto">
-        <TableOrder orders={orderFilter} />
+        {orderFilter?.length > 0 ? (
+          <TableOrder orders={orderFilter} />
+        ) : (
+          <NotInventory
+            icon=""
+            title="No hay pedidos"
+            description="Tus pedidos se veran aqui"
+          />
+        )}
       </WrapperFlex>
     </StyledOrder>
   );

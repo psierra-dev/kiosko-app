@@ -1,4 +1,4 @@
-import { ButtonPrimary } from "@components/General/Button/Button";
+import { Button } from "@components/General/Button/Button";
 import {
   StyledItemForm,
   StyledWrapperInput,
@@ -66,7 +66,7 @@ const FormStateOrder = ({
         </StyledItemForm>
       </StyledWrapperInput>
       {isChange && (
-        <ButtonPrimary disabled={status === "loading"} onClick={handleUpdate}>
+        <Button disabled={status === "loading"} onClick={handleUpdate}>
           {status === "loading" ? (
             <Loader>
               <BiLoader />
@@ -74,7 +74,7 @@ const FormStateOrder = ({
           ) : (
             "Actualizar"
           )}
-        </ButtonPrimary>
+        </Button>
       )}
       {status === "success" && <p>Se actualizo correctamente</p>}
       {status === "error" && <p>Hubo un error</p>}
