@@ -71,7 +71,7 @@ const Header = () => {
         </Drawer>
         <div className="cont-avatar-name">
           <div className="cont-noti">
-            <Badge n={noti} type="" onOpen={() => setIsOpen(!isOpen)}>
+            <Badge count={noti} onClick={() => setIsOpen(!isOpen)}>
               <IoNotificationsOutline />
             </Badge>
 
