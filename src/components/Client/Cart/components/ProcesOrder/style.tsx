@@ -135,9 +135,10 @@ export const SProcesOrder = styled.div`
     }
 
     .info-store .info {
-        flex-direction: row;
-        font-size: 0.8em;
-        justify-content: space-between;
+        flex-direction: column;
+        font-size: 13px;
+        gap: 2px;
+        
     }
 
     .cont-state {

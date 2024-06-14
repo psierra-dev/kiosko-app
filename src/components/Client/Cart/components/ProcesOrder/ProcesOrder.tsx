@@ -47,7 +47,7 @@ const ProcesOrder = ({
   });
   const { data: customer } = useCustomer();
   const { data: store } = useCurrentSWR(`/stores/store/${storeId}`);
-  const [typePayment, setTypePayment] = useState("mp");
+  const [typePayment, setTypePayment] = useState("cash");
   const [delivery, setDelivery] = useState(true);
   const [statu, setStatu] = useState<TStatus>("typing");
   const [response, setResponse] = useState(false);
@@ -158,7 +158,6 @@ const ProcesOrder = ({
                   errors={errors.direction}
                   required
                   placeholder="Ej B San expedito mjlote 1"
-                  value={store?.direction}
                 />
                 <Input
                   type="text"
@@ -255,8 +254,14 @@ const ProcesOrder = ({
                 <h5>Datos de la tienda</h5>
 
                 <div className="info">
-                  <p>{store?.direction}</p>
+                  <p>Direccion: {store?.direction}</p>
                   <p>Tel. {store?.phone}</p>
+                  <p>
+                    Medio de pago:{" "}
+                    {store?.active_type === "cash"
+                      ? "Efectivo"
+                      : "Efectivo/Mercado pago"}
+                  </p>
                 </div>
               </div>
             </>
