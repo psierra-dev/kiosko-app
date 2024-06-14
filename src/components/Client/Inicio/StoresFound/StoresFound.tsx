@@ -38,6 +38,7 @@ const StoresFound = ({ stores }: { stores: TStore[] }) => {
       ) : (
         <div className="not-stores">
           <NotStores
+            icon=""
             title="No podemos ofrecerte resultados"
             description="Elija otra direccion"
           />

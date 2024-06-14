@@ -35,7 +35,11 @@ const FavoriteStores = ({ stores }) => {
         <ListStores stores={stores} />
       ) : (
         <div className="not-stores">
-          <NotStores title="No tienes kioskos favoritos" description="" />
+          <NotStores
+            icon=""
+            title="No tienes kioskos favoritos"
+            description=""
+          />
         </div>
       )}
     </StyledFavoriteStores>

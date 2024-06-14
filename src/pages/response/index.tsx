@@ -7,8 +7,6 @@ const ResponsePage = () => {
 
   const { state } = router.query;
 
-  console.log(router.query, "state response");
-
   /*useEffect(() => {
     if (!state) {
       router.replace("/comercio");

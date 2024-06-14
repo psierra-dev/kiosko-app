@@ -60,12 +60,11 @@ const CardProduct = ({ product }: Prop) => {
 
       <td>
         <WrapperFlex $flexdirection="row" $gap="8px" $justifycontent="end">
-          <ButtonIcon $width="fit-content" onClick={() => setModalUpdate(true)}>
+          <ButtonIcon onClick={() => setModalUpdate(true)}>
             <RiEditLine />
           </ButtonIcon>
 
           <ButtonIcon
-            $width="fit-content"
             onClick={() => {
               setOpenDelete(true);
             }}
