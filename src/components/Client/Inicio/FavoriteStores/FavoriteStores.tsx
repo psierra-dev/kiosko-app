@@ -1,12 +1,12 @@
 import NotStores from "@components/General/NotInventory";
-import { SubTitle } from "@components/General/Text";
+import {SubTitle} from "@components/General/Text";
 import React from "react";
 import styled from "styled-components";
 import ListStores from "../components/ListStores";
 
 const StyledFavoriteStores = styled.section`
     padding: 8px 10px;
-    min-height: 270px;
+    min-height: 300px;
     background-color: ${(props) => props.theme.colors["primary-100"]};
     .not-stores {
         justify-content: center;
@@ -26,7 +26,7 @@ const StyledFavoriteStores = styled.section`
         
 `;
 
-const FavoriteStores = ({ stores }) => {
+const FavoriteStores = ({stores}) => {
   return (
     <StyledFavoriteStores>
       <SubTitle>Kioskos favoritos</SubTitle>

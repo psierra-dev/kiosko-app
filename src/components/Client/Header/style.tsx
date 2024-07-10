@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledHeader = styled.header`
   width: 100%;
-  background-color: ${({ theme: { colors } }) => colors.main};
+  background-color: ${({theme: {colors}}) => colors.main};
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -11,19 +11,19 @@ export const StyledHeader = styled.header`
   position: fixed;
   top: 0%;
   z-index: 20;
-  color: ${({ theme: { colors } }) => colors.text};
+  color: ${({theme: {colors}}) => colors.text};
 
   .chip-location {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: 1px solid ${({ theme: { colors } }) => colors.text};
+    border: 1px solid ${({theme: {colors}}) => colors.text};
     border-radius: 10px;
     padding: 4px 9px;
     gap: 2px;
     font-size: 12px;
     background-color: transparent;
-    color: ${({ theme: { colors } }) => colors.text};
+    color: ${({theme: {colors}}) => colors.text};
     cursor: pointer;
 
     &:hover {
@@ -38,8 +38,8 @@ export const StyledHeader = styled.header`
     border: none;
     width: fit-content;
     height: fit-content;
-    color: ${({ theme: { colors } }) => colors.text};
-    font-size: 15px;
+    color: ${({theme: {colors}}) => colors.text};
+    font-size: 20px;
     background: transparent;
   }
   
@@ -73,11 +73,11 @@ export const StyledNav = styled.div`
     border: none;
     width: fit-content;
     height: fit-content;
-    color: ${({ theme: { colors } }) => colors.text};
+    color: ${({theme: {colors}}) => colors.text};
   }
 
   nav {
-    color: ${({ theme: { colors } }) => colors.text};
+    color: ${({theme: {colors}}) => colors.text};
     font-size: 14px;
     font-weight: 500;
     margin-top: 10px;

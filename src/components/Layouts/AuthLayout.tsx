@@ -1,11 +1,12 @@
+import Logo from "@components/General/Logo";
 import Link from "next/link";
-import React, { ReactElement } from "react";
+import React, {ReactElement} from "react";
 import styled from "styled-components";
 
 export const StyledAuthLayout = styled.div`
     flex: 1;
     .logo {
-        color:  ${({ theme: { colors } }) => colors.primary || "#fff"};;
+        color:  ${({theme: {colors}}) => colors.primary || "#fff"};;
         font-size: 24px;
         font-weight: 900;
     }
@@ -19,7 +20,7 @@ export const StyledAuthLayout = styled.div`
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        background-color: ${({ theme: { colors } }) => colors.primary};
+        background-color: ${({theme: {colors}}) => colors.primary};
         filter: blur(50px)
     }
     .container-form::before {
@@ -31,7 +32,7 @@ export const StyledAuthLayout = styled.div`
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        background-color: ${({ theme: { colors } }) => colors.primary};
+        background-color: ${({theme: {colors}}) => colors.primary};
         filter: blur(50px)
     }
     & header {
@@ -92,7 +93,7 @@ export const StyledAuthLayout = styled.div`
 type Prop = {
   children: React.ReactNode;
 };
-const AuthLayout = ({ children }: Prop) => {
+const AuthLayout = ({children}: Prop) => {
   return (
     <StyledAuthLayout>
       <header>
@@ -101,8 +102,8 @@ const AuthLayout = ({ children }: Prop) => {
         </Link>
       </header>
       <main>
-        <Link href="/" className="logo">
-          Kiosko
+        <Link href="/">
+          <Logo />
         </Link>
         <div className="container-form">{children}</div>
       </main>

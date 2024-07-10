@@ -1,18 +1,10 @@
-import { getLayout } from "@components/Layouts/ClientLayout";
+import {getLayout} from "@components/Layouts/ClientLayout";
 import StoresFound from "@components/Client/Inicio/StoresFound/StoresFound";
 import FavoriteStores from "@components/Client/Inicio/FavoriteStores/FavoriteStores";
-import Container from "@components/General/Container";
-import { SubTitle } from "@components/General/Text";
-import Categories from "@components/General/Categories";
 
-const HomePage = ({ stores_found, favorite_stores }) => {
+const HomePage = ({stores_found, favorite_stores}) => {
   return (
     <>
-      <Container>
-        <SubTitle>Productos Disponibles</SubTitle>
-
-        <Categories />
-      </Container>
       <StoresFound stores={stores_found} />
       <FavoriteStores stores={favorite_stores} />
     </>
@@ -20,7 +12,7 @@ const HomePage = ({ stores_found, favorite_stores }) => {
 };
 
 export const getServerSideProps = async (context) => {
-  const { token } = context.req.cookies;
+  const {token} = context.req.cookies;
   const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
 
   if (!token) {
@@ -40,7 +32,7 @@ export const getServerSideProps = async (context) => {
 
   const stores = await response.json();
 
-  return { props: { stores_found: stores, favorite_stores: [] } };
+  return {props: {stores_found: stores, favorite_stores: []}};
 };
 
 HomePage.getLayout = getLayout;

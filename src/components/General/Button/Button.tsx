@@ -4,13 +4,15 @@ export const Button = styled.button<{
   $width?: string;
   $variant?: string;
   $color?: string;
-}>`
-    padding: 7px 13px;
+  $height?: string;
+}>` 
+    padding: 0 14px;
+    height: ${(props) => props.$height || "40px"};
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     width: ${(props) => props.$width || "100%"};
     cursor: pointer;
@@ -20,7 +22,7 @@ export const Button = styled.button<{
       ]}
 `;
 
-export const ButtonIcon = styled.button<{ $color?: string; $size?: string }>`
+export const ButtonIcon = styled.button<{$color?: string; $size?: string}>`
   width: fit-content;
   height: fit-content;
   background-color: transparent;

@@ -1,7 +1,7 @@
-import Footer from "@components/General/Footer/Footer";
-import React, { ReactElement } from "react";
+import Footer from "@components/Landing/Footer/Footer";
+import React, {ReactElement} from "react";
 import HeaderClient from "../Client/Header/Header";
-import { ProductCartProvider } from "@context/cart";
+import {ProductCartProvider} from "@context/cart";
 import useConnectSocket from "@hooks/useConnectSocket";
 import useCustomer from "@hooks/useCustomer";
 
@@ -9,8 +9,8 @@ type Prop = {
   children: React.ReactNode;
 };
 
-const ClientLayout = ({ children }: Prop) => {
-  const { data } = useCustomer();
+const ClientLayout = ({children}: Prop) => {
+  const {data} = useCustomer();
   useConnectSocket(data?.userId);
 
   return (

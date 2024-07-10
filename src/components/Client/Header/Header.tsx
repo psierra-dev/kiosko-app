@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { StyledHeader, StyledNav } from "./style";
+import React, {useEffect, useState} from "react";
+import {StyledHeader, StyledNav} from "./style";
 import Link from "next/link";
-import { ToastContainer, toast } from "react-toastify";
+import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useCustomer from "@hooks/useCustomer";
-import { Drawer, Modal, Skeleton } from "@mui/material";
+import {Drawer, Modal, Skeleton} from "@mui/material";
 
 import socket from "@lib/socket";
 
-import { MdOutlineNotifications } from "react-icons/md";
-import { AiOutlineClose } from "react-icons/ai";
-import { BiMenu } from "react-icons/bi";
-import { GoLocation } from "react-icons/go";
-import { FiUser } from "react-icons/fi";
-import { IoExitOutline } from "react-icons/io5";
+import {MdOutlineNotifications} from "react-icons/md";
+import {AiOutlineClose} from "react-icons/ai";
+import {BiMenu} from "react-icons/bi";
+import {GoLocation} from "react-icons/go";
+import {FiUser} from "react-icons/fi";
+import {IoExitOutline} from "react-icons/io5";
 
 import Notification from "./components/Notification";
-import { useRouter } from "next/router";
-import { WrapperFlex } from "@components/General/Wrapper/Wrapper";
+import {useRouter} from "next/router";
+import {WrapperFlex} from "@components/General/Wrapper/Wrapper";
 import AvatarC from "./components/Avatar";
 
 import Badge from "@components/General/Badge/Badge";
 import Logo from "@components/General/Logo";
 import FindLocation from "../FindLocation";
 import ClickOutsideComponent from "@components/General/ClickOutsideComponent";
-const Nav = ({ onClose }) => {
+const Nav = ({onClose}) => {
   const router = useRouter();
 
   return (
@@ -56,7 +56,7 @@ const Nav = ({ onClose }) => {
 };
 
 const HeaderClient = () => {
-  const { data, isLoading, error } = useCustomer();
+  const {data, isLoading, error} = useCustomer();
   const [open, setOpen] = useState(false);
   const [modalLocation, setModalLocation] = useState(false);
   const router = useRouter();
@@ -114,7 +114,7 @@ const HeaderClient = () => {
           <BiMenu />
         </button>
         <Link href="/home">
-          <Logo className="" />
+          <Logo />
         </Link>
       </WrapperFlex>
 
