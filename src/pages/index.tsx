@@ -8,22 +8,6 @@ import Products from "@components/Landing/Products";
 import StoreInfo from "@components/Landing/StoreInfo";
 import Feature from "@components/Landing/Feature";
 
-const Inicio = () => {
-  return (
-    <StyledPageLanding>
-      <Header />
-      <main>
-        <Hero />
-        <Products />
-        <StoreInfo />
-        <Feature />
-      </main>
-      <Footer />
-    </StyledPageLanding>
-  );
-};
-
-export default Inicio;
 const StyledPageLanding = styled.div`
     width: 100%;
     height: 100%;
@@ -51,6 +35,19 @@ const StyledPageLanding = styled.div`
 
 `;
 
-/*display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 0.5rem; */
+const Inicio = () => {
+  return (
+    <StyledPageLanding>
+      <Header />
+      <main>
+        <Hero />
+        <Products />
+        <StoreInfo />
+        <Feature />
+      </main>
+      <Footer />
+    </StyledPageLanding>
+  );
+};
+
+export default Inicio;
